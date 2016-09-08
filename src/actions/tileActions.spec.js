@@ -1,4 +1,4 @@
-// import * as ActionTypes from '../constants/actionTypes';
+// import * as ActionTypes from '../constants/ActionTypes';
 // import * as ActionCreators from './tileActions';
 
 // import sinon from 'sinon';

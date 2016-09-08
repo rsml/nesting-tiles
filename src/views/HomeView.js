@@ -14,6 +14,14 @@ export default class HomeView extends Component {
 
     const tileObject = tiles[Utils.ROOT_TILE_ID];
 
+    if(!tileObject){
+        return (
+            <div>
+              No Tile Found
+            </div>
+        );
+    }
+
     return (
         <div>
           <Tile id={tileObject.id}

@@ -17,6 +17,7 @@ export default class Tile extends Component {
   }
 
   handleSplitVertical() {
+    debugger;
     this.props.actions.insertBelow(this.props.id);
   }
 

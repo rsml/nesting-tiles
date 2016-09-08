@@ -1,14 +1,12 @@
 import * as Utils from './index';
 
-const states = {
+export const states = {
     INITIAL: "inital",
     HOVER: "hover"
 };
-module.exports.states = states;
-
 
 const allowedTypes = [null, undefined, ...Utils.objectValues(states)];
 
-module.exports.getAllowedTypes = function(){
+export function getAllowedTypes(){
     return allowedTypes;
-};
+}
