@@ -1,0 +1,36 @@
+.Tile-menu {
+    width: 102px;
+    height: 102px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    line-height: 0;
+}
+
+.Tile-menu-item {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    line-height: 0;
+    margin: 5px;
+}
+
+.Tile-menu-insert {
+    
+}
+
+.Tile-menu-split-vertical {
+    
+}
+
+.Tile-menu-split-horizontal {
+    
+}
+
+.Tile-menu-delete {
+    
+}
