@@ -14,87 +14,77 @@ const initialState = {
     }
 };
 
+const DIRECTIONS = {
+    ABOVE: 'ABOVE',
+    BELOW: 'BELOW',
+    LEFT: 'LEFT',
+    RIGHT:  'RIGHT'
+};
+
+function insertInDirection(state, direction, activeTileId){
+    let newTiles = Utils.cloneAllTiles(state.tiles);
+
+    // Set the ids for the new tiles
+    const newParentTileId = state.currentTileId;
+    const newSiblingTileId = state.currentTileId + 1;
+
+    // Get the active tile object and safely exit if there is an error
+    const activeTileObject = newTiles[activeTileId];
+    if(!activeTileObject){
+        return state;
+    }
+
+    // Keep track of the old parentId for the active tile
+    const oldParentTileId = activeTileObject.parentId;
+    
+    // Update the parentId for the activeTile
+    activeTileObject.parentId = newParentTileId;
+
+    // Create the new parent tile and the new sibling tile, and add both these tiles to the cloned tiles
+    const splitVertical = (direction === DIRECTIONS.ABOVE || direction === DIRECTIONS.BELOW);
+
+    let newChildrenTiles;
+    if(direction === DIRECTIONS.LEFT || direction === DIRECTIONS.ABOVE){
+        newChildrenTiles = [newSiblingTileId, activeTileId]
+    }else{
+        newChildrenTiles = [activeTileId, newSiblingTileId];
+    }
+
+    const newParentTileObject = new TileObject(newParentTileId, oldParentTileId, newChildrenTiles, splitVertical);
+    const newSiblingTileObject = new TileObject(newSiblingTileId, newParentTileId);
+
+    newTiles[newParentTileId] = newParentTileObject;
+    newTiles[newSiblingTileId] = newSiblingTileObject;
+
+    if(oldParentTileId >= 0){
+        newTiles[oldParentTileId] = Utils.updateTileWithChildren(newTiles[oldParentTileId], activeTileId, newParentTileId);
+    }
+
+    let newParameters = {
+        currentTileId: state.currentTileId + 2,
+        tiles: newTiles
+    };
+
+    if(activeTileId === state.rootTileId){
+        newParameters.rootTileId = newParentTileId;
+    }
+
+    return Object.assign({}, state, newParameters);
+}
+
 export default function tiles(state = initialState, action) {
-    let newParentTileId;
-    let newTiles;
-    let activeTileObject;
-    let newChildTileId;
-    let newChildTileObject;
-    let oldParentTileId;
-    let oldParentTileObject;
-    let newParentTileObject;
-    const keys = Object.keys(state.tiles);
-    let i;
-    let newParameters;
-    let splitVertical;
-
-
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
-        break;
+        return insertInDirection(state, DIRECTIONS.ABOVE, action.tileId);
 
     case ActionTypes.INSERT_BELOW:
-
-        newTiles = {};
-
-        debugger;
-        for (i = 0; i < keys.length; i++) {
-            // newTiles.push(clone state.tiles[i]);
-            newTiles[keys[i]] = state.tiles[i].clone();
-
-            // ({}, state.tiles[keys[i]]);
-            // newTiles.push(Object.assign({}, state.tiles[i]));
-        }
-
-
-        newParentTileId = state.currentTileId;
-        newChildTileId = state.currentTileId + 1;
-
-        activeTileObject = newTiles[action.tileId];
-        if(!activeTileObject){
-            return state;
-        }
-
-        oldParentTileId = activeTileObject.parentId;
-        activeTileObject.parentId = newParentTileId;
-
-
-        newChildTileObject = new TileObject(newChildTileId, newParentTileId);
-        splitVertical = true;
-        newParentTileObject = new TileObject(newParentTileId, oldParentTileId, [action.tileId, newChildTileId], splitVertical); // debugger;
-
-        newTiles[newParentTileId] = newParentTileObject;
-        newTiles[newChildTileId] = newChildTileObject;
-
-        oldParentTileObject = newTiles[oldParentTileId];
-        if(oldParentTileObject){
-            oldParentTileObject.children = oldParentTileObject.children.map((number) => {
-                if(number === action.tileId){
-                    return newParentTileId;
-                }else{
-                    return number;
-                }
-            })
-        }
-
-        newParameters = {
-            currentTileId: state.currentTileId + 2,
-            tiles: newTiles
-        };
-
-        debugger;
-
-        if(action.tileId === state.rootTileId){ // TODO!!!
-            newParameters.rootTileId = newParentTileId;
-        }
-
-        return Object.assign({}, state, newParameters);
+        return insertInDirection(state, DIRECTIONS.BELOW, action.tileId);
 
     case ActionTypes.INSERT_TO_THE_LEFT_OF:
-        break;
+        return insertInDirection(state, DIRECTIONS.LEFT, action.tileId);
 
     case ActionTypes.INSERT_TO_THE_RIGHT_OF:
-        break;
+        return insertInDirection(state, DIRECTIONS.RIGHT, action.tileId);
 
 
     case ActionTypes.RESIZE:
@@ -120,41 +110,3 @@ export default function tiles(state = initialState, action) {
       return state;
   }
 }
-
-
-/*import {SAVE_FUEL_SAVINGS, CALCULATE_FUEL_SAVINGS} from '../constants/ActionTypes';
-import calculator from '../utils/fuelSavingsCalculator';
-import objectAssign from 'object-assign';
-import initialState from './initialState';
-
-// IMPORTANT: Note that with Redux, state should NEVER be changed.
-// State is considered immutable. Instead,
-// create a copy of the state passed and set new values on the copy.
-// Note that I'm using Object.assign to create a copy of current state
-// and update values on the copy.
-export default function fuelSavingsReducer(state = initialState.fuelSavings, action) {
-  let newState;
-
-  switch (action.type) {
-    case SAVE_FUEL_SAVINGS:
-      // For this example, just simulating a save by changing date modified.
-      // In a real app using Redux, you might use redux-thunk and handle the async call in tileActions.js
-      return objectAssign({}, state, {dateModified: action.dateModified});
-
-    case CALCULATE_FUEL_SAVINGS:
-      newState = objectAssign({}, state);
-      newState[action.fieldName] = action.value;
-      newState.necessaryDataIsProvidedToCalculateSavings = calculator().necessaryDataIsProvidedToCalculateSavings(newState);
-      newState.dateModified = action.dateModified;
-
-      if (newState.necessaryDataIsProvidedToCalculateSavings) {
-        newState.savings = calculator().calculateSavings(newState);
-      }
-
-      return newState;
-
-    default:
-      return state;
-  }
-}
-*/

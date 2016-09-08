@@ -11,7 +11,3 @@ export const HIDE_INSERT_MENU = 'HIDE_INSERT_MENU';
 export const ADD = 'ADD';
 
 export const DELETE_TILE = 'DELETE_TILE';
-
-//TODO: delete
-export const SAVE_FUEL_SAVINGS = 'SAVE_FUEL_SAVINGS';
-export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
