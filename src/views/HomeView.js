@@ -1,18 +1,44 @@
 import React, { Component, PropTypes } from 'react';
 import Tile from '../components/Tile';
-import * as Utils from '../utils/index';
 
 export default class HomeView extends Component {
+    _getChildren(tileId) {
+        const {
+            tiles,
+            actions
+        } = this.props;
+
+        const tileObject = tiles[tileId];
+        const that = this;
+
+        let result = [];
+
+        const children = tileObject.children || [];
+        for (let i = 0; i < children.length; i++) {
+            const childId = tileObject.children[i];
+            const childObject = tiles[childId];
+
+            result.push((
+                <Tile key={childId}
+                      data={childObject}
+                      actions={actions}>
+                    {that._getChildren(childId)}
+                </Tile>
+            ))
+        }
+
+        return result;
+    }
+
+
   render() {
     const {
-        /*store,
-        history,
-        dispatch,*/
+        rootTileId,
         tiles,
         actions
     } = this.props;
 
-    const tileObject = tiles[Utils.ROOT_TILE_ID];
+    const tileObject = tiles[rootTileId];
 
     if(!tileObject){
         return (
@@ -22,16 +48,23 @@ export default class HomeView extends Component {
         );
     }
 
+    const that = this;
     let allTiles = (
-        <Tile data={tileObject}
-                actions={actions} />
+        <Tile key={tileObject.id} 
+              data={tileObject}
+              actions={actions}>
+            {that._getChildren(tileObject.id)}
+        </Tile>
     );
 
     debugger;
+/*
     if(tileObject.children){
-        debugger;
-        // allTiles
+        allTiles.props.children = 
     }
+*/
+
+
 
 
 

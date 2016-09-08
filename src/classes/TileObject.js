@@ -1,15 +1,14 @@
 import { states } from '../utils/TileStates';
 
 class TileObject {
-    constructor(id, parentId) {
+    constructor(id, parentId, children = null, type = null, content = null, size = 50, state = states.INITIAL) {
         this._id = id;
         this._parentId = parentId;
-
-        this._children = null;
-        this._type = null;
-        this._content = null;
-        this._size = 50;
-        this._state = states.INITIAL;
+        this._children = children;
+        this._type = type;
+        this._content = content;
+        this._size = size;
+        this._state = state;
     }
 
     get id () {
@@ -62,6 +61,10 @@ class TileObject {
 
     get state () {
         return this._state;
+    }
+
+    clone () {
+        return new TileObject(this.id, this.parentId, this.children, this.type, this.content, this.size, this.state)
     }
 }
 

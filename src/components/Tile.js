@@ -30,7 +30,7 @@ export default class Tile extends Component {
   }
 
   render() {
-    if(!this.props.children){
+    if(!this.props.children || this.props.children.length === 0){
         return (
           <div id={`tile-${this.props.data.id}`}>
             <div className='Tile-menu'>
@@ -55,16 +55,17 @@ export default class Tile extends Component {
         );
     }
 
-    const tileObjects = this.props.children.map((tileObject) => (<Tile data={tileObject} />))
+    // const tileObjects = this.props.children.map((tileObject) => (<Tile data={tileObject} />))
     return (
         <div>
-            {tileObjects}
+            {this.props.children}
         </div>
     );
   }
 }
 
 Tile.propTypes = {
+  children: PropTypes.array,
   data: PropTypes.instanceOf(TileObject),
   actions: PropTypes.object.isRequired
 };

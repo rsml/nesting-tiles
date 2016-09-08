@@ -3,10 +3,10 @@ import * as ActionTypes from '../constants/ActionTypes';
 import TileObject from '../classes/TileObject';
 
 const initialState = {
-    rootTileId: Utils.ROOT_TILE_ID,
-    currentTileId: Utils.ROOT_TILE_ID + 1,
+    rootTileId: Utils.INITIAL_ROOT_TILE_ID,
+    currentTileId: Utils.INITIAL_ROOT_TILE_ID + 1,
     tiles: {
-        [Utils.ROOT_TILE_ID]: new TileObject(Utils.ROOT_TILE_ID)
+        [Utils.INITIAL_ROOT_TILE_ID]: new TileObject(Utils.INITIAL_ROOT_TILE_ID)
     },
     insertMenu: {
         isVisible: false,
@@ -18,9 +18,9 @@ export default function tiles(state = initialState, action) {
     let newParentTileId;
     let newTiles;
     let activeTileObject;
-    let newParentTileObject;
     let newChildTileId;
     let newChildTileObject;
+    let newParentTileObject;
     const keys = Object.keys(state.tiles);
     let i;
     let newParameters;
@@ -30,13 +30,12 @@ export default function tiles(state = initialState, action) {
         break;
 
     case ActionTypes.INSERT_BELOW:
-        newParentTileId = state.currentTileId;
 
         newTiles = {};
 
         for (i = 0; i < keys.length; i++) {
             // newTiles.push(clone state.tiles[i]);
-            newTiles[keys[i]] = Object.create(state.tiles[i])
+            newTiles[keys[i]] = state.tiles[i].clone();
 
             // ({}, state.tiles[keys[i]]);
             // newTiles.push(Object.assign({}, state.tiles[i]));
@@ -47,16 +46,10 @@ export default function tiles(state = initialState, action) {
             activeTileObject.parentId = newParentTileId;
         }
 
-        newParentTileObject = new TileObject(newParentTileId, action.tileId);
-
+        newParentTileId = state.currentTileId;
         newChildTileId = state.currentTileId + 1;
         newChildTileObject = new TileObject(newChildTileId, newParentTileId);
-        // debugger;
-
-        newParentTileObject.children = [
-            action.tileId,
-            newChildTileId
-        ];
+        newParentTileObject = new TileObject(newParentTileId, action.tileId, [action.tileId, newChildTileId]); // debugger;
 
         newTiles[newParentTileId] = newParentTileObject;
         newTiles[newChildTileId] = newChildTileObject;

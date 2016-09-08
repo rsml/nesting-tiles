@@ -3,4 +3,4 @@ const objectValues = function(obj){
 };
 export { objectValues };
 
-export const ROOT_TILE_ID = 0;
+export const INITIAL_ROOT_TILE_ID = 0;
