@@ -3,14 +3,18 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/fuelSavingsActions';
 import FuelSavingsForm from '../components/FuelSavingsForm';
+import DevTools from './DevTools';
 
 export const FuelSavingsPage = (props) => {
   return (
-    <FuelSavingsForm
-      saveFuelSavings={props.actions.saveFuelSavings}
-      calculateFuelSavings={props.actions.calculateFuelSavings}
-      fuelSavings={props.fuelSavings}
-    />
+    <div>
+        <FuelSavingsForm
+          saveFuelSavings={props.actions.saveFuelSavings}
+          calculateFuelSavings={props.actions.calculateFuelSavings}
+          fuelSavings={props.fuelSavings}
+        />
+        <DevTools />
+    </div>
   );
 };
 
