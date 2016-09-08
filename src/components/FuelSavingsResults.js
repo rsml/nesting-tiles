@@ -7,7 +7,7 @@ import NumberFormatter from '../utils/numberFormatter';
 // Props are being destructured below to extract the savings object to shorten calls within component.
 const FuelSavingsResults = ({savings}) => {
   // console.log(savings);
-  // console.log("typeof", typeof(savings.monthly));
+  // console.log('typeof', typeof(savings.monthly));
   const savingsExist = NumberFormatter.scrubFormatting(savings.monthly) > 0;
   const savingsClass = savingsExist ? 'savings' : 'loss';
   const resultLabel = savingsExist ? 'Savings' : 'Loss';
@@ -19,7 +19,7 @@ const FuelSavingsResults = ({savings}) => {
     <table>
       <tbody>
       <tr>
-        <td className="fuel-savings-label">{resultLabel}</td>
+        <td className='fuel-savings-label'>{resultLabel}</td>
         <td>
           <table>
             <tbody>

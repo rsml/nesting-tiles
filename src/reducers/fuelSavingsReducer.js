@@ -14,7 +14,7 @@ export default function fuelSavingsReducer(state = initialState.fuelSavings, act
   switch (action.type) {
     case SAVE_FUEL_SAVINGS:
       // For this example, just simulating a save by changing date modified.
-      // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
+      // In a real app using Redux, you might use redux-thunk and handle the async call in tileActions.js
       return objectAssign({}, state, {dateModified: action.dateModified});
 
     case CALCULATE_FUEL_SAVINGS:
