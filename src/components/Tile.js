@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 // import TileTypes from '../utils/TileTypes';
 import './Tile.css';
@@ -13,25 +14,24 @@ export default class Tile extends Component {
   }
 
   handleShowInsertMenu() {
-    this.props.actions.showInsertMenu(this.props.id);
+    this.props.actions.showInsertMenu(this.props.data.id);
   }
 
   handleSplitVertical() {
-    debugger;
-    this.props.actions.insertBelow(this.props.id);
+    this.props.actions.insertBelow(this.props.data.id);
   }
 
   handleSplitHorizontal() {
-    this.props.actions.inesertToTheRightOf(this.props.id);
+    this.props.actions.inesertToTheRightOf(this.props.data.id);
   }
 
   handleDelete() {
-    this.props.actions.delete(this.props.id);
+    this.props.actions.delete(this.props.data.id);
   }
 
   render() {
     return (
-      <div id={`tile-${this.props.id}`}>
+      <div id={`tile-${this.props.data.id}`}>
         <div className='Tile-menu'>
             <img src={require('../images/insert.svg')}
                 alt=''
@@ -56,12 +56,6 @@ export default class Tile extends Component {
 }
 
 Tile.propTypes = {
-  id: PropTypes.number.isRequired,
-  /*type: PropTypes.oneOf(TileTypes.getAllowedTypes()),*/
-  type: PropTypes.string,
-  content: PropTypes.string,
-  size: PropTypes.number,
-  state: PropTypes.string,
-  /*state: PropTypes.oneOf(TileStates.getAllowedTypes()),*/
+  data: PropTypes.instanceOf(TileObject),
   actions: PropTypes.object.isRequired
 };

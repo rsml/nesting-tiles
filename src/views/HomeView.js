@@ -24,11 +24,7 @@ export default class HomeView extends Component {
 
     return (
         <div>
-          <Tile id={tileObject.id}
-                type={tileObject.type}
-                content={tileObject.content}
-                size={tileObject.size}
-                state={tileObject.state}
+          <Tile data={tileObject}
                 actions={actions} />
         </div>
     );

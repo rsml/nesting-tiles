@@ -12,7 +12,6 @@ export function insertAbove(tileId){
 }
 
 export function insertBelow(tileId){
-    debugger;
     return {
         type: ActionTypes.INSERT_BELOW,
         tileId
