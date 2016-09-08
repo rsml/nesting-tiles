@@ -3,6 +3,7 @@ import * as ActionTypes from '../constants/ActionTypes';
 import TileObject from '../classes/TileObject';
 
 const initialState = {
+    rootTileId: Utils.ROOT_TILE_ID,
     currentTileId: Utils.ROOT_TILE_ID + 1,
     tiles: {
         [Utils.ROOT_TILE_ID]: new TileObject(Utils.ROOT_TILE_ID)
@@ -22,6 +23,7 @@ export default function tiles(state = initialState, action) {
     let newChildTileObject;
     const keys = Object.keys(state.tiles);
     let i;
+    let newParameters;
 
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
@@ -39,8 +41,6 @@ export default function tiles(state = initialState, action) {
             // ({}, state.tiles[keys[i]]);
             // newTiles.push(Object.assign({}, state.tiles[i]));
         }
-
-        debugger;
 
         activeTileObject = newTiles[action.tileId];
         if(activeTileObject){
@@ -61,12 +61,16 @@ export default function tiles(state = initialState, action) {
         newTiles[newParentTileId] = newParentTileObject;
         newTiles[newChildTileId] = newChildTileObject;
 
-        // debugger;
-
-        return Object.assign({}, state, {
+        newParameters = {
             currentTileId: state.currentTileId + 2,
             tiles: newTiles
-        });
+        };
+
+        if(action.tileId === state.rootTileId){ // TODO!!!
+            newParameters.rootTileId = newParentTileId;
+        }
+
+        return Object.assign({}, state, newParameters);
 
     case ActionTypes.INSERT_TO_THE_LEFT_OF:
         break;

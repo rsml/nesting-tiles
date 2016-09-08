@@ -30,27 +30,36 @@ export default class Tile extends Component {
   }
 
   render() {
+    if(!this.props.children){
+        return (
+          <div id={`tile-${this.props.data.id}`}>
+            <div className='Tile-menu'>
+                <img src={require('../images/insert.svg')}
+                    alt=''
+                    className='Tile-menu-item Tile-menu-insert'
+                    onClick={this.handleShowInsertMenu} />
+                <img src={require('../images/split-vertical.svg')}
+                    alt=''
+                    className='Tile-menu-item Tile-menu-split-vertical'
+                    onClick={this.handleSplitVertical} />
+                <img src={require('../images/delete.svg')}
+                    alt=''
+                    className='Tile-menu-item Tile-menu-delete'
+                    onClick={this.handleDelete} />
+                <img src={require('../images/split-horizontal.svg')}
+                    alt=''
+                    className='Tile-menu-item Tile-menu-split-horizontal'
+                    onClick={this.handleSplitHorizontal} />
+            </div>
+          </div>
+        );
+    }
+
+    const tileObjects = this.props.children.map((tileObject) => (<Tile data={tileObject} />))
     return (
-      <div id={`tile-${this.props.data.id}`}>
-        <div className='Tile-menu'>
-            <img src={require('../images/insert.svg')}
-                alt=''
-                className='Tile-menu-item Tile-menu-insert'
-                onClick={this.handleShowInsertMenu} />
-            <img src={require('../images/split-vertical.svg')}
-                alt=''
-                className='Tile-menu-item Tile-menu-split-vertical'
-                onClick={this.handleSplitVertical} />
-            <img src={require('../images/delete.svg')}
-                alt=''
-                className='Tile-menu-item Tile-menu-delete'
-                onClick={this.handleDelete} />
-            <img src={require('../images/split-horizontal.svg')}
-                alt=''
-                className='Tile-menu-item Tile-menu-split-horizontal'
-                onClick={this.handleSplitHorizontal} />
+        <div>
+            {tileObjects}
         </div>
-      </div>
     );
   }
 }

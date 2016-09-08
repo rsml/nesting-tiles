@@ -22,16 +22,32 @@ export default class HomeView extends Component {
         );
     }
 
+    let allTiles = (
+        <Tile data={tileObject}
+                actions={actions} />
+    );
+
+    debugger;
+    if(tileObject.children){
+        debugger;
+        // allTiles
+    }
+
+
+
+
+
+
     return (
         <div>
-          <Tile data={tileObject}
-                actions={actions} />
+          {allTiles}
         </div>
     );
   }
 }
 
 HomeView.propTypes = {
+  rootTileId: PropTypes.number.isRequired,
   tiles: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
