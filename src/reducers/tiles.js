@@ -20,11 +20,14 @@ export default function tiles(state = initialState, action) {
     let activeTileObject;
     let newChildTileId;
     let newChildTileObject;
+    let oldParentTileId;
+    let oldParentTileObject;
     let newParentTileObject;
     const keys = Object.keys(state.tiles);
     let i;
     let newParameters;
     let splitVertical;
+
 
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
@@ -34,6 +37,7 @@ export default function tiles(state = initialState, action) {
 
         newTiles = {};
 
+        debugger;
         for (i = 0; i < keys.length; i++) {
             // newTiles.push(clone state.tiles[i]);
             newTiles[keys[i]] = state.tiles[i].clone();
@@ -42,24 +46,43 @@ export default function tiles(state = initialState, action) {
             // newTiles.push(Object.assign({}, state.tiles[i]));
         }
 
-        activeTileObject = newTiles[action.tileId];
-        if(activeTileObject){
-            activeTileObject.parentId = newParentTileId;
-        }
 
         newParentTileId = state.currentTileId;
         newChildTileId = state.currentTileId + 1;
+
+        activeTileObject = newTiles[action.tileId];
+        if(!activeTileObject){
+            return state;
+        }
+
+        oldParentTileId = activeTileObject.parentId;
+        activeTileObject.parentId = newParentTileId;
+
+
         newChildTileObject = new TileObject(newChildTileId, newParentTileId);
         splitVertical = true;
-        newParentTileObject = new TileObject(newParentTileId, action.tileId, [action.tileId, newChildTileId], splitVertical); // debugger;
+        newParentTileObject = new TileObject(newParentTileId, oldParentTileId, [action.tileId, newChildTileId], splitVertical); // debugger;
 
         newTiles[newParentTileId] = newParentTileObject;
         newTiles[newChildTileId] = newChildTileObject;
+
+        oldParentTileObject = newTiles[oldParentTileId];
+        if(oldParentTileObject){
+            oldParentTileObject.children = oldParentTileObject.children.map((number) => {
+                if(number === action.tileId){
+                    return newParentTileId;
+                }else{
+                    return number;
+                }
+            })
+        }
 
         newParameters = {
             currentTileId: state.currentTileId + 2,
             tiles: newTiles
         };
+
+        debugger;
 
         if(action.tileId === state.rootTileId){ // TODO!!!
             newParameters.rootTileId = newParentTileId;
