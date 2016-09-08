@@ -24,6 +24,7 @@ export default function tiles(state = initialState, action) {
     const keys = Object.keys(state.tiles);
     let i;
     let newParameters;
+    let splitVertical;
 
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
@@ -49,7 +50,8 @@ export default function tiles(state = initialState, action) {
         newParentTileId = state.currentTileId;
         newChildTileId = state.currentTileId + 1;
         newChildTileObject = new TileObject(newChildTileId, newParentTileId);
-        newParentTileObject = new TileObject(newParentTileId, action.tileId, [action.tileId, newChildTileId]); // debugger;
+        splitVertical = true;
+        newParentTileObject = new TileObject(newParentTileId, action.tileId, [action.tileId, newChildTileId], splitVertical); // debugger;
 
         newTiles[newParentTileId] = newParentTileObject;
         newTiles[newChildTileId] = newChildTileObject;

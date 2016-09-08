@@ -49,15 +49,15 @@ export default class HomeView extends Component {
     }
 
     const that = this;
+    const children = that._getChildren(tileObject.id);
     let allTiles = (
         <Tile key={tileObject.id} 
               data={tileObject}
               actions={actions}>
-            {that._getChildren(tileObject.id)}
+            {children}
         </Tile>
     );
 
-    debugger;
 /*
     if(tileObject.children){
         allTiles.props.children = 

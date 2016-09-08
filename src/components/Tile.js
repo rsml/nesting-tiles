@@ -55,12 +55,37 @@ export default class Tile extends Component {
         );
     }
 
-    // const tileObjects = this.props.children.map((tileObject) => (<Tile data={tileObject} />))
-    return (
-        <div>
-            {this.props.children}
-        </div>
-    );
+    if(this.props.children.length !== 2 || (this.props.data.splitVertical !== true && this.props.data.splitVertical !== false)){
+        return (
+            <div>
+                Improperly formatted tile
+            </div>
+        );
+    }
+
+    if(this.props.data.splitVertical){
+        return (
+            <div className='Tile-container-full'>
+                <div className='Tile-container-top'>
+                    {this.props.children[0]}
+                </div>
+                <div className='Tile-container-bottom'>
+                    {this.props.children[1]}
+                </div>
+            </div>
+        );
+    }else{
+        return (
+            <div className='Tile-container-full'>
+                <div className='Tile-container-left'>
+                    {this.props.children[0]}
+                </div>
+                <div className='Tile-container-right'>
+                    {this.props.children[1]}
+                </div>
+            </div>
+        );
+    }
   }
 }
 
