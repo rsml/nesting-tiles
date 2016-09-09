@@ -280,8 +280,10 @@ export default class Tile extends Component {
             innerDOM = (
                 <iframe className='FullSize' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameborder="0" allowfullscreen></iframe>
             )
-
         }else if(data.type === TileTypes.types.WEBSITE){
+            innerDOM = (
+                <iframe className='FullSize' src={data.content}></iframe>
+            )
         }
 
         const tileMenu = (hoverMenu && hoverMenu.isVisible) ? (
