@@ -17,6 +17,7 @@ export const App = (props) => {
             <HomeView rootTileId={tiles.rootTileId}
                       tiles={tiles.tiles}
                       tooltip={tiles.tooltip}
+                      hoverMenu={tiles.hoverMenu}
                       actions={actions} />
             <DevTools />
         </div>

@@ -111,3 +111,10 @@ export function submitTooltip(contentType, content){
         content
     };
 }
+
+export function updateHoverMenu(options){
+    return {
+        type: ActionTypes.UPDATE_HOVER_MENU,
+        options
+    };
+}

@@ -3,10 +3,22 @@ import Tile from '../components/Tile';
 import '../styles/FullSize.css';
 
 export default class HomeView extends Component {
-    _getChildren(tileId) {
+    onClick(e) {
+        const {
+            actions
+        } = this.props;
+        debugger;
+
+        if(!e.isPropagationStopped()){
+            actions.setTooltipIsVisible(false);
+        }
+    }
+
+    getChildren(tileId) {
         const {
             tiles,
             tooltip,
+            hoverMenu,
             actions
         } = this.props;
 
@@ -21,21 +33,24 @@ export default class HomeView extends Component {
             const childObject = tiles[childId];
 
             let newTile;
+            const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === childId) ? hoverMenu : null;
             if(tooltip && tooltip.tileId === childId){
                 newTile = (
                     <Tile key={childId}
                           data={childObject}
                           actions={actions}
-                          tooltip={tooltip}>
-                        {that._getChildren(childId)}
+                          tooltip={tooltip}
+                          hoverMenu={hoverMenuForTile}>
+                        {that.getChildren(childId)}
                     </Tile>
                 );
             }else{
                 newTile = (
                     <Tile key={childId}
                           data={childObject}
-                          actions={actions}>
-                        {that._getChildren(childId)}
+                          actions={actions}
+                          hoverMenu={hoverMenuForTile}>
+                        {that.getChildren(childId)}
                     </Tile>
                 );
             }
@@ -52,6 +67,7 @@ export default class HomeView extends Component {
         rootTileId,
         tiles,
         tooltip,
+        hoverMenu,
         actions
     } = this.props;
 
@@ -66,14 +82,16 @@ export default class HomeView extends Component {
     }
 
     const that = this;
-    const children = that._getChildren(tileObject.id);
+    const children = that.getChildren(tileObject.id);
     let allTiles;
+    const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === tileObject.id) ? hoverMenu : null;
     if(tooltip && tooltip.tileId === tileObject.id){
         allTiles = (
             <Tile key={tileObject.id} 
                   data={tileObject}
                   actions={actions}
-                  tooltip={tooltip}>
+                  tooltip={tooltip}
+                  hoverMenu={hoverMenuForTile}>
                 {children}
             </Tile>
         );
@@ -81,14 +99,16 @@ export default class HomeView extends Component {
         allTiles = (
             <Tile key={tileObject.id} 
                   data={tileObject}
-                  actions={actions}>
+                  actions={actions}
+                  hoverMenu={hoverMenu}>
                 {children}
             </Tile>
         );
     }
 
     return (
-        <div className='FullSize'>
+        <div className='FullSize'
+             onClick={this.onClick.bind(this)}>
           {allTiles}
         </div>
     );
@@ -97,6 +117,7 @@ export default class HomeView extends Component {
 
 HomeView.propTypes = {
   tooltip: PropTypes.object,
+  hoverMenu: PropTypes.object,
   rootTileId: PropTypes.number.isRequired,
   tiles: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired

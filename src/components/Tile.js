@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 // import Tooltip from 'rc-tooltip';
 // import 'rc-tooltip/assets/bootstrap.css';
 import TileObject from '../classes/TileObject';
@@ -6,31 +7,110 @@ import TileObject from '../classes/TileObject';
 import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
 import Popover from 'react-bootstrap/lib/Popover';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Overlay from 'react-bootstrap/lib/Overlay';
+// import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
 // import './Tooltip.css';
 
 export default class Tile extends Component {
-  handleShowInsertMenu() {
+    onHideOverlay() {
+        const {
+            actions
+        } = this.props;
+
+        actions.setTooltipIsVisible(false);
+    }
+
+    onShowOverlay() {
+        // const {
+        //     actions
+        // } = this.props;
+
+        // actions.setTooltipIsVisible(true);
+    }
+
+    onMouseEnter() {
+        const {
+            data,
+            actions
+        } = this.props;
+
+        actions.updateHoverMenu({
+            isVisible: true,
+            tileId: data.id
+        });
+    }
+
+    onMouseLeave() {
+        const {
+            data,
+            hoverMenu,
+            tooltip,
+            actions
+        } = this.props;
+
+        if(hoverMenu && hoverMenu.tileId === data.id){
+            if(tooltip && tooltip.tileId === data.id){
+                return;
+            }
+
+            actions.updateHoverMenu({
+                isVisible: false,
+                tileId: null
+            });
+        }
+    }
+
+  handleShowInsertMenu(e) {
     const {
         data,
         actions
     } = this.props;
 
+    console.log('stop propagation 1')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
+
+    actions.setTooltipIsVisible(true);
     actions.setTooltipType(data.type);
     actions.setTooltipTileId(data.id);
     actions.setTooltipContent(data.content);
   }
 
-  handleSplitVertical() {
+  handleSplitVertical(e) {
+    console.log('stop propagation 2')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
     this.props.actions.insertBelow(this.props.data.id);
   }
 
-  handleSplitHorizontal() {
+  handleSplitHorizontal(e) {
+    console.log('stop propagation 3')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
     this.props.actions.inesertToTheRightOf(this.props.data.id);
   }
 
-  handleDeleteTile() {
+  handleDeleteTile(e) {
+    console.log('stop propagation 4')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
     this.props.actions.deleteTile(this.props.data.id);
   }
 
@@ -47,10 +127,6 @@ export default class Tile extends Component {
     actions.setTooltipContent(e.target.value);
   }
 
-  handleSetTooltipIsVisible() {
-    this.props.actions.setTooltipIsVisible(true);
-  }
-
   handleClickDone() {
     const {
         tooltip,
@@ -63,13 +139,46 @@ export default class Tile extends Component {
 
     actions.submitTooltip(tooltip.type, tooltip.content);
   }
+
+  onClickPopoverTabVideo(e){
+    console.log('stop propagation 5')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
+    this.onClickPopoverTab(TileTypes.types.VIDEO);
+  }
+
+  onClickPopoverTabImage(e){
+    console.log('stop propagation 6')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
+    this.onClickPopoverTab(TileTypes.types.IMAGE);
+  }
+
+  onClickPopoverTabWebsite(e){
+    console.log('stop propagation 7')
+    e.stopPropagation();
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    e.nativeEvent.stopPropagation()
+    e.nativeEvent.preventDefault()
+    this.onClickPopoverTab(TileTypes.types.WEBSITE);
+  }
   
   onClickPopoverTab(tileType) {
     const {
         actions,
         data
     } = this.props;
-    
+
     actions.setTooltipType(tileType);
 
     let newContent = '';
@@ -123,11 +232,12 @@ export default class Tile extends Component {
   render() {
     const {
         tooltip,
+        hoverMenu,
         children,
         data
     } = this.props;
 
-    if(!children || children.length === 0){
+    if(!data.children || data.children.length === 0){
         let tooltipHeight;
         const isExpanded = tooltip && tooltip.type;
         if(isExpanded){
@@ -155,7 +265,7 @@ export default class Tile extends Component {
                      className='Tooltip'>
                     <div className='Tooltip-header'>
                         <div className='Tile-tooltip-icon-container'
-                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.VIDEO)}>
+                             onClick={this.onClickPopoverTabVideo.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
                                 className='Tile-tooltip-icon' />
@@ -164,7 +274,7 @@ export default class Tile extends Component {
                             </div>
                         </div>
                         <div className='Tile-tooltip-icon-container'
-                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.WEBSITE)}>
+                             onClick={this.onClickPopoverTabImage.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
                                 className='Tile-tooltip-icon' />
@@ -173,7 +283,7 @@ export default class Tile extends Component {
                             </div>
                         </div>
                         <div className='Tile-tooltip-icon-container'
-                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.IMAGE)}>
+                             onClick={this.onClickPopoverTabWebsite.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
                                 className='Tile-tooltip-icon' />
@@ -188,23 +298,32 @@ export default class Tile extends Component {
         );
 
         const tooltipDOM = (
-            <OverlayTrigger trigger='click' rootClose placement='right' overlay={popover}>
-                <img src={require('../images/insert.svg')}
-                    alt=''
-                    className='Tile-menu-item Tile-menu-insert'
-                    onClick={this.handleShowInsertMenu.bind(this)} />
-            </OverlayTrigger>
+            <img ref='insert'
+                src={require('../images/insert.svg')}
+                alt=''
+                className='Tile-menu-item Tile-menu-insert'
+                onClick={this.handleShowInsertMenu.bind(this)} />
         );
 
-        debugger;
+        let overlayDOM;
+        overlayDOM = (
+            <Overlay
+                  show={(tooltip && tooltip.isVisible)}
+                  onEntering={this.onShowOverlay.bind(this)}
+                  onHide={this.onHideOverlay.bind(this)}
+                  placement='right'
+                  container={this}
+                  target={() => ReactDOM.findDOMNode(this.refs.insert)} >
+                {popover}
+            </Overlay>
+        );
 
         const backgroundStyle = {
             background: `url(${data.content}) no-repeat center center`,
             backgroundSize: 'contain'
         };
 
-        return (
-          <div className='Tile' style={backgroundStyle} id={`tile-${data.id}`}>
+        const tileMenu = (hoverMenu && hoverMenu.isVisible) ? (
             <div className='Tile-menu'>
                 {tooltipDOM}
                 <img src={require('../images/split-vertical.svg')}
@@ -219,7 +338,17 @@ export default class Tile extends Component {
                     alt=''
                     className='Tile-menu-item Tile-menu-split-horizontal'
                     onClick={this.handleSplitHorizontal.bind(this)} />
+                {overlayDOM}
             </div>
+        ) : null;
+
+        return (
+          <div className='Tile'
+                style={backgroundStyle}
+                id={`tile-${data.id}`}
+                onMouseEnter={this.onMouseEnter.bind(this)}
+                onMouseLeave={this.onMouseLeave.bind(this)}>
+            {tileMenu}
           </div>
         );
     }
@@ -260,6 +389,7 @@ export default class Tile extends Component {
 
 Tile.propTypes = {
   tooltip: PropTypes.object,
+  hoverMenu: PropTypes.object,
   children: PropTypes.array,
   data: PropTypes.instanceOf(TileObject),
   actions: PropTypes.object.isRequired

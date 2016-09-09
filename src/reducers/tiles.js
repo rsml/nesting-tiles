@@ -13,6 +13,10 @@ const initialState = {
         type: null,
         content: null,
         isVisible: false
+    },
+    hoverMenu: {
+        isVisible: false,
+        tileId: null
     }
 };
 
@@ -78,7 +82,10 @@ function insertInDirection(state, direction, activeTileId){
 
     let newParameters = {
         currentTileId: state.currentTileId + 2,
-        tiles: newTiles
+        tiles: newTiles,
+        tooltip: Object.assign({}, state.tooltip, {
+            isVisible: false
+        })
     };
 
     if(activeTileId === state.rootTileId){
@@ -166,7 +173,10 @@ function deleteTile(state, activeTileId){
 
     return Object.assign({}, state, {
         rootTileId: newRootTileId,
-        tiles: newTiles
+        tiles: newTiles,
+        tooltip: Object.assign({}, state.tooltip, {
+            isVisible: false
+        })
     });
 }
 
@@ -261,6 +271,18 @@ export default function tiles(state = initialState, action) {
     case ActionTypes.SUBMIT_TOOLTIP:
         document.body.click();
         return submitTooltip(state, action.contentType, action.content);
+
+    case ActionTypes.UPDATE_HOVER_MENU:
+        if(state.tooltip.isVisible){
+            return state;
+        }
+
+        return Object.assign({}, state, {
+            hoverMenu: Object.assign({}, state.hoverMenu, {
+                isVisible: action.options.isVisible,
+                tileId: action.options.tileId
+            })
+        });
 
     default:
       return state;
