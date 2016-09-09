@@ -6,6 +6,8 @@ import * as Actions from '../actions/tileActions';
 import HomeView from '../views/HomeView';
 import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
+import '../styles/App.css';
+import '../styles/Fonts.css';
 
 class App extends Component {
     onClick(e) {
@@ -33,7 +35,7 @@ class App extends Component {
         } = this.props;
         
         return (
-            <div className='FullSize'
+            <div className='App FullSize'
                  onClick={this.onClick.bind(this)}>
                 <HomeView rootTileId={tiles.rootTileId}
                           tiles={tiles.tiles}

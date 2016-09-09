@@ -278,11 +278,11 @@ export default class Tile extends Component {
             };
         }else if(data.type === TileTypes.types.YOUTUBE){
             innerDOM = (
-                <iframe className='FullSize' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameborder="0" allowfullscreen></iframe>
+                <iframe className='FullSize' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameBorder='0' allowFullScreen />
             )
         }else if(data.type === TileTypes.types.WEBSITE){
             innerDOM = (
-                <iframe className='FullSize' src={data.content}></iframe>
+                <iframe className='FullSize' src={data.content} />
             )
         }
 

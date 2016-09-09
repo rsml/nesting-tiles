@@ -1,0 +1,20 @@
+@font-face {
+    font-family: PH_ExtraThin;
+    src: url('../fonts/PH-100CondCaps.otf') format('opentype');
+}
+
+@font-face {
+    font-family: PH_Thin;
+    src: url('../fonts/PH-300CondCaps.otf') format('opentype');
+}
+
+@font-face {
+    font-family: PH;
+    font-weight: bold;
+    src: url('../fonts/PH-400RegularCaps.otf') format('opentype');
+}
+
+@font-face {
+    font-family: PH_Bold;
+    src: url('../fonts/PH-600RegularCaps.otf') format('opentype');
+}
