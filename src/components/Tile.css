@@ -92,13 +92,18 @@
     color: white;
     text-align: center;
     display: inline-block;
-    line-height: 13px;
-    font-size: 13px;
-    font-weight: bold;
 }
 
 .Tile-tooltip-icon {
     width: 60px;
     height: 70px;
     margin: auto;
+    box-shadow: 0px 0px 0px 1px black inset;
+}
+
+.Tile-tooltip-icon-label {
+    line-height: 13px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 4px;
 }

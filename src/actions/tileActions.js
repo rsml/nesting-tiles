@@ -71,5 +71,28 @@ export function deleteTile(tileId){
     return {
         type: ActionTypes.DELETE_TILE,
         tileId
-    }
+    };
+}
+
+/***************/
+
+export function setTooltipType(tooltipType){
+    return {
+        type: ActionTypes.SET_TOOLTIP_TYPE,
+        tooltipType
+    };
+}
+
+export function setTooltipTileId(tooltipTileId){
+    return {
+        type: ActionTypes.SET_TOOLTIP_TILE_ID,
+        tooltipTileId
+    };
+}
+
+export function setTooltipContent(tooltipContent){
+    return {
+        type: ActionTypes.SET_TOOLTIP_CONTENT,
+        tooltipContent
+    };
 }

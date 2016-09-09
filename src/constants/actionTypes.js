@@ -11,3 +11,7 @@ export const HIDE_INSERT_MENU = 'HIDE_INSERT_MENU';
 export const ADD = 'ADD';
 
 export const DELETE_TILE = 'DELETE_TILE';
+
+export const SET_TOOLTIP_TYPE = 'SET_TOOLTIP_TYPE';
+export const SET_TOOLTIP_TILE_ID = 'SET_TOOLTIP_TILE_ID';
+export const SET_TOOLTIP_CONTENT = 'SET_TOOLTIP_CONTENT';

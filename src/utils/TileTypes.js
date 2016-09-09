@@ -1,15 +1,14 @@
 import * as Utils from './index';
 
-const types = {
+export const types = {
     VIDEO: "video",
     IMAGE: "image",
     WEBSITE: "website"
 };
-module.exports.types = types;
 
 
 const allowedTypes = [undefined, null, ...Utils.objectValues(types)];
 
-module.exports.getAllowedTypes = function(){
+export function getAllowedTypes(){
     return allowedTypes;
-};
+}

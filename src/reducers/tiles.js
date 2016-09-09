@@ -11,6 +11,11 @@ const initialState = {
     insertMenu: {
         isVisible: false,
         tileId: null
+    },
+    tooltip: {
+        tileId: null,
+        type: null,
+        content: null
     }
 };
 
@@ -120,7 +125,6 @@ function deleteTile(state, activeTileId){
     }
     const newSiblingTileObject = siblingTileObject.clone();
     newSiblingTileObject.parentId = parentTileObject.parentId;
-    debugger;
 
     // update the children of the grandparent tile
     const grandParentTileId = parentTileObject.parentId;
@@ -137,7 +141,6 @@ function deleteTile(state, activeTileId){
     // remove the parent and active tile from the tiles data structure
     // copy of the tiles to a new dictionary and omit the active tile and parent
     const newTiles = {};
-    debugger;
     const tilesKeys = Object.keys(tiles);
     for (let i = 0; i < tilesKeys.length; i++) {
         const key = parseInt(tilesKeys[i]);
@@ -202,6 +205,29 @@ export default function tiles(state = initialState, action) {
 
     case ActionTypes.DELETE_TILE:
         return deleteTile(state, action.tileId);
+
+    case ActionTypes.SET_TOOLTIP_TYPE:
+        return Object.assign({}, state, {
+            tooltip: Object.assign({}, state.tooltip, {
+                type: action.tooltipType
+            })
+        });
+
+    case ActionTypes.SET_TOOLTIP_TILE_ID:
+        return Object.assign({}, state, {
+            tooltip: Object.assign({}, state.tooltip, {
+                tileId: action.tooltipTileId
+            })
+        });
+
+    case ActionTypes.SET_TOOLTIP_CONTENT:
+        return Object.assign({}, state, {
+            tooltip: Object.assign({}, state.tooltip, {
+                content: action.tooltipContent
+            })
+        });
+
+
 
     default:
       return state;
