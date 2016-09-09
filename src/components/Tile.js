@@ -98,7 +98,6 @@ export default class Tile extends Component {
 
     const isDisabled = !tooltip || !tooltip.content || tooltip.content.length === 0;
 
-    debugger;
     return (
         <div>
             <div className='Tooltip-title'>
@@ -129,10 +128,8 @@ export default class Tile extends Component {
     } = this.props;
 
     if(!children || children.length === 0){
-        const isTooltipVisible = ((tooltip || {}).isVisible || false);
         let tooltipHeight;
         const isExpanded = tooltip && tooltip.type;
-        debugger;
         if(isExpanded){
             tooltipHeight = 300;
         }else{
@@ -152,7 +149,7 @@ export default class Tile extends Component {
         }
 
         const popover = (
-            <Popover id="popover-trigger-click-root-close" title="Popover bottom">
+            <Popover id='popover-trigger-click-root-close' title='Popover bottom'>
                 <div key={`tooltip-height-${tooltipHeight}`}
                      style={{ width: 210, height: tooltipHeight }}
                      className='Tooltip'>
@@ -189,23 +186,9 @@ export default class Tile extends Component {
                 </div>
             </Popover>
         );
-        /*const insertIcon = (
-            <img src={require('../images/insert.svg')}
-                    alt=''
-                    className='Tile-menu-item Tile-menu-insert' />
-        );
 
-        */
-        /*const tooltipDOM = (isTooltipVisible) ? (
-            <div onClick={this.handleSetTooltipIsVisible.bind(this)}>
-                <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
-                      {insertIcon}
-                </OverlayTrigger>
-            </div>
-        ) : (insertIcon);
-*/
         const tooltipDOM = (
-            <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
+            <OverlayTrigger trigger='click' rootClose placement='right' overlay={popover}>
                 <img src={require('../images/insert.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-insert'
@@ -215,24 +198,27 @@ export default class Tile extends Component {
 
         debugger;
 
-        return (
-          <div id={`tile-${data.id}`}>
+        const backgroundStyle = {
+            background: `url(${data.content}) no-repeat center center`,
+            backgroundSize: 'contain'
+        };
 
-                ID: {data.id}
+        return (
+          <div className='Tile' style={backgroundStyle} id={`tile-${data.id}`}>
             <div className='Tile-menu'>
                 {tooltipDOM}
                 <img src={require('../images/split-vertical.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-split-vertical'
-                    onClick={this.handleSplitVertical} />
+                    onClick={this.handleSplitVertical.bind(this)} />
                 <img src={require('../images/delete.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-delete'
-                    onClick={this.handleDeleteTile} />
+                    onClick={this.handleDeleteTile.bind(this)} />
                 <img src={require('../images/split-horizontal.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-split-horizontal'
-                    onClick={this.handleSplitHorizontal} />
+                    onClick={this.handleSplitHorizontal.bind(this)} />
             </div>
           </div>
         );

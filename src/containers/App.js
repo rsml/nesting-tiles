@@ -4,6 +4,7 @@ import DevTools from './DevTools';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/tileActions';
 import HomeView from '../views/HomeView';
+import '../styles/FullSize.css';
 
 export const App = (props) => {
     const {
@@ -12,7 +13,7 @@ export const App = (props) => {
     } = props;
 
     return (
-        <div>
+        <div className='FullSize'>
             <HomeView rootTileId={tiles.rootTileId}
                       tiles={tiles.tiles}
                       tooltip={tiles.tooltip}

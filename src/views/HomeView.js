@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Tile from '../components/Tile';
+import '../styles/FullSize.css';
 
 export default class HomeView extends Component {
     _getChildren(tileId) {
@@ -87,7 +88,7 @@ export default class HomeView extends Component {
     }
 
     return (
-        <div>
+        <div className='FullSize'>
           {allTiles}
         </div>
     );
