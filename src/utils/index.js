@@ -56,3 +56,12 @@ export function isDescendant(parent, child) {
     }
     return false;
 }
+
+/**
+ * Convert 'https://www.youtube.com/watch?v=HxXbrnJ6l4A' into
+ *         'https://www.youtube.com/embed/HxXbrnJ6l4A'
+ * @return {[type]} [description]
+ */
+export function getYoutubeEmbedUrlFromVideoUrl(videoUrl){
+    return videoUrl.replace('/watch?v=', '/embed/');
+}

@@ -1,7 +1,7 @@
 import * as Utils from './index';
 
 export const types = {
-    VIDEO: "video",
+    YOUTUBE: "youtube",
     IMAGE: "image",
     WEBSITE: "website"
 };

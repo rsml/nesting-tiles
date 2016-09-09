@@ -8,6 +8,7 @@ import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
 import Popover from 'react-bootstrap/lib/Popover';
 import Overlay from 'react-bootstrap/lib/Overlay';
+import * as Utils from '../utils/index';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
 // import './Tooltip.css';
@@ -111,8 +112,8 @@ export default class Tile extends Component {
     actions.submitTooltip(tooltip.type, tooltip.content);
   }
 
-  onClickPopoverTabVideo(){
-    this.onClickPopoverTab(TileTypes.types.VIDEO);
+  onClickPopoverTabYoutube(){
+    this.onClickPopoverTab(TileTypes.types.YOUTUBE);
   }
 
   onClickPopoverTabImage(){
@@ -147,8 +148,8 @@ export default class Tile extends Component {
     } = this.props;
 
     let title;
-    if(tooltip.type === TileTypes.types.VIDEO){
-        title = 'Video URL';
+    if(tooltip.type === TileTypes.types.YOUTUBE){
+        title = 'Youtube URL';
     }else if(tooltip.type === TileTypes.types.IMAGE){
         title = 'Image URL';
     }else if(tooltip.type === TileTypes.types.WEBSITE){
@@ -215,12 +216,12 @@ export default class Tile extends Component {
                      className='Tooltip'>
                     <div className='Tooltip-header'>
                         <div className='Tile-tooltip-icon-container'
-                             onClick={this.onClickPopoverTabVideo.bind(this)}>
+                             onClick={this.onClickPopoverTabYoutube.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
                                 className='Tile-tooltip-icon' />
                             <div className='Tile-tooltip-icon-label'>
-                                Video
+                                Youtube
                             </div>
                         </div>
                         <div className='Tile-tooltip-icon-container'
@@ -268,10 +269,20 @@ export default class Tile extends Component {
             </Overlay>
         );
 
-        const backgroundStyle = {
-            background: `url(${data.content}) no-repeat center center`,
-            backgroundSize: 'contain'
-        };
+        let backgroundStyle;
+        let innerDOM;
+        if(data.type === TileTypes.types.IMAGE){
+            backgroundStyle = {
+                background: `url(${data.content}) no-repeat center center`,
+                backgroundSize: 'contain'
+            };
+        }else if(data.type === TileTypes.types.YOUTUBE){
+            innerDOM = (
+                <iframe className='FullSize' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameborder="0" allowfullscreen></iframe>
+            )
+
+        }else if(data.type === TileTypes.types.WEBSITE){
+        }
 
         const tileMenu = (hoverMenu && hoverMenu.isVisible) ? (
             <div className='Tile-menu'>
@@ -298,6 +309,7 @@ export default class Tile extends Component {
                 id={`tile-${data.id}`}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}>
+            {innerDOM}
             {tileMenu}
           </div>
         );
