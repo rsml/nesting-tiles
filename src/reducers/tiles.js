@@ -179,7 +179,7 @@ function submitTooltip(state, type, content){
         if(parseInt(key) === state.tooltip.tileId){
             let newTileObject = state.tiles[key].clone();
             newTileObject.type = type;
-            newTileObject.type = content;
+            newTileObject.content = content;
             newTiles[key] = newTileObject
         }else{
             newTiles[key] = state.tiles[key];
@@ -259,6 +259,7 @@ export default function tiles(state = initialState, action) {
         });
 
     case ActionTypes.SUBMIT_TOOLTIP:
+        document.body.click();
         return submitTooltip(state, action.contentType, action.content);
 
     default:

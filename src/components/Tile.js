@@ -5,21 +5,21 @@ import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
+import Popover from 'react-bootstrap/lib/Popover';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
 // import './Tooltip.css';
 
 export default class Tile extends Component {
-  constructor(props) {
-    super(props);
-    this.handleShowInsertMenu = this.handleShowInsertMenu.bind(this);
-    this.handleSplitVertical = this.handleSplitVertical.bind(this);
-    this.handleSplitHorizontal = this.handleSplitHorizontal.bind(this);
-    this.handleDeleteTile = this.handleDeleteTile.bind(this);
-  }
-
   handleShowInsertMenu() {
-    this.props.actions.showInsertMenu(this.props.data.id);
+    const {
+        data,
+        actions
+    } = this.props;
+
+    actions.setTooltipType(data.type);
+    actions.setTooltipTileId(data.id);
+    actions.setTooltipContent(data.content);
   }
 
   handleSplitVertical() {
@@ -63,27 +63,23 @@ export default class Tile extends Component {
 
     actions.submitTooltip(tooltip.type, tooltip.content);
   }
+  
+  onClickPopoverTab(tileType) {
+    const {
+        actions,
+        data
+    } = this.props;
+    
+    actions.setTooltipType(tileType);
 
-  onVisibleChange(tileId, visible) {
-    if(visible){
-        this.props.actions.setTooltipType(null);
-        this.props.actions.setTooltipTileId(tileId);
+    let newContent = '';
+    if(data.type === tileType){
+        newContent = data.content;
+    }else{
+        newContent = '';
     }
-  }
 
-  onClickVideo() {
-    this.props.actions.setTooltipType(TileTypes.types.VIDEO);
-    this.props.actions.setTooltipContent('');
-  }
-
-  onClickImage() {
-    this.props.actions.setTooltipType(TileTypes.types.IMAGE);
-    this.props.actions.setTooltipContent('');
-  }
-
-  onClickWebsite() {
-    this.props.actions.setTooltipType(TileTypes.types.WEBSITE);
-    this.props.actions.setTooltipContent('');
+    actions.setTooltipContent(newContent);
   }
 
   getTooltipBody() {
@@ -102,6 +98,7 @@ export default class Tile extends Component {
 
     const isDisabled = !tooltip || !tooltip.content || tooltip.content.length === 0;
 
+    debugger;
     return (
         <div>
             <div className='Tooltip-title'>
@@ -109,7 +106,7 @@ export default class Tile extends Component {
             </div>
             <input className='Tooltip-input'
                 type='text'
-                value={tooltip.content}
+                value={tooltip.content || ''}
                 onChange={this.handleOnChangeContent.bind(this)} />
 
             <Button block={true}
@@ -135,6 +132,7 @@ export default class Tile extends Component {
         const isTooltipVisible = ((tooltip || {}).isVisible || false);
         let tooltipHeight;
         const isExpanded = tooltip && tooltip.type;
+        debugger;
         if(isExpanded){
             tooltipHeight = 300;
         }else{
@@ -153,64 +151,67 @@ export default class Tile extends Component {
             tooltipBody = null;
         }
 
-        const tooltipContents = (
-            <div key={`tooltip-height-${tooltipHeight}`}
-                 style={{ width: 210, height: tooltipHeight }}
-                 className='Tooltip'>
-                <div className='Tooltip-header'>
-                    <div className='Tile-tooltip-icon-container'
-                         onClick={this.onClickVideo.bind(this)}>
-                        <img src={require('../images/insert.svg')}
-                            alt=''
-                            className='Tile-tooltip-icon' />
-                        <div className='Tile-tooltip-icon-label'>
-                            Video
+        const popover = (
+            <Popover id="popover-trigger-click-root-close" title="Popover bottom">
+                <div key={`tooltip-height-${tooltipHeight}`}
+                     style={{ width: 210, height: tooltipHeight }}
+                     className='Tooltip'>
+                    <div className='Tooltip-header'>
+                        <div className='Tile-tooltip-icon-container'
+                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.VIDEO)}>
+                            <img src={require('../images/insert.svg')}
+                                alt=''
+                                className='Tile-tooltip-icon' />
+                            <div className='Tile-tooltip-icon-label'>
+                                Video
+                            </div>
+                        </div>
+                        <div className='Tile-tooltip-icon-container'
+                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.WEBSITE)}>
+                            <img src={require('../images/insert.svg')}
+                                alt=''
+                                className='Tile-tooltip-icon' />
+                            <div className='Tile-tooltip-icon-label'>
+                                Photo
+                            </div>
+                        </div>
+                        <div className='Tile-tooltip-icon-container'
+                             onClick={this.onClickPopoverTab.bind(this, TileTypes.types.IMAGE)}>
+                            <img src={require('../images/insert.svg')}
+                                alt=''
+                                className='Tile-tooltip-icon' />
+                            <div className='Tile-tooltip-icon-label'>
+                                Website
+                            </div>
                         </div>
                     </div>
-                    <div className='Tile-tooltip-icon-container'
-                         onClick={this.onClickImage.bind(this)}>
-                        <img src={require('../images/insert.svg')}
-                            alt=''
-                            className='Tile-tooltip-icon' />
-                        <div className='Tile-tooltip-icon-label'>
-                            Photo
-                        </div>
-                    </div>
-                    <div className='Tile-tooltip-icon-container'
-                         onClick={this.onClickWebsite.bind(this)}>
-                        <img src={require('../images/insert.svg')}
-                            alt=''
-                            className='Tile-tooltip-icon' />
-                        <div className='Tile-tooltip-icon-label'>
-                            Website
-                        </div>
-                    </div>
+                    {tooltipBody}
                 </div>
-                {tooltipBody}
-            </div>
+            </Popover>
         );
-        const insertIcon = (
+        /*const insertIcon = (
             <img src={require('../images/insert.svg')}
                     alt=''
-                     onClick={this.handleSetTooltipIsVisible.bind(this)}
                     className='Tile-menu-item Tile-menu-insert' />
         );
-        const tooltipDOM = (isTooltipVisible) ? (
+
+        */
+        /*const tooltipDOM = (isTooltipVisible) ? (
             <div onClick={this.handleSetTooltipIsVisible.bind(this)}>
-                <Tooltip
-                      placement='right'
-                      mouseEnterDelay={0}
-                      mouseLeaveDelay={0.1}
-                      destroyTooltipOnHide={true}
-                      onVisibleChange={this.onVisibleChange.bind(this, data.id)}
-                      trigger='click'
-                      overlay={tooltipContents}
-                      align={{ offset: [0, 0] }}
-                      transitionName='rc-tooltip-zoom'>
+                <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
                       {insertIcon}
-                </Tooltip>
+                </OverlayTrigger>
             </div>
         ) : (insertIcon);
+*/
+        const tooltipDOM = (
+            <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
+                <img src={require('../images/insert.svg')}
+                    alt=''
+                    className='Tile-menu-item Tile-menu-insert'
+                    onClick={this.handleShowInsertMenu.bind(this)} />
+            </OverlayTrigger>
+        );
 
         debugger;
 
