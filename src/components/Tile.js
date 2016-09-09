@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
 import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 // import TileTypes from '../utils/TileTypes';
@@ -31,15 +33,29 @@ export default class Tile extends Component {
 
   render() {
     if(!this.props.children || this.props.children.length === 0){
+        const isTooltipVisible = true;
+        const tooltip = (isTooltipVisible) ? (
+            <Tooltip
+                  placement='right'
+                  mouseEnterDelay={0}
+                  mouseLeaveDelay={0.1}
+                  destroyTooltipOnHide={true}
+                  trigger='click'
+                  overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
+                  align={{ offset: [0, 0] }}
+                  transitionName='rc-tooltip-zoom'>
+                  <img src={require('../images/insert.svg')}
+                        alt=''
+                        className='Tile-menu-item Tile-menu-insert' />
+            </Tooltip>
+        ) : null;
+
         return (
           <div id={`tile-${this.props.data.id}`}>
-          
+
                 ID: {this.props.data.id}
             <div className='Tile-menu'>
-                <img src={require('../images/insert.svg')}
-                    alt=''
-                    className='Tile-menu-item Tile-menu-insert'
-                    onClick={this.handleShowInsertMenu} />
+                {tooltip}
                 <img src={require('../images/split-vertical.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-split-vertical'

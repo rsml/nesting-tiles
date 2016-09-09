@@ -68,9 +68,6 @@ export default class HomeView extends Component {
 
 
 
-
-
-
     return (
         <div>
           {allTiles}
