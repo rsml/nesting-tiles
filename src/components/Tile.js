@@ -61,19 +61,11 @@ export default class Tile extends Component {
         }
     }
 
-  handleShowInsertMenu(e) {
+  handleShowInsertMenu() {
     const {
         data,
         actions
     } = this.props;
-
-    console.log('stop propagation 1')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
 
     actions.setTooltipIsVisible(true);
     actions.setTooltipType(data.type);
@@ -81,36 +73,15 @@ export default class Tile extends Component {
     actions.setTooltipContent(data.content);
   }
 
-  handleSplitVertical(e) {
-    console.log('stop propagation 2')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  handleSplitVertical() {
     this.props.actions.insertBelow(this.props.data.id);
   }
 
-  handleSplitHorizontal(e) {
-    console.log('stop propagation 3')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  handleSplitHorizontal() {
     this.props.actions.inesertToTheRightOf(this.props.data.id);
   }
 
-  handleDeleteTile(e) {
-    console.log('stop propagation 4')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  handleDeleteTile() {
     this.props.actions.deleteTile(this.props.data.id);
   }
 
@@ -140,36 +111,15 @@ export default class Tile extends Component {
     actions.submitTooltip(tooltip.type, tooltip.content);
   }
 
-  onClickPopoverTabVideo(e){
-    console.log('stop propagation 5')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  onClickPopoverTabVideo(){
     this.onClickPopoverTab(TileTypes.types.VIDEO);
   }
 
-  onClickPopoverTabImage(e){
-    console.log('stop propagation 6')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  onClickPopoverTabImage(){
     this.onClickPopoverTab(TileTypes.types.IMAGE);
   }
 
-  onClickPopoverTabWebsite(e){
-    console.log('stop propagation 7')
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-
-    e.nativeEvent.stopPropagation()
-    e.nativeEvent.preventDefault()
+  onClickPopoverTabWebsite(){
     this.onClickPopoverTab(TileTypes.types.WEBSITE);
   }
   

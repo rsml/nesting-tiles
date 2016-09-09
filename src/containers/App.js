@@ -1,27 +1,49 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import DevTools from './DevTools';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/tileActions';
 import HomeView from '../views/HomeView';
+import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
 
-export const App = (props) => {
-    const {
-        actions,
-        tiles
-    } = props;
+class App extends Component {
+    onClick(e) {
+        const {
+            actions
+        } = this.props;
 
-    return (
-        <div className='FullSize'>
-            <HomeView rootTileId={tiles.rootTileId}
-                      tiles={tiles.tiles}
-                      tooltip={tiles.tooltip}
-                      hoverMenu={tiles.hoverMenu}
-                      actions={actions} />
-            <DevTools />
-        </div>
-    );
+        const classNames = e.nativeEvent.target.className.split(' ');
+        if(Utils.isDescendant(
+            document.getElementById('popover-trigger-click-root-close'),
+            e.nativeEvent.target
+        )){
+            return;
+        }else if(classNames && typeof classNames.indexOf === 'function' && classNames.indexOf('Tile-menu-insert') >= 0){
+            return;
+        }
+
+        actions.setTooltipIsVisible(false);
+    }
+
+    render() {
+        const {
+            actions,
+            tiles
+        } = this.props;
+        
+        return (
+            <div className='FullSize'
+                 onClick={this.onClick.bind(this)}>
+                <HomeView rootTileId={tiles.rootTileId}
+                          tiles={tiles.tiles}
+                          tooltip={tiles.tooltip}
+                          hoverMenu={tiles.hoverMenu}
+                          actions={actions} />
+                <DevTools />
+            </div>
+        );
+    }
 }
 
 App.propTypes = {

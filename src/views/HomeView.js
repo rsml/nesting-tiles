@@ -3,17 +3,6 @@ import Tile from '../components/Tile';
 import '../styles/FullSize.css';
 
 export default class HomeView extends Component {
-    onClick(e) {
-        const {
-            actions
-        } = this.props;
-        debugger;
-
-        if(!e.isPropagationStopped()){
-            actions.setTooltipIsVisible(false);
-        }
-    }
-
     getChildren(tileId) {
         const {
             tiles,
@@ -107,8 +96,7 @@ export default class HomeView extends Component {
     }
 
     return (
-        <div className='FullSize'
-             onClick={this.onClick.bind(this)}>
+        <div className='FullSize'>
           {allTiles}
         </div>
     );
