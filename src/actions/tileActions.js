@@ -96,3 +96,18 @@ export function setTooltipContent(tooltipContent){
         tooltipContent
     };
 }
+
+export function setTooltipIsVisible(isVisible){
+    return {
+        type: ActionTypes.SET_TOOLTIP_IS_VISIBLE,
+        isVisible
+    };
+}
+
+export function submitTooltip(contentType, content){
+    return {
+        type: ActionTypes.SUBMIT_TOOLTIP,
+        contentType,
+        content
+    };
+}

@@ -8,14 +8,11 @@ const initialState = {
     tiles: {
         [Utils.INITIAL_ROOT_TILE_ID]: new TileObject(Utils.INITIAL_ROOT_TILE_ID)
     },
-    insertMenu: {
-        isVisible: false,
-        tileId: null
-    },
     tooltip: {
         tileId: null,
         type: null,
-        content: null
+        content: null,
+        isVisible: false
     }
 };
 
@@ -173,6 +170,33 @@ function deleteTile(state, activeTileId){
     });
 }
 
+function submitTooltip(state, type, content){
+    // efficiently copy over all of the TileObjects to a new dictionary
+    // but if the find the one TileObject that should be updated, clone it
+    // and update it
+    let newTiles = {};
+    for (let key in state.tiles) {
+        if(parseInt(key) === state.tooltip.tileId){
+            let newTileObject = state.tiles[key].clone();
+            newTileObject.type = type;
+            newTileObject.type = content;
+            newTiles[key] = newTileObject
+        }else{
+            newTiles[key] = state.tiles[key];
+        }
+    }
+
+    return Object.assign({}, state, {
+        tiles: newTiles,
+        tooltip: Object.assign({}, state.tooltip, {
+            tileId: null,
+            type: null,
+            content: null,
+            isVisible: false
+        })
+    });
+}
+
 export default function tiles(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
@@ -227,7 +251,15 @@ export default function tiles(state = initialState, action) {
             })
         });
 
+    case ActionTypes.SET_TOOLTIP_IS_VISIBLE:
+        return Object.assign({}, state, {
+            tooltip: Object.assign({}, state.tooltip, {
+                isVisible: action.isVisible
+            })
+        });
 
+    case ActionTypes.SUBMIT_TOOLTIP:
+        return submitTooltip(state, action.contentType, action.content);
 
     default:
       return state;
