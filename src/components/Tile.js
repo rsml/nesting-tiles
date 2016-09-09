@@ -149,6 +149,10 @@ export default class Tile extends Component {
         tooltip
     } = this.props;
 
+    if(!tooltip){
+        return null;
+    }
+
     let title;
     if(tooltip.type === TileTypes.types.YOUTUBE){
         title = 'Youtube URL';
@@ -174,7 +178,7 @@ export default class Tile extends Component {
                 bsSize='large'
                 bsStyle='primary'
                 disabled={isDisabled}
-                bsClass='btn-bottom waves-effect waves-light btn'
+                bsClass='btn-bottom blue waves-effect waves-light btn'
                 onClick={this.handleClickDone.bind(this)}
                 type='button'>
                 Done
@@ -192,31 +196,18 @@ export default class Tile extends Component {
     } = this.props;
 
     if(!data.children || data.children.length === 0){
-        let tooltipHeight;
-        const isExpanded = tooltip && tooltip.type;
-        if(isExpanded){
-            tooltipHeight = 220;
-        }else{
-            tooltipHeight = 60;
-        }
-        // tooltipHeight = 150;
+        let tooltipHeight = 215;
 
-        let tooltipBody;
-
-        if(isExpanded){
-            tooltipBody = (
-                <div className='Tooltip-body'>
-                    {this.getTooltipBody()}
-                </div>
-            );
-        } else {
-            tooltipBody = null;
-        }
+        let tooltipBody = (
+            <div className='Tooltip-body'>
+                {this.getTooltipBody()}
+            </div>
+        );
 
         let classes = {
             tooltipHeader: classNames({
                 'Tooltip-header': true,
-                'Tooltip-header-expanded': isExpanded 
+                'Tooltip-header-expanded': true 
             }),
             tileTooltipIconContainer: function(tileType){
                 return classNames({
@@ -225,7 +216,7 @@ export default class Tile extends Component {
                 });
             },
             overlayContainer: classNames({
-                'Overlay-move-up': isExpanded
+                'Overlay-move-up': true
             })
         }
 

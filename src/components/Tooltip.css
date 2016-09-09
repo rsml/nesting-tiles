@@ -7,7 +7,7 @@
 
 .Tooltip-header {
     width: 100%;
-    height: 50px;
+    height: 61px;
     position: absolute;
     left: 0;
     top: 0;
@@ -20,7 +20,7 @@
 .Tooltip-header-inner {
     position: absolute;
     width: calc(100% - 10px);
-    height: 31px;
+    height: 41px;
     margin: 10px 5px;
     background: #efefef;
     border-radius: 6px;
@@ -33,7 +33,7 @@
 
 .Tooltip-body {
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 61px);
     position: absolute;
     left: 0;
     bottom: 0;
@@ -46,16 +46,20 @@
     color: #838383;
     font-weight: bold;
     font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
-    margin-top: 20px;
+    margin: 10px 0 12px;
 }
 
 .Tooltip-input {
     width: 100%;
-    height: 34px;
-    line-height: 34px;
-    font-size: 18px;
+    height: 30px !important;
+    line-height: 30px !important;
+    /*font-size: 18px;*/
     color: black;
-    margin-bottom : 10px;
+    /*border-color: #42A5F5 !important;*/
+}
+
+.Tooltip-input:focus {
+    border-color: #42A5F5 !important;
 }
 
 .popover-content {
