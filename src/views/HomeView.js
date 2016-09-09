@@ -96,7 +96,7 @@ export default class HomeView extends Component {
     }
 
     return (
-        <div className='FullSize'>
+        <div className='full-size'>
           {allTiles}
         </div>
     );

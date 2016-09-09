@@ -2,6 +2,7 @@
 /** Tooltip container **/
 .Tooltip {
     position: relative;
+    border-radius: 6px;
 }
 
 .Tooltip-header {
@@ -12,6 +13,8 @@
     top: 0;
     background: #ffffff;
     border-bottom: 1px solid #eee;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .Tooltip-header-inner {
@@ -62,4 +65,6 @@
 
 .popover {
     border: 1px solid rgba(221, 221, 221, 0.5);
+    padding: 0;
+    border-radius: 6px
 }

@@ -1,6 +1,7 @@
 import * as Utils from '../utils/index';
 import * as ActionTypes from '../constants/ActionTypes';
 import TileObject from '../classes/TileObject';
+import * as TileTypes from '../utils/TileTypes';
 
 const initialState = {
     rootTileId: Utils.INITIAL_ROOT_TILE_ID,
@@ -10,7 +11,7 @@ const initialState = {
     },
     tooltip: {
         tileId: null,
-        type: null,
+        type: TileTypes.types.YOUTUBE,
         content: null,
         isVisible: false
     },

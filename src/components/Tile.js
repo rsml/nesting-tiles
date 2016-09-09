@@ -7,8 +7,8 @@ import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
-// import Popover from 'react-bootstrap/lib/Popover';
-import MyPopover from './MyPopover';
+import Popover from 'react-bootstrap/lib/Popover';
+// import MyPopover from './MyPopover';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import * as Utils from '../utils/index';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
@@ -71,7 +71,7 @@ export default class Tile extends Component {
     } = this.props;
 
     actions.setTooltipIsVisible(true);
-    actions.setTooltipType(data.type);
+    actions.setTooltipType(data.type || TileTypes.types.YOUTUBE);
     actions.setTooltipTileId(data.id);
     actions.setTooltipContent(data.content);
   }
@@ -174,7 +174,7 @@ export default class Tile extends Component {
                 bsSize='large'
                 bsStyle='primary'
                 disabled={isDisabled}
-                bsClass='waves-effect waves-light btn'
+                bsClass='btn-bottom waves-effect waves-light btn'
                 onClick={this.handleClickDone.bind(this)}
                 type='button'>
                 Done
@@ -230,7 +230,7 @@ export default class Tile extends Component {
         }
 
         const popover = (
-            <MyPopover id='popover-trigger-click-root-close'
+            <Popover id='popover-trigger-click-root-close'
                      title='Popover bottom'
                      arrowOffsetTop='10%'>
                 <div key={`tooltip-height-${tooltipHeight}`}
@@ -269,7 +269,7 @@ export default class Tile extends Component {
                     </div>
                     {tooltipBody}
                 </div>
-            </MyPopover>
+            </Popover>
         );
 
         const tooltipDOM = (
@@ -306,11 +306,11 @@ export default class Tile extends Component {
             };
         }else if(data.type === TileTypes.types.YOUTUBE){
             innerDOM = (
-                <iframe className='FullSize' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameBorder='0' allowFullScreen />
+                <iframe className='full-size' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameBorder='0' allowFullScreen />
             )
         }else if(data.type === TileTypes.types.WEBSITE){
             innerDOM = (
-                <iframe className='FullSize' src={data.content} />
+                <iframe className='full-size' src={data.content} />
             )
         }
 

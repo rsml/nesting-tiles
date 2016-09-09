@@ -156,3 +156,16 @@
 
     box-shadow: 0 2px 0 0 rgba(0,0,0,0.1),0 0 0 0.5px rgba(0,0,0,0.07) !important;
 }
+
+.btn-bottom {
+    position: absolute;
+    /*left: 5px;
+    width: calc(100% - 10px);
+    bottom: 5px;*/
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 41px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
