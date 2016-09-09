@@ -10,7 +10,7 @@ export default class Tile extends Component {
     this.handleShowInsertMenu = this.handleShowInsertMenu.bind(this);
     this.handleSplitVertical = this.handleSplitVertical.bind(this);
     this.handleSplitHorizontal = this.handleSplitHorizontal.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteTile = this.handleDeleteTile.bind(this);
   }
 
   handleShowInsertMenu() {
@@ -25,14 +25,16 @@ export default class Tile extends Component {
     this.props.actions.inesertToTheRightOf(this.props.data.id);
   }
 
-  handleDelete() {
-    this.props.actions.delete(this.props.data.id);
+  handleDeleteTile() {
+    this.props.actions.deleteTile(this.props.data.id);
   }
 
   render() {
     if(!this.props.children || this.props.children.length === 0){
         return (
           <div id={`tile-${this.props.data.id}`}>
+          
+                ID: {this.props.data.id}
             <div className='Tile-menu'>
                 <img src={require('../images/insert.svg')}
                     alt=''
@@ -45,7 +47,7 @@ export default class Tile extends Component {
                 <img src={require('../images/delete.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-delete'
-                    onClick={this.handleDelete} />
+                    onClick={this.handleDeleteTile} />
                 <img src={require('../images/split-horizontal.svg')}
                     alt=''
                     className='Tile-menu-item Tile-menu-split-horizontal'

@@ -6,11 +6,10 @@ export { objectValues };
 export const INITIAL_ROOT_TILE_ID = 0;
 
 export function cloneAllTiles(tiles){
-    var result = {};
-    const keys = Object.keys(tiles);
-
-    for (let i = 0; i < keys.length; i++) {
-            result[keys[i]] = tiles[i].clone();
+    let result = {};
+    
+    for (const key of Object.keys(tiles)) {
+        result[key] = tiles[key].clone();
     }
 
     return result;
@@ -22,12 +21,24 @@ export function updateTileWithChildren(tileObject, oldChildId, newChildId){
         return tileObject;
     }
 
-    debugger;
-
     const result = tileObject.clone();
     result.children = result.children.map(
         (number) => (number === oldChildId) ? newChildId : number
     )
 
     return result;
+}
+
+export function getSiblingId(parentTileObject, childId){
+    if(!parentTileObject || !parentTileObject.children){
+        return null;
+    }
+
+    for (let i = 0; i < parentTileObject.children.length; i++) {
+        if(parentTileObject.children[i] !== childId){
+            return parentTileObject.children[i];
+        }
+    }
+
+    return null;
 }
