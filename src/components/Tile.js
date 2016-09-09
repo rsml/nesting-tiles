@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames/bind';
 import ReactDOM from 'react-dom';
 // import Tooltip from 'rc-tooltip';
 // import 'rc-tooltip/assets/bootstrap.css';
@@ -11,7 +12,7 @@ import Overlay from 'react-bootstrap/lib/Overlay';
 import * as Utils from '../utils/index';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
-// import './Tooltip.css';
+import './Tooltip.css';
 
 export default class Tile extends Component {
     onHideOverlay() {
@@ -194,7 +195,7 @@ export default class Tile extends Component {
         if(isExpanded){
             tooltipHeight = 300;
         }else{
-            tooltipHeight = 90;
+            tooltipHeight = 60;
         }
 
         let tooltipBody;
@@ -209,13 +210,27 @@ export default class Tile extends Component {
             tooltipBody = null;
         }
 
+        let classes = {
+            tooltipHeader: classNames({
+                'Tooltip-header': true,
+                'Tooltip-header-expanded': isExpanded 
+            }),
+
+            tileTooltipIconContainer: function(tileType){
+                return classNames({
+                    'Tile-tooltip-icon-container': true,
+                    'Tile-tooltip-icon-selected': (tooltip && tileType === tooltip.type)
+                });
+            }
+        }
+
         const popover = (
             <Popover id='popover-trigger-click-root-close' title='Popover bottom'>
                 <div key={`tooltip-height-${tooltipHeight}`}
                      style={{ width: 210, height: tooltipHeight }}
                      className='Tooltip'>
-                    <div className='Tooltip-header'>
-                        <div className='Tile-tooltip-icon-container'
+                    <div className={classes.tooltipHeader}>
+                        <div className={classes.tileTooltipIconContainer(TileTypes.types.YOUTUBE)}
                              onClick={this.onClickPopoverTabYoutube.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
@@ -224,7 +239,7 @@ export default class Tile extends Component {
                                 Youtube
                             </div>
                         </div>
-                        <div className='Tile-tooltip-icon-container'
+                        <div className={classes.tileTooltipIconContainer(TileTypes.types.IMAGE)}
                              onClick={this.onClickPopoverTabImage.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''
@@ -233,7 +248,7 @@ export default class Tile extends Component {
                                 Photo
                             </div>
                         </div>
-                        <div className='Tile-tooltip-icon-container'
+                        <div className={classes.tileTooltipIconContainer(TileTypes.types.WEBSITE)}
                              onClick={this.onClickPopoverTabWebsite.bind(this)}>
                             <img src={require('../images/insert.svg')}
                                 alt=''

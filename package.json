@@ -29,6 +29,7 @@
   "author": "Ross Miller",
   "license": "MIT",
   "dependencies": {
+    "classnames": "2.2.5",
     "object-assign": "4.1.0",
     "rc-tooltip": "3.4.2",
     "react": "15.3.1",

@@ -95,9 +95,12 @@
 .Tile-tooltip-icon-container {
     width: 70px;
     height: 60px;
-    color: white;
     text-align: center;
     display: inline-block;
+}
+
+.Tile-tooltip-icon-selected {
+    background: white;
 }
 
 .Tile-tooltip-icon {
@@ -113,6 +116,8 @@
     font-weight: bold;
     padding-top: 4px;
     color: black;
+    font-family: PH_Bold;
+    letter-spacing: 0.03em;
 }
 
 .popover-title {

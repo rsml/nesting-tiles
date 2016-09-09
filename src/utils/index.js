@@ -47,7 +47,7 @@ export function getSiblingId(parentTileObject, childId){
  * Checks if a given parent node contains the given child not as a descendent
  */
 export function isDescendant(parent, child) {
-    var node = child.parentNode;
+    let node = child.parentNode;
     while (node != null) {
         if (node == parent) {
             return true;
