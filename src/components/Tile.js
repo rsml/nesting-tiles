@@ -34,6 +34,28 @@ export default class Tile extends Component {
   render() {
     if(!this.props.children || this.props.children.length === 0){
         const isTooltipVisible = true;
+        const tooltipContents = (
+            <div style={{ width: 210, height: 90 }}>
+                <div className='Tile-tooltip-icon-container'>
+                    <img src={require('../images/insert.svg')}
+                        alt=''
+                        className='Tile-tooltip-icon' />
+                        Video
+                </div>
+                <div className='Tile-tooltip-icon-container'>
+                    <img src={require('../images/insert.svg')}
+                        alt=''
+                        className='Tile-tooltip-icon' />
+                        Photo
+                </div>
+                <div className='Tile-tooltip-icon-container'>
+                    <img src={require('../images/insert.svg')}
+                        alt=''
+                        className='Tile-tooltip-icon' />
+                        Website
+                </div>
+            </div>
+        );
         const tooltip = (isTooltipVisible) ? (
             <Tooltip
                   placement='right'
@@ -41,7 +63,7 @@ export default class Tile extends Component {
                   mouseLeaveDelay={0.1}
                   destroyTooltipOnHide={true}
                   trigger='click'
-                  overlay={<div style={{ height: 50, width: 50 }}>i am a tooltip</div>}
+                  overlay={tooltipContents}
                   align={{ offset: [0, 0] }}
                   transitionName='rc-tooltip-zoom'>
                   <img src={require('../images/insert.svg')}
