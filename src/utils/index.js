@@ -63,5 +63,23 @@ export function isDescendant(parent, child) {
  * @return {[type]} [description]
  */
 export function getYoutubeEmbedUrlFromVideoUrl(videoUrl){
-    return videoUrl.replace('/watch?v=', '/embed/');
+    const embedUrl = videoUrl.replace('/watch?v=', '/embed/');
+
+    const hasArguments = embedUrl.indexOf('?') >= 0;
+
+    const embedUrlWithoutParameters = (hasArguments) ? embedUrl.substring(0, embedUrl.indexOf('?')) : embedUrl;
+
+    return `${embedUrlWithoutParameters}?autohide=1&autoplay=1&disablekb=0&loop=1&modestbranding=1&playsinline=1&theme=light`;
+}
+
+/**
+ * Prevent XSS Attacks. This is only essential to have if workspaces are shareable. But it's good to have anyway
+ */
+export function cleanURL(dirtyURL){
+    let result = dirtyURL;
+    if(result.indexOf('http://') === -1 && result.indexOf('https://' === -1) && result.indexOf('file://' === -1)){
+        result = `http://${result}`;
+    }
+
+    return result.replace(/[^-A-Za-z0-9+&@#/%?=~_|!:,.;\(\)]/, '');
 }

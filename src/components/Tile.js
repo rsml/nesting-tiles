@@ -32,6 +32,10 @@ export default class Tile extends Component {
         // actions.setTooltipIsVisible(true);
     }
 
+    onClick() {
+        this.onMouseEnter();
+    }
+
     onMouseEnter() {
         const {
             data,
@@ -153,13 +157,17 @@ export default class Tile extends Component {
         return null;
     }
 
-    let title;
+    let title,
+        placeholder;
     if(tooltip.type === TileTypes.types.YOUTUBE){
         title = 'Youtube URL';
+        placeholder = 'youtube.com/watch?v=geluLZ-S21Q'
     }else if(tooltip.type === TileTypes.types.IMAGE){
         title = 'Image URL';
+        placeholder = 'example.com/image.png';
     }else if(tooltip.type === TileTypes.types.WEBSITE){
         title = 'Website URL';
+        placeholder = 'example.com';
     }
 
     const isDisabled = !tooltip || !tooltip.content || tooltip.content.length === 0;
@@ -172,6 +180,7 @@ export default class Tile extends Component {
             <input className='Tooltip-input'
                 type='text'
                 value={tooltip.content || ''}
+                placeholder={placeholder}
                 onChange={this.handleOnChangeContent.bind(this)} />
 
             <Button block={true}
@@ -196,7 +205,7 @@ export default class Tile extends Component {
     } = this.props;
 
     if(!data.children || data.children.length === 0){
-        let tooltipHeight = 215;
+        let tooltipHeight = 225;
 
         let tooltipBody = (
             <div className='Tooltip-body'>
@@ -232,7 +241,8 @@ export default class Tile extends Component {
                             <div className={classes.tileTooltipIconContainer(TileTypes.types.YOUTUBE)}
                                  onClick={this.onClickPopoverTabYoutube.bind(this)}>
                                 <img src={require('../images/youtube.svg')}
-                                    alt=''
+                                    alt='Youtube'
+                                    title='Youtube'
                                     className='Tile-tooltip-icon' />
                                 {/*<div className='Tile-tooltip-icon-label'>
                                     Youtube
@@ -241,7 +251,8 @@ export default class Tile extends Component {
                             <div className={classes.tileTooltipIconContainer(TileTypes.types.IMAGE)}
                                  onClick={this.onClickPopoverTabImage.bind(this)}>
                                 <img src={require('../images/photo.svg')}
-                                    alt=''
+                                    alt='Photo'
+                                    title='Photo'
                                     className='Tile-tooltip-icon' />
                                 {/*<div className='Tile-tooltip-icon-label'>
                                     Photo
@@ -250,7 +261,8 @@ export default class Tile extends Component {
                             <div className={classes.tileTooltipIconContainer(TileTypes.types.WEBSITE)}
                                  onClick={this.onClickPopoverTabWebsite.bind(this)}>
                                 <img src={require('../images/website.svg')}
-                                    alt=''
+                                    alt='Website'
+                                    title='Website'
                                     className='Tile-tooltip-icon' />
                                 {/*<div className='Tile-tooltip-icon-label'>
                                     Website
@@ -292,7 +304,7 @@ export default class Tile extends Component {
         let innerDOM;
         if(data.type === TileTypes.types.IMAGE){
             backgroundStyle = {
-                background: `url(${data.content}) no-repeat center center`,
+                background: `url(${Utils.cleanURL(data.content)}) no-repeat center center`,
                 backgroundSize: 'contain'
             };
         }else if(data.type === TileTypes.types.YOUTUBE){
@@ -301,7 +313,7 @@ export default class Tile extends Component {
             )
         }else if(data.type === TileTypes.types.WEBSITE){
             innerDOM = (
-                <iframe className='full-size' src={data.content} />
+                <iframe className='full-size' src={Utils.cleanURL(data.content)} />
             )
         }
 
@@ -328,6 +340,7 @@ export default class Tile extends Component {
           <div className='Tile'
                 style={backgroundStyle}
                 id={`tile-${data.id}`}
+                onClick={this.onClick.bind(this)}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}>
             {innerDOM}
