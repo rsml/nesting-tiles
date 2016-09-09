@@ -1,19 +1,10 @@
 @font-face {
-    font-family: PH_ExtraThin;
-    src: url('../fonts/PH-100CondCaps.otf') format('opentype');
+  font-family: 'ArchivoNarrow-Regular';
+  src: url('../fonts/ArchivoNarrow-Regular.eot') format('eot'), url('../fonts/ArchivoNarrow-Regular.woff') format('woff'), url('../fonts/ArchivoNarrow-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: PH_Thin;
-    src: url('../fonts/PH-300CondCaps.otf') format('opentype');
-}
-
-@font-face {
-    font-family: PH;
-    src: url('../fonts/PH-400RegularCaps.otf') format('opentype');
-}
-
-@font-face {
-    font-family: PH_Bold;
-    src: url('../fonts/PH-600RegularCaps.otf') format('opentype');
+  font-family: 'ArchivoNarrow-Bold';
+  font-weight: bold;
+  src: url('../fonts/ArchivoNarrow-Bold.eot') format('eot'), url('../fonts/ArchivoNarrow-Bold.woff') format('woff'), url('../fonts/ArchivoNarrow-Bold.ttf') format('truetype');
 }

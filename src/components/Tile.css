@@ -62,7 +62,7 @@
     margin-top: -29px;
     margin-left: -29px;
     background: rgba(200, 200, 200, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.75);
+    /*border: 1px solid rgba(0, 0, 0, 0.75);*/
     line-height: 0;
     border-radius: 2px;
 }
@@ -93,33 +93,66 @@
 
 /** Tooltip **/
 .Tile-tooltip-icon-container {
-    width: 70px;
-    height: 60px;
+    width: 66px;
+    height: 27px;
     text-align: center;
     display: inline-block;
+    margin: 2px;
 }
 
 .Tile-tooltip-icon-selected {
     background: white;
+    border-radius: 4px;
 }
 
 .Tile-tooltip-icon {
-    width: 18px;
-    height: 18px;
+    width: 28px;
+    height: 28px;
     margin: auto;
-    box-shadow: 0px 0px 0px 1px black inset;
 }
 
-.Tile-tooltip-icon-label {
+/*.Tile-tooltip-icon-label {
     line-height: 13px;
     font-size: 13px;
     font-weight: bold;
     padding-top: 4px;
     color: black;
-    font-family: PH_Bold;
+    font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
     letter-spacing: 0.03em;
-}
+}*/
 
 .popover-title {
     display: none;
+}
+
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    max-width: 276px;
+    padding: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+
+
+    box-shadow: 0 2px 0 0 rgba(0,0,0,0.1),0 0 0 0.5px rgba(0,0,0,0.07) !important;
 }

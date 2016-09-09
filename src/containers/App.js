@@ -8,6 +8,7 @@ import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
 import '../styles/App.css';
 import '../styles/Fonts.css';
+import '../styles/external/bootstrap.css';
 
 class App extends Component {
     onClick(e) {

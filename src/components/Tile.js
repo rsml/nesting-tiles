@@ -7,7 +7,8 @@ import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
-import Popover from 'react-bootstrap/lib/Popover';
+// import Popover from 'react-bootstrap/lib/Popover';
+import MyPopover from './MyPopover';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import * as Utils from '../utils/index';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
@@ -173,6 +174,7 @@ export default class Tile extends Component {
                 bsSize='large'
                 bsStyle='primary'
                 disabled={isDisabled}
+                bsClass='waves-effect waves-light btn'
                 onClick={this.handleClickDone.bind(this)}
                 type='button'>
                 Done
@@ -193,10 +195,11 @@ export default class Tile extends Component {
         let tooltipHeight;
         const isExpanded = tooltip && tooltip.type;
         if(isExpanded){
-            tooltipHeight = 300;
+            tooltipHeight = 220;
         }else{
             tooltipHeight = 60;
         }
+        // tooltipHeight = 150;
 
         let tooltipBody;
 
@@ -215,52 +218,58 @@ export default class Tile extends Component {
                 'Tooltip-header': true,
                 'Tooltip-header-expanded': isExpanded 
             }),
-
             tileTooltipIconContainer: function(tileType){
                 return classNames({
                     'Tile-tooltip-icon-container': true,
                     'Tile-tooltip-icon-selected': (tooltip && tileType === tooltip.type)
                 });
-            }
+            },
+            overlayContainer: classNames({
+                'Overlay-move-up': isExpanded
+            })
         }
 
         const popover = (
-            <Popover id='popover-trigger-click-root-close' title='Popover bottom'>
+            <MyPopover id='popover-trigger-click-root-close'
+                     title='Popover bottom'
+                     arrowOffsetTop='10%'>
                 <div key={`tooltip-height-${tooltipHeight}`}
-                     style={{ width: 210, height: tooltipHeight }}
+                     style={{ width: 220, height: tooltipHeight }}
                      className='Tooltip'>
                     <div className={classes.tooltipHeader}>
-                        <div className={classes.tileTooltipIconContainer(TileTypes.types.YOUTUBE)}
-                             onClick={this.onClickPopoverTabYoutube.bind(this)}>
-                            <img src={require('../images/insert.svg')}
-                                alt=''
-                                className='Tile-tooltip-icon' />
-                            <div className='Tile-tooltip-icon-label'>
-                                Youtube
+                        <div className='Tooltip-header-inner'>
+                            <div className={classes.tileTooltipIconContainer(TileTypes.types.YOUTUBE)}
+                                 onClick={this.onClickPopoverTabYoutube.bind(this)}>
+                                <img src={require('../images/youtube.svg')}
+                                    alt=''
+                                    className='Tile-tooltip-icon' />
+                                {/*<div className='Tile-tooltip-icon-label'>
+                                    Youtube
+                                </div>*/}
                             </div>
-                        </div>
-                        <div className={classes.tileTooltipIconContainer(TileTypes.types.IMAGE)}
-                             onClick={this.onClickPopoverTabImage.bind(this)}>
-                            <img src={require('../images/insert.svg')}
-                                alt=''
-                                className='Tile-tooltip-icon' />
-                            <div className='Tile-tooltip-icon-label'>
-                                Photo
+                            <div className={classes.tileTooltipIconContainer(TileTypes.types.IMAGE)}
+                                 onClick={this.onClickPopoverTabImage.bind(this)}>
+                                <img src={require('../images/photo.svg')}
+                                    alt=''
+                                    className='Tile-tooltip-icon' />
+                                {/*<div className='Tile-tooltip-icon-label'>
+                                    Photo
+                                </div>*/}
                             </div>
-                        </div>
-                        <div className={classes.tileTooltipIconContainer(TileTypes.types.WEBSITE)}
-                             onClick={this.onClickPopoverTabWebsite.bind(this)}>
-                            <img src={require('../images/insert.svg')}
-                                alt=''
-                                className='Tile-tooltip-icon' />
-                            <div className='Tile-tooltip-icon-label'>
-                                Website
+                            <div className={classes.tileTooltipIconContainer(TileTypes.types.WEBSITE)}
+                                 onClick={this.onClickPopoverTabWebsite.bind(this)}>
+                                <img src={require('../images/website.svg')}
+                                    alt=''
+                                    className='Tile-tooltip-icon' />
+                                {/*<div className='Tile-tooltip-icon-label'>
+                                    Website
+                                </div>*/}
                             </div>
                         </div>
                     </div>
                     {tooltipBody}
                 </div>
-            </Popover>
+            </MyPopover>
         );
 
         const tooltipDOM = (
@@ -273,15 +282,19 @@ export default class Tile extends Component {
 
         let overlayDOM;
         overlayDOM = (
-            <Overlay
-                  show={(tooltip && tooltip.isVisible)}
-                  onEntering={this.onShowOverlay.bind(this)}
-                  onHide={this.onHideOverlay.bind(this)}
-                  placement='right'
-                  container={this}
-                  target={() => ReactDOM.findDOMNode(this.refs.insert)} >
-                {popover}
-            </Overlay>
+            <div id='move-up' className={classes.overlayContainer}>
+                <Overlay
+                      show={(tooltip && tooltip.isVisible)}
+                      onEntering={this.onShowOverlay.bind(this)}
+                      onHide={this.onHideOverlay.bind(this)}
+                      placement='right'
+                      container={this}
+                      animation={true}
+                      arrowOffsetTop={10}
+                      target={() => ReactDOM.findDOMNode(this.refs.insert)} >
+                    {popover}
+                </Overlay>
+            </div>
         );
 
         let backgroundStyle;
