@@ -83,3 +83,41 @@ export function cleanURL(dirtyURL){
 
     return result.replace(/[^-A-Za-z0-9+&@#/%?=~_|!:,.;\(\)]/, '');
 }
+
+/**
+ * cloneAllTilesAndSwapInNewTile
+ *     Clones all the tiles. Meanwhile, looks for any tile matching
+ *     'needleTileId' and updates it's clone with a new percentage
+ * @param  {object} tiles         Maps tileIds to tileObjects
+ * @param  {number} needleTileId  The id of the tile to edit
+ * @param  {number} newPercentage The new percentage of the tile to edit
+ * @return {object}               A mapping of tileIds to tileObjects
+ */
+export function cloneAllTilesAndSwapInNewTile(tiles,
+                                              needleTileId,
+                                              newPercentage){
+    const result = {};
+    for (const key of Object.keys(tiles)) {
+        if(parseInt(key) === needleTileId){
+            const newTile = tiles[needleTileId].clone();
+            newTile.percentage = newPercentage;
+            result[key] = newTile;
+        }else{
+            result[key] = tiles[key].clone();
+        }
+    }
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

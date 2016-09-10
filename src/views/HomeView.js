@@ -80,6 +80,7 @@ export default class HomeView extends Component {
                   data={tileObject}
                   actions={actions}
                   tooltip={tooltip}
+                  percentage={tileObject.percentage}
                   hoverMenu={hoverMenuForTile}>
                 {children}
             </Tile>
@@ -89,6 +90,7 @@ export default class HomeView extends Component {
             <Tile key={tileObject.id} 
                   data={tileObject}
                   actions={actions}
+                  percentage={tileObject.percentage}
                   hoverMenu={hoverMenu}>
                 {children}
             </Tile>

@@ -118,3 +118,26 @@ export function updateHoverMenu(options){
         options
     };
 }
+
+/***************/
+
+export function handleMouseDownOnDragger(parentId){
+    return {
+        type: ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER,
+        parentId
+    };
+}
+
+export function handleMouseMoveOnParentContainer(xPos, yPos){
+    return {
+        type: ActionTypes.HANDLE_MOUSE_MOVE_ON_PARENT_CONTAINER,
+        xPos,
+        yPos
+    };
+}
+
+export function handleMouseUpOnParentContainer(){
+    return {
+        type: ActionTypes.HANDLE_MOUSE_UP_ON_PARENT_CONTAINER
+    };
+}

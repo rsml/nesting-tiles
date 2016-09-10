@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import DevTools from './DevTools';
+// import DevTools from './DevTools';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/tileActions';
 import HomeView from '../views/HomeView';
@@ -43,7 +43,7 @@ class App extends Component {
                           tooltip={tiles.tooltip}
                           hoverMenu={tiles.hoverMenu}
                           actions={actions} />
-                <DevTools />
+                {/*<DevTools />*/}
             </div>
         );
     }

@@ -16,6 +16,23 @@ import './Tile.css';
 import './Tooltip.css';
 
 export default class Tile extends Component {
+    handleMouseDownOnDragger(tileId) {
+        const { actions } = this.props;
+        actions.handleMouseDownOnDragger(tileId)
+    }
+
+    handleMouseMoveOnParentContainer(e){
+        const { actions } = this.props;
+
+        actions.handleMouseMoveOnParentContainer(e.clientX, e.clientY);
+        e.preventDefault();
+    }
+
+    handleMouseUpOnParentContainer(){
+        const { actions } = this.props;
+        actions.handleMouseUpOnParentContainer()
+    }
+
     onHideOverlay() {
         const {
             actions
@@ -357,29 +374,52 @@ export default class Tile extends Component {
         );
     }
 
-    if(data.splitVertical){
-        return (
-            <div className='Tile-container-full'>
-                <div className='Tile-container-top'>
-                    {children[0]}
-                </div>
-                <div className='Tile-container-bottom'>
-                    {children[1]}
-                </div>
-            </div>
-        );
-    }else{
-        return (
-            <div className='Tile-container-full'>
-                <div className='Tile-container-left'>
-                    {children[0]}
-                </div>
-                <div className='Tile-container-right'>
-                    {children[1]}
-                </div>
-            </div>
-        );
+    const classes = {
+        first: function(splitVertical){
+            return splitVertical ? 'Tile-container-left' : 'Tile-container-top';
+        },
+        second: function(splitVertical){
+            return splitVertical ? 'Tile-container-right' : 'Tile-container-bottom';
+        },
+        dragger: classNames({
+            'Tile-dragger': true,
+            'Tile-dragger-horizontal': data.splitVertical === false,
+            'Tile-dragger-vertical': data.splitVertical === true
+        })
     }
+
+    const styles = {
+        first: function(splitVertical){
+            return {
+                [splitVertical ? 'width' : 'height']: `${data.percentage}%`
+            }
+        },
+        second: function(splitVertical){
+            return {
+                [splitVertical ? 'width' : 'height']: `${100 - data.percentage}%`
+            }
+        }
+    }
+
+    return (
+        <div id={`tile-${data.id}`}
+             className='Tile-container-full'
+             onMouseMove={this.handleMouseMoveOnParentContainer.bind(this)}
+             onMouseUp={this.handleMouseUpOnParentContainer.bind(this)}>
+            <div className={classes.first(data.splitVertical)}
+                 key={`first-${data.percentage}`}
+                 style={styles.first(data.splitVertical)}>
+                {children[0]}
+            </div>
+            <div className={classes.second(data.splitVertical)}
+                 key={`second-${data.percentage}`}
+                 style={styles.second(data.splitVertical)}>
+                <div className={classes.dragger}
+                     onMouseDown={this.handleMouseDownOnDragger.bind(this, data.id)} />
+                {children[1]}
+            </div>
+        </div>
+    );
   }
 }
 

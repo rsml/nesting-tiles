@@ -1,7 +1,7 @@
 import { states } from '../utils/TileStates';
 
 class TileObject {
-    constructor(id, parentId, children = null, splitVertical = true, type = null, content = null, size = 50, state = states.INITIAL) {
+    constructor(id, parentId, children = null, splitVertical = true, type = null, content = null, size = 50, state = states.INITIAL, percentage = 50) {
         this._id = id;
         this._parentId = parentId;
         this._children = children;
@@ -10,6 +10,7 @@ class TileObject {
         this._content = content;
         this._size = size;
         this._state = state;
+        this._percentage = percentage;
     }
 
     get id () {
@@ -72,8 +73,16 @@ class TileObject {
         return this._state;
     }
 
+    set percentage (percentage) {
+        this._percentage = percentage;
+    }
+
+    get percentage () {
+        return this._percentage;
+    }
+
     clone () {
-        return new TileObject(this.id, this.parentId, this.children, this.splitVertical, this.type, this.content, this.size, this.state)
+        return new TileObject(this.id, this.parentId, this.children, this.splitVertical, this.type, this.content, this.size, this.state, this.percentage)
     }
 }
 

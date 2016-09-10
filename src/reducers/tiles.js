@@ -18,6 +18,19 @@ const initialState = {
     hoverMenu: {
         isVisible: false,
         tileId: null
+    },
+
+    /* This is used for resizable panes */
+    dragger: {
+        isVertical: null,
+        parentId: null,
+        xPos: null,
+        yPos: null,
+        isResizing: false,
+        containerWidth: null,
+        containerHeight: null,
+        containerOffsetTop: null,
+        containerOffsetLeft: null
     }
 };
 
@@ -27,6 +40,82 @@ const DIRECTIONS = {
     LEFT: 'LEFT',
     RIGHT:  'RIGHT'
 };
+
+function handleMouseDownOnDragger(state, parentId){
+    const parentTile = document.getElementById(`tile-${parentId}`);
+    const isVertical = state.tiles[parentId].splitVertical;
+    debugger;
+    const bounds = parentTile.getBoundingClientRect();
+    return Object.assign({}, state, {
+        dragger: Object.assign({}, state.dragger, {
+            isVertical: isVertical,
+            parentId: parentId,
+            isResizing: true,
+            containerWidth: bounds.width,
+            containerHeight: bounds.height,
+            containerOffsetLeft: bounds.left,
+            containerOffsetTop: bounds.top
+        })
+    });
+}
+
+function handleMouseMoveOnParentContainer(state, xPos, yPos){
+    if(!state.dragger.isResizing){
+        return state;
+    }
+
+    // console.log('DEBUG isResizing: ' + state.dragger.isResizing);
+
+    if(state.dragger.isVertical){
+        // const offsetRight = state.dragger.containerWidth - action.xPos;
+        // TODO!!!
+        
+        // left.css('right', offsetRight);
+        // right.css('width', offsetRight);
+        // 
+        // 
+        const widthPercentage = (xPos - state.dragger.containerOffsetLeft)/state.dragger.containerWidth * 100;
+        // console.log('DEBUG heightPercentage: ' + JSON.stringify(heightPercentage))
+        
+        return Object.assign({}, state, {
+            tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
+                                                       state.dragger.parentId,
+                                                       widthPercentage),
+            dragger: Object.assign({}, state.dragger, {
+                xPos: xPos,
+                yPos: yPos
+            })
+        });
+    }else{ 
+        // const offsetBottom = state.dragger.containerHeight - state.dragger.containerOffsetTop;
+        // TODO!!!
+        
+        // left.css('bottom', offsetRight);
+        // right.css('height', offsetRight);
+        // 
+        // 
+        if(heightPercentage > 50){
+            debugger;
+        }
+        const heightPercentage =  (yPos - state.dragger.containerOffsetTop)/state.dragger.containerHeight * 100;
+        console.log('DEBUG heightPercentage: ' + JSON.stringify(heightPercentage))
+        // debugger;
+        // 
+        if(heightPercentage < 30){
+            debugger
+        }
+
+        return Object.assign({}, state, {
+            tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
+                                                       state.dragger.parentId,
+                                                       heightPercentage),
+            dragger: Object.assign({}, state.dragger, {
+                xPos: xPos,
+                yPos: yPos
+            })
+        });
+    }
+}
 
 function insertInDirection(state, direction, activeTileId){
     let newTiles = Utils.cloneAllTiles(state.tiles);
@@ -49,8 +138,8 @@ function insertInDirection(state, direction, activeTileId){
 
     // Create the new parent tile and the new sibling tile,
     // and add both these tiles to the cloned tiles
-    const splitVertical = (direction === DIRECTIONS.ABOVE ||
-                           direction === DIRECTIONS.BELOW);
+    const splitVertical = (direction === DIRECTIONS.LEFT ||
+                           direction === DIRECTIONS.RIGHT);
 
     let newChildrenTiles;
     if(direction === DIRECTIONS.LEFT || direction === DIRECTIONS.ABOVE){
@@ -282,6 +371,19 @@ export default function tiles(state = initialState, action) {
             hoverMenu: Object.assign({}, state.hoverMenu, {
                 isVisible: action.options.isVisible,
                 tileId: action.options.tileId
+            })
+        });
+
+    case ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER:
+        return handleMouseDownOnDragger(state, action.parentId);
+
+    case ActionTypes.HANDLE_MOUSE_MOVE_ON_PARENT_CONTAINER:
+        return handleMouseMoveOnParentContainer(state, action.xPos, action.yPos);
+
+    case ActionTypes.HANDLE_MOUSE_UP_ON_PARENT_CONTAINER:
+        return Object.assign({}, state, {
+            dragger: Object.assign({}, state.dragger, {
+                isResizing: false
             })
         });
 
