@@ -16,12 +16,22 @@ class HomeView extends Component {
     }
 
     handleOpenContextMenu(e) {
-        const {actions} = this.props;
+        const {
+            tiles,
+            rootTileId,
+            actions
+        } = this.props;
 
         const id = Utils.findIdOfTileThatClickIsInsideOf(e.target);
-        actions.setContextMenuTileId(id);
+
+        const tileObject = tiles[id];
+
+        actions.setContextMenuIsRemoveContentEnabled(tileObject.content !==null && tileObject.content !== '');
+        actions.setContextMenuIsDeleteEnabled(tileObject.id !== rootTileId);
         
-        actions.setContextMenuPreventEvents(true); // this must come at the end of this function
+        // these must come at the end of this function!
+        actions.setContextMenuTileId(id);
+        actions.setContextMenuPreventEvents(true);
     }
 
     getChildren(tileId) {

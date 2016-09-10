@@ -25,8 +25,10 @@ class App extends Component {
             return;
         }
 
-        actions.setTooltipIsVisible(false);
+        // This should come before all over events in this function!
         actions.setContextMenuPreventEvents(false);
+
+        actions.setTooltipIsVisible(false);
         actions.closeContextMenu();
     }
 
