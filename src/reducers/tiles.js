@@ -387,15 +387,13 @@ export default function tiles(state = initialState, action) {
         });
 
     case ActionTypes.CLOSE_CONTEXT_MENU:
-        let menu = document.getElementById('contextMenu');
-        menu.style.cssText = 'visibility: hidden;';
+        document.getElementById('contextMenu').style.cssText = 'visibility: hidden;';
 
         return Object.assign({}, state, {
             contextMenuTileId: null
         });
 
     case ActionTypes.CLONE_ALL_TILES_AND_SWAP_IN_NEW_TILE:
-    debugger;
         return Object.assign({}, state, {
             tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles, state.hoverMenu.tileId, null, '')
         });

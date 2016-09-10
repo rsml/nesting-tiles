@@ -49,7 +49,6 @@ export default class ContextMenu extends Component {
                         item.function(this.state.target);
                     }
                     let label = item.label;
-                    let icon = item.icon;
                     return (
                         <span onClick={clickHandler} key={label}>
                             {label}

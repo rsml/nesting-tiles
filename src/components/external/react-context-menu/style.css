@@ -1,6 +1,7 @@
 #contextMenu {
     position: absolute;
-
+    left: 0;
+    top: 0;
     display: flex;
     flex-flow: column;
 
@@ -14,11 +15,11 @@
 }
 #contextMenu span {
         cursor: pointer;
-        font-size:14px;
-        display:flex;
+        font-size: 14px;
+        line-height: 26px;
+        display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin-bottom: 7px;
 }
 
 #contextMenu img {

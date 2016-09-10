@@ -45,6 +45,7 @@ class HomeView extends Component {
             if(tooltip && tooltip.tileId === childId){
                 newTile = (
                     <Tile key={childId}
+                          isRootTile={false}
                           data={childObject}
                           actions={actions}
                           tooltip={tooltip}
@@ -55,6 +56,7 @@ class HomeView extends Component {
             }else{
                 newTile = (
                     <Tile key={childId}
+                          isRootTile={false}
                           data={childObject}
                           actions={actions}
                           hoverMenu={hoverMenuForTile}>
@@ -94,6 +96,7 @@ class HomeView extends Component {
     const children = that.getChildren(tileObject.id);
     let allTiles;
     const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === tileObject.id) ? hoverMenu : null;
+
     if(tooltip && tooltip.tileId === tileObject.id){
         allTiles = (
             <Tile key={tileObject.id} 

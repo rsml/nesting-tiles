@@ -99,7 +99,6 @@ export function cloneAllTilesAndSwapInNewTile(tiles,
                                               needleTileId,
                                               newPercentage = null,
                                               newContent = null){
-    debugger;
     const result = {};
     for (const key in Object.keys(tiles)) {
         const keyAsInt = parseInt(key);

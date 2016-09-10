@@ -4,9 +4,6 @@ import Directions from '../utils/Directions';
 import ContextMenu from './external/react-context-menu/ContextMenu';
 import * as TileTypes from '../utils/TileTypes';
 
-// import insert from '../images/insert.svg';
-const insert = require('../images/insert.svg')
-
 export default class MyContextMenu extends Component {
 
     /*handleAddContent() {

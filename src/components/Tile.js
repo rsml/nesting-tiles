@@ -222,7 +222,8 @@ export default class Tile extends Component {
         tooltip,
         hoverMenu,
         children,
-        data
+        data,
+        isRootTile
     } = this.props;
 
     if(!data.children || data.children.length === 0){
@@ -344,6 +345,8 @@ export default class Tile extends Component {
             )
         }
 
+        const deleteIcon = require(`../images/delete${isRootTile ? '-disabled' : ''}.svg`);
+
         const tileMenu = (hoverMenu && hoverMenu.isVisible) ? (
             <div className='Tile-menu'>
                 {tooltipDOM}
@@ -351,7 +354,7 @@ export default class Tile extends Component {
                     alt=''
                     className='Tile-menu-item Tile-menu-split-vertical'
                     onClick={this.handleSplitVertical.bind(this)} />
-                <img src={require('../images/delete.svg')}
+                <img src={deleteIcon}
                     alt=''
                     className='Tile-menu-item Tile-menu-delete'
                     onClick={this.handleDeleteTile.bind(this)} />
@@ -440,5 +443,6 @@ Tile.propTypes = {
   hoverMenu: PropTypes.object,
   children: PropTypes.array,
   data: PropTypes.instanceOf(TileObject),
+  isRootTile: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired
 };
