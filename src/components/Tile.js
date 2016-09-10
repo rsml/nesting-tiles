@@ -210,7 +210,13 @@ export default class Tile extends Component {
         placeholder = 'example.com';
     }
 
-    const isDisabled = !tooltip || !tooltip.content || tooltip.content.length === 0;
+    let isDisabled = !tooltip || 
+                     !tooltip.content ||
+                     tooltip.content.length === 0;
+
+    if(!Utils.validateURL(tooltip.content)){
+        isDisabled = true;
+    }
 
     return (
         <div>
