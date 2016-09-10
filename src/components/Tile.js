@@ -133,6 +133,17 @@ export default class Tile extends Component {
     actions.setTooltipContent(e.target.value);
   }
 
+  handleOnKeyPress(e) {
+    const {
+        tooltip,
+        actions
+    } = this.props;
+    
+    if(e.key === 'Enter'){
+        actions.submitTooltip(tooltip.type, tooltip.content);
+    }
+  }
+
   handleClickDone() {
     const {
         tooltip,
@@ -209,7 +220,8 @@ export default class Tile extends Component {
                 type='text'
                 value={tooltip.content || ''}
                 placeholder={placeholder}
-                onChange={this.handleOnChangeContent.bind(this)} />
+                onChange={this.handleOnChangeContent.bind(this)} 
+                onKeyPress={this.handleOnKeyPress.bind(this)} />
 
             <Button block={true}
                 bsSize='large'
