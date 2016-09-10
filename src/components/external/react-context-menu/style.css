@@ -4,22 +4,29 @@
     top: 0;
     display: flex;
     flex-flow: column;
+    border-radius:5px;
+    box-shadow:0 1px 11px 0px rgba(0,0,0,0.2), 0px 0px 0px 0.5px #AAAAAA inset;
+    padding: 4.5px 0px;
 
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius:2px;
-    box-shadow:0 1px 1px 1px rgba(0,0,0,0.05);
-    padding: 10px 15px;
-
-    background: #f8f8f8;
+    background: #f0f0f0;
     visibility: hidden;
 }
 #contextMenu span {
+    padding: 0 15px 0px;
         cursor: pointer;
-        font-size: 14px;
-        line-height: 26px;
+        font-size: 14.5px;
+        line-height: 19px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        color: #3E3E3E;
+        font-family: Helvetica,Arial,sans-serif;
+        font-weight: 500;
+}
+
+#contextMenu span:hover {
+    background: #689afb;
+    color: white;
 }
 
 #contextMenu img {
