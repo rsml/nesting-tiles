@@ -16,17 +16,17 @@ class App extends Component {
             actions
         } = this.props;
 
-        const classNames = e.nativeEvent.target.className.split(' ');
         if(Utils.isDescendant(
             document.getElementById('popover-trigger-click-root-close'),
             e.nativeEvent.target
         )){
             return;
-        }else if(classNames && typeof classNames.indexOf === 'function' && classNames.indexOf('Tile-menu-insert') >= 0){
+        }else if(e.nativeEvent.target.classList.contains('Tile-menu-insert')){
             return;
         }
 
         actions.setTooltipIsVisible(false);
+        actions.closeContextMenu();
     }
 
     render() {

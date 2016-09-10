@@ -93,32 +93,32 @@ export default class MyContextMenu extends Component {
 
         const items = [
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Insert Above',
                 'function': this.handleClickInsert.bind(this, Directions.ABOVE)
             },
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Insert Below',
                 'function': this.handleClickInsert.bind(this, Directions.BELOW)
             },
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Insert to the Left',
                 'function': this.handleClickInsert.bind(this, Directions.LEFT)
             },
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Insert to the Right',
                 'function': this.handleClickInsert.bind(this, Directions.RIGHT)
             },
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Remove Content',
                 'function': this.handleRemoveContent.bind(this)
             },
             {
-                'icon': insert,
+                'icon': null,
                 'label': 'Delete',
                 'function': this.handleClickDelete.bind(this)
             }

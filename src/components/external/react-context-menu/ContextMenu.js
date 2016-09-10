@@ -14,8 +14,8 @@ export default class ContextMenu extends Component {
         let context = document.getElementById('home-view');
         context.addEventListener('contextmenu', () => {this.openContextMenu(event)});
 
-        let menu = document.getElementById('contextMenu');
-        menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
+        // let menu = document.getElementById('contextMenu');
+        // menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
 
     }
 
@@ -34,18 +34,18 @@ export default class ContextMenu extends Component {
             'visibility: visible;';
     }
 
-    closeContextMenu() {
+    /*closeContextMenu() {
         let menu = document.getElementById('contextMenu');
         menu.style.cssText = 'visibility: hidden;';
         this.props.actions.closeContextMenu();
-    }
+    }*/
 
     render () {
         return (
             <div id='contextMenu'>
                 {this.props.items.map((item) => {
                     let clickHandler = () => {
-                        this.closeContextMenu();
+                        // this.closeContextMenu();
                         item.function(this.state.target);
                     }
                     let label = item.label;

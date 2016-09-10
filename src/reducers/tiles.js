@@ -286,6 +286,8 @@ function submitTooltip(state, type, content){
 }
 
 export default function tiles(state = initialState, action) {
+    // If the context menu is visible, it
+    // should block all other reducer functions
     if(state.contextMenuTileId !== null && action.type !== ActionTypes.CLOSE_CONTEXT_MENU){
         return state;
     }
@@ -385,6 +387,9 @@ export default function tiles(state = initialState, action) {
         });
 
     case ActionTypes.CLOSE_CONTEXT_MENU:
+        let menu = document.getElementById('contextMenu');
+        menu.style.cssText = 'visibility: hidden;';
+
         return Object.assign({}, state, {
             contextMenuTileId: null
         });

@@ -97,6 +97,7 @@ class HomeView extends Component {
     if(tooltip && tooltip.tileId === tileObject.id){
         allTiles = (
             <Tile key={tileObject.id} 
+                  isRootTile={true}
                   data={tileObject}
                   actions={actions}
                   tooltip={tooltip}
@@ -107,7 +108,8 @@ class HomeView extends Component {
         );
     }else{
         allTiles = (
-            <Tile key={tileObject.id} 
+            <Tile key={tileObject.id}
+                  isRootTile={true}
                   data={tileObject}
                   actions={actions}
                   percentage={tileObject.percentage}
