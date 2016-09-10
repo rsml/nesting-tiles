@@ -52,7 +52,6 @@ export default class ContextMenu extends Component {
                     let icon = item.icon;
                     return (
                         <span onClick={clickHandler} key={label}>
-                            <img className='icon' src={icon} role='presentation' />
                             {label}
                         </span>
                     );
