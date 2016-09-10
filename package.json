@@ -1,7 +1,7 @@
 {
-  "name": "new-project",
+  "name": "nesting-tiles",
   "version": "0.1.0",
-  "description": "A nesting pane layout with controls to create and delete panes",
+  "description": "A nesting tile layout with controls to create and delete tiles",
   "engines": {
     "npm": ">=3"
   },

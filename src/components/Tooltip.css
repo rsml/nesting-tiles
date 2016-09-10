@@ -61,14 +61,3 @@
 .Tooltip-input:focus {
     border-color: #42A5F5 !important;
 }
-
-.popover-content {
-    /*padding: 9px 14px;*/
-    padding: 0;
-}
-
-.popover {
-    border: 1px solid rgba(221, 221, 221, 0.5);
-    padding: 0;
-    border-radius: 6px
-}

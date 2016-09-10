@@ -13,6 +13,7 @@ import TileObject from '../classes/TileObject';
 import * as TileTypes from '../utils/TileTypes';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
+import './Popover.css';
 import './Tooltip.css';
 
 
