@@ -18,8 +18,10 @@ class HomeView extends Component {
     handleOpenContextMenu(e) {
         const {actions} = this.props;
 
-        const id = Utils.findIdOfTileThatClickIsInsideOf(e.target)
+        const id = Utils.findIdOfTileThatClickIsInsideOf(e.target);
         actions.setContextMenuTileId(id);
+        
+        actions.setContextMenuPreventEvents(true); // this must come at the end of this function
     }
 
     getChildren(tileId) {
@@ -78,7 +80,7 @@ class HomeView extends Component {
         tiles,
         tooltip,
         hoverMenu,
-        contextMenuTileId,
+        contextMenu,
         actions
     } = this.props;
 
@@ -125,8 +127,11 @@ class HomeView extends Component {
     return (
         <div id='home-view' className='full-size'>
           {allTiles}
-          <MyContextMenu activeTileObject={tiles[contextMenuTileId]}
-                         actions={actions} />
+          <MyContextMenu 
+                isRemoveContentEnabled={contextMenu.isRemoveContentEnabled}
+                isDeleteEnabled={contextMenu.isDeleteEnabled}
+                activeTileObject={tiles[contextMenu.tileId]}
+                actions={actions} />
         </div>
     );
   }
@@ -137,7 +142,7 @@ HomeView.propTypes = {
   hoverMenu: PropTypes.object,
   rootTileId: PropTypes.number.isRequired,
   tiles: PropTypes.object.isRequired,
-  contextMenuTileId: PropTypes.number,
+  contextMenu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 

@@ -5,17 +5,6 @@ export { objectValues };
 
 export const INITIAL_ROOT_TILE_ID = 0;
 
-export function cloneAllTiles(tiles){
-    let result = {};
-    
-    for (const key in Object.keys(tiles)) {
-        const keyAsInt = parseInt(key);
-        result[keyAsInt] = tiles[keyAsInt].clone();
-    }
-
-    return result;
-}
-
 // Update the children for the old parent tile object to point to the new parent tile object
 export function updateTileWithChildren(tileObject, oldChildId, newChildId){
     if(!tileObject || !tileObject.children){
@@ -85,6 +74,24 @@ export function cleanURL(dirtyURL){
     return result.replace(/[^-A-Za-z0-9+&@#/%?=~_|!:,.;\(\)]/, '');
 }
 
+export function cloneAllTiles(tiles){
+    let result = {};
+    
+    for (const key of Object.keys(tiles)) {
+        const keyAsInt = parseInt(key);
+        const oldTile = tiles[keyAsInt];
+        if(!oldTile){
+            debugger;
+        }
+        result[keyAsInt] = oldTile.clone();
+
+
+        
+    }
+
+    return result;
+}
+
 /**
  * cloneAllTilesAndSwapInNewTile
  *     Clones all the tiles. Meanwhile, looks for any tile matching
@@ -100,7 +107,7 @@ export function cloneAllTilesAndSwapInNewTile(tiles,
                                               newPercentage = null,
                                               newContent = null){
     const result = {};
-    for (const key in Object.keys(tiles)) {
+    for (const key of Object.keys(tiles)) {
         const keyAsInt = parseInt(key);
 
         if(keyAsInt === needleTileId){

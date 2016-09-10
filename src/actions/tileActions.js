@@ -152,6 +152,27 @@ export function setContextMenuTileId(tileId){
     };
 }
 
+export function setContextMenuIsRemoveContentEnabled(value){
+    return {
+        type: ActionTypes.SET_CONTEXT_MENU_IS_REMOVE_CONTENT_ENABLED,
+        value
+    };
+}
+
+export function setContextMenuIsDeleteEnabled(value){
+    return {
+        type: ActionTypes.SET_CONTEXT_MENU_IS_DELETE_ENABLED,
+        value
+    };
+}
+
+export function setContextMenuPreventEvents(value){
+    return {
+        type: ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS,
+        value
+    };
+}
+
 export function closeContextMenu(){
     return {
         type: ActionTypes.CLOSE_CONTEXT_MENU

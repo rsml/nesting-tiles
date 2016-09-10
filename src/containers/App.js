@@ -26,6 +26,7 @@ class App extends Component {
         }
 
         actions.setTooltipIsVisible(false);
+        actions.setContextMenuPreventEvents(false);
         actions.closeContextMenu();
     }
 
@@ -42,7 +43,7 @@ class App extends Component {
                           tiles={tiles.tiles}
                           tooltip={tiles.tooltip}
                           hoverMenu={tiles.hoverMenu}
-                          contextMenuTileId={tiles.contextMenuTileId}
+                          contextMenu={tiles.contextMenu}
                           actions={actions} />
                 {<DevTools />}
             </div>

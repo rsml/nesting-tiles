@@ -33,7 +33,12 @@ const initialState = {
         containerOffsetTop: null,
         containerOffsetLeft: null
     },
-    contextMenuTileId: null
+    contextMenu: {
+        tileId: null,
+        isRemoveContentEnabled: false,
+        isDeleteEnabled: false,
+        preventEvents: false
+    }
 };
 
 function handleMouseDownOnDragger(state, parentId, content){
@@ -288,7 +293,11 @@ function submitTooltip(state, type, content){
 export default function tiles(state = initialState, action) {
     // If the context menu is visible, it
     // should block all other reducer functions
-    if(state.contextMenuTileId !== null && action.type !== ActionTypes.CLOSE_CONTEXT_MENU){
+    if(action.type === ActionTypes.INSERT_ABOVE){
+        debugger;
+    }
+    // 
+    if(state.contextMenu.preventEvents && action.type !== ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS){
         return state;
     }
 
@@ -383,14 +392,40 @@ export default function tiles(state = initialState, action) {
 
     case ActionTypes.SET_CONTEXT_MENU_TILE_ID:
         return Object.assign({}, state, {
-            contextMenuTileId: action.tileId
+            contextMenu: Object.assign({}, state.contextMenu, {
+                tileId: action.tileId,
+                preventEvents: (action.tileId !== null) ? true : false
+            })
+        });
+
+    case ActionTypes.SET_CONTEXT_MENU_IS_REMOVE_CONTENT_ENABLED:
+        return Object.assign({}, state, {
+            contextMenu: Object.assign({}, state.contextMenu, {
+                isRemoveContentEnabled: action.value
+            })
+        });
+
+    case ActionTypes.SET_CONTEXT_MENU_IS_DELETE_ENABLED:
+        return Object.assign({}, state, {
+            contextMenu: Object.assign({}, state.contextMenu, {
+                isDeleteEnabled: action.value
+            })
+        });
+
+    case ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS:
+        return Object.assign({}, state, {
+            contextMenu: Object.assign({}, state.contextMenu, {
+                preventEvents: action.value
+            })
         });
 
     case ActionTypes.CLOSE_CONTEXT_MENU:
         document.getElementById('contextMenu').style.cssText = 'visibility: hidden;';
 
         return Object.assign({}, state, {
-            contextMenuTileId: null
+            contextMenu: Object.assign({}, state.contextMenu, {
+                tileId: null
+            })
         });
 
     case ActionTypes.CLONE_ALL_TILES_AND_SWAP_IN_NEW_TILE:

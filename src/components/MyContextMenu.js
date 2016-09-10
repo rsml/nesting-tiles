@@ -24,6 +24,7 @@ export default class MyContextMenu extends Component {
             actions
         } = this.props;
 
+        actions.setContextMenuPreventEvents(false);
         actions.cloneAllTilesAndSwapInNewTile();
         actions.setTooltipIsVisible(false);
         actions.setTooltipType(activeTileObject.type || TileTypes.types.YOUTUBE);
@@ -31,11 +32,13 @@ export default class MyContextMenu extends Component {
         actions.setTooltipContent(null);
     }
 
-    handleClickInsert(direction, e, data) {
+    handleClickInsert(direction) {
         const {
             activeTileObject,
             actions
         } = this.props;
+
+        actions.setContextMenuPreventEvents(false);
 
         switch(direction){
             case Directions.ABOVE:
@@ -53,8 +56,6 @@ export default class MyContextMenu extends Component {
             case Directions.RIGHT:
                 actions.insertToTheRightOf(activeTileObject.id);
                 return;
-
-                
         }
 
         if(direction === Directions.ABOVE){
@@ -67,9 +68,9 @@ export default class MyContextMenu extends Component {
             actions.insertAbove(activeTileObject.id);
         }
 
-        console.log(e);
-        console.log(data);
-        actions.deleteTile(activeTileObject.id)
+        // console.log(e);
+        // console.log(data);
+        // actions.deleteTile(activeTileObject.id)
     }
 
     handleClickDelete(e, data) {
@@ -80,15 +81,24 @@ export default class MyContextMenu extends Component {
 
         console.log(e);
         console.log(data);
-        actions.deleteTile(activeTileObject.id)
+        actions.setContextMenuPreventEvents(false);
+        actions.deleteTile(activeTileObject.id);
+        actions.updateHoverMenu({
+            isVisible: true,
+            tileId: activeTileObject.parentId
+        });
     }
 
     render() {
         const {
+            isRemoveContentEnabled,
+            isDeleteEnabled,
             actions
         } = this.props;
 
-        const items = [
+        
+
+        let items = [
             {
                 'icon': null,
                 'label': 'Insert Above',
@@ -108,18 +118,25 @@ export default class MyContextMenu extends Component {
                 'icon': null,
                 'label': 'Insert to the Right',
                 'function': this.handleClickInsert.bind(this, Directions.RIGHT)
-            },
-            {
+            }
+        ];
+
+        if(isRemoveContentEnabled){
+            items.push({
                 'icon': null,
                 'label': 'Remove Content',
                 'function': this.handleRemoveContent.bind(this)
-            },
-            {
+            });
+        }
+
+        if(isDeleteEnabled){
+            items.push({
                 'icon': null,
                 'label': 'Delete',
                 'function': this.handleClickDelete.bind(this)
-            }
-        ];
+            });
+        }
+
         return (
             <ContextMenu contextID='home-view'
                          items={items}
@@ -129,6 +146,8 @@ export default class MyContextMenu extends Component {
 }
 
 MyContextMenu.propTypes = {
+    isRemoveContentEnabled: PropTypes.bool.isRequired,
+    isDeleteEnabled: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired,
     activeTileObject: PropTypes.object
 }
