@@ -98,6 +98,7 @@ export default class Tile extends Component {
     } = this.props;
 
     actions.setTooltipIsVisible(true);
+    actions.closeContextMenu();
     actions.setTooltipType(data.type || TileTypes.types.YOUTUBE);
     actions.setTooltipTileId(data.id);
     actions.setTooltipContent(data.content);
@@ -138,7 +139,7 @@ export default class Tile extends Component {
         tooltip,
         actions
     } = this.props;
-    
+
     if(e.key === 'Enter'){
         actions.submitTooltip(tooltip.type, tooltip.content);
     }

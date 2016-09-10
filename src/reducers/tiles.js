@@ -319,7 +319,8 @@ export default function tiles(state = initialState, action) {
     // 
     if(state.contextMenu.preventEvents && 
         action.type !== ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS && 
-        action.type !== ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING){
+        action.type !== ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING &&
+        action.type !== ActionTypes.CLOSE_CONTEXT_MENU){
         return state;
     }
 
