@@ -38,8 +38,25 @@ const initialState = {
         isRemoveContentEnabled: false,
         isDeleteEnabled: false,
         preventEvents: false
-    }
+    },
+    tileIdBeingDeleted: -1
 };
+
+function updateHoverMenuWithSibling(state, options){
+    if(state.tooltip.isVisible){
+        return state;
+    }
+
+    const parentTileObject = state.tiles[options.parentId];
+    debugger;
+
+    return Object.assign({}, state, {
+        hoverMenu: Object.assign({}, state.hoverMenu, {
+            isVisible: options.isVisible,
+            tileId: Utils.getSiblingId(parentTileObject, options.childId)
+        })
+    });
+}
 
 function handleMouseDownOnDragger(state, parentId, content){
     const parentTile = document.getElementById(`tile-${parentId}-${content}`);
@@ -202,6 +219,8 @@ function deleteTile(state, activeTileId){
     }
     const parentTileObject = tiles[activeTileObject.parentId];
 
+    debugger;
+
     // get the sibling of the active tile
     let siblingTileId = Utils.getSiblingId(parentTileObject, activeTileId);
 
@@ -259,7 +278,8 @@ function deleteTile(state, activeTileId){
         tiles: newTiles,
         tooltip: Object.assign({}, state.tooltip, {
             isVisible: false
-        })
+        }),
+        tileIdBeingDeleted: activeTileId
     });
 }
 
@@ -297,7 +317,9 @@ export default function tiles(state = initialState, action) {
         debugger;
     }
     // 
-    if(state.contextMenu.preventEvents && action.type !== ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS){
+    if(state.contextMenu.preventEvents && 
+        action.type !== ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS && 
+        action.type !== ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING){
         return state;
     }
 
@@ -366,6 +388,10 @@ export default function tiles(state = initialState, action) {
         return submitTooltip(state, action.contentType, action.content);
 
     case ActionTypes.UPDATE_HOVER_MENU:
+        if(action.options.tileId === state.tileIdBeingDeleted){
+            return state;
+        }
+
         if(state.tooltip.isVisible){
             return state;
         }
@@ -378,16 +404,7 @@ export default function tiles(state = initialState, action) {
         });
 
     case ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING:
-        if(state.tooltip.isVisible){
-            return state;
-        }
-
-        return Object.assign({}, state, {
-            hoverMenu: Object.assign({}, state.hoverMenu, {
-                isVisible: action.options.isVisible,
-                tileId: Utils.getSiblingId(state.tiles[state.tiles[action.options.tileId].parentId], action.options.tileId)
-            })
-        });
+        return updateHoverMenuWithSibling(state, action.options);
 
     case ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER:
         return handleMouseDownOnDragger(state, action.parentId, action.content);

@@ -63,6 +63,8 @@ export default class Tile extends Component {
             actions
         } = this.props;
 
+        debugger;
+
         actions.updateHoverMenu({
             isVisible: true,
             tileId: data.id
@@ -110,11 +112,12 @@ export default class Tile extends Component {
   }
 
   handleDeleteTile() {
-    this.props.actions.deleteTile(this.props.data.id);
     this.props.actions.updateHoverMenuWithSibling({
         isVisible: true,
-        tileId: this.props.data.parentId
+        parentId: this.props.data.parentId,
+        childId: this.props.data.id
     });
+    this.props.actions.deleteTile(this.props.data.id);
   }
 
   handleOnChangeContent(e) {
