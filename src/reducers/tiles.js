@@ -377,6 +377,18 @@ export default function tiles(state = initialState, action) {
             })
         });
 
+    case ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING:
+        if(state.tooltip.isVisible){
+            return state;
+        }
+
+        return Object.assign({}, state, {
+            hoverMenu: Object.assign({}, state.hoverMenu, {
+                isVisible: action.options.isVisible,
+                tileId: Utils.getSiblingId(state.tiles[state.tiles[action.options.tileId].parentId], action.options.tileId)
+            })
+        });
+
     case ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER:
         return handleMouseDownOnDragger(state, action.parentId, action.content);
 

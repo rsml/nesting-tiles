@@ -119,6 +119,14 @@ export function updateHoverMenu(options){
     };
 }
 
+/* Displays the hover menu on the sibling of a given tile */
+export function updateHoverMenuWithSibling(options){
+    return {
+        type: ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING,
+        options
+    };
+}
+
 /***************/
 
 export function handleMouseDownOnDragger(parentId, content){

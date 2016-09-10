@@ -82,11 +82,11 @@ export default class MyContextMenu extends Component {
         console.log(e);
         console.log(data);
         actions.setContextMenuPreventEvents(false);
-        actions.deleteTile(activeTileObject.id);
-        actions.updateHoverMenu({
+        actions.updateHoverMenuWithSibling({
             isVisible: true,
-            tileId: activeTileObject.parentId
+            tileId: activeTileObject.id
         });
+        actions.deleteTile(activeTileObject.id);
     }
 
     render() {

@@ -111,7 +111,7 @@ export default class Tile extends Component {
 
   handleDeleteTile() {
     this.props.actions.deleteTile(this.props.data.id);
-    this.props.actions.updateHoverMenu({
+    this.props.actions.updateHoverMenuWithSibling({
         isVisible: true,
         tileId: this.props.data.parentId
     });

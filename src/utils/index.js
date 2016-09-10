@@ -53,7 +53,8 @@ export function isDescendant(parent, child) {
  * @return {[type]} [description]
  */
 export function getYoutubeEmbedUrlFromVideoUrl(videoUrl){
-    const embedUrl = videoUrl.replace('/watch?v=', '/embed/');
+    debugger;
+    const embedUrl = cleanURL(videoUrl).replace('/watch?v=', '/embed/');
 
     const hasArguments = embedUrl.indexOf('?') >= 0;
 
