@@ -2,6 +2,7 @@ import * as Utils from '../utils/index';
 import * as ActionTypes from '../constants/ActionTypes';
 import TileObject from '../classes/TileObject';
 import * as TileTypes from '../utils/TileTypes';
+import Directions from '../utils/Directions';
 
 const initialState = {
     rootTileId: Utils.INITIAL_ROOT_TILE_ID,
@@ -31,20 +32,13 @@ const initialState = {
         containerHeight: null,
         containerOffsetTop: null,
         containerOffsetLeft: null
-    }
+    },
+    contextMenuTileId: null
 };
 
-const DIRECTIONS = {
-    ABOVE: 'ABOVE',
-    BELOW: 'BELOW',
-    LEFT: 'LEFT',
-    RIGHT:  'RIGHT'
-};
-
-function handleMouseDownOnDragger(state, parentId){
-    const parentTile = document.getElementById(`tile-${parentId}`);
+function handleMouseDownOnDragger(state, parentId, content){
+    const parentTile = document.getElementById(`tile-${parentId}-${content}`);
     const isVertical = state.tiles[parentId].splitVertical;
-    debugger;
     const bounds = parentTile.getBoundingClientRect();
     return Object.assign({}, state, {
         dragger: Object.assign({}, state.dragger, {
@@ -80,7 +74,8 @@ function handleMouseMoveOnParentContainer(state, xPos, yPos){
         return Object.assign({}, state, {
             tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
                                                        state.dragger.parentId,
-                                                       widthPercentage),
+                                                       widthPercentage,
+                                                       null),
             dragger: Object.assign({}, state.dragger, {
                 xPos: xPos,
                 yPos: yPos
@@ -94,21 +89,14 @@ function handleMouseMoveOnParentContainer(state, xPos, yPos){
         // right.css('height', offsetRight);
         // 
         // 
-        if(heightPercentage > 50){
-            debugger;
-        }
         const heightPercentage =  (yPos - state.dragger.containerOffsetTop)/state.dragger.containerHeight * 100;
         console.log('DEBUG heightPercentage: ' + JSON.stringify(heightPercentage))
-        // debugger;
-        // 
-        if(heightPercentage < 30){
-            debugger
-        }
 
         return Object.assign({}, state, {
             tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
                                                        state.dragger.parentId,
-                                                       heightPercentage),
+                                                       heightPercentage,
+                                                       null),
             dragger: Object.assign({}, state.dragger, {
                 xPos: xPos,
                 yPos: yPos
@@ -138,11 +126,11 @@ function insertInDirection(state, direction, activeTileId){
 
     // Create the new parent tile and the new sibling tile,
     // and add both these tiles to the cloned tiles
-    const splitVertical = (direction === DIRECTIONS.LEFT ||
-                           direction === DIRECTIONS.RIGHT);
+    const splitVertical = (direction === Directions.LEFT ||
+                           direction === Directions.RIGHT);
 
     let newChildrenTiles;
-    if(direction === DIRECTIONS.LEFT || direction === DIRECTIONS.ABOVE){
+    if(direction === Directions.LEFT || direction === Directions.ABOVE){
         newChildrenTiles = [newSiblingTileId, activeTileId]
     }else{
         newChildrenTiles = [activeTileId, newSiblingTileId];
@@ -298,18 +286,22 @@ function submitTooltip(state, type, content){
 }
 
 export default function tiles(state = initialState, action) {
+    if(state.contextMenuTileId !== null && action.type !== ActionTypes.CLOSE_CONTEXT_MENU){
+        return state;
+    }
+
   switch (action.type) {
     case ActionTypes.INSERT_ABOVE:
-        return insertInDirection(state, DIRECTIONS.ABOVE, action.tileId);
+        return insertInDirection(state, Directions.ABOVE, action.tileId);
 
     case ActionTypes.INSERT_BELOW:
-        return insertInDirection(state, DIRECTIONS.BELOW, action.tileId);
+        return insertInDirection(state, Directions.BELOW, action.tileId);
 
     case ActionTypes.INSERT_TO_THE_LEFT_OF:
-        return insertInDirection(state, DIRECTIONS.LEFT, action.tileId);
+        return insertInDirection(state, Directions.LEFT, action.tileId);
 
     case ActionTypes.INSERT_TO_THE_RIGHT_OF:
-        return insertInDirection(state, DIRECTIONS.RIGHT, action.tileId);
+        return insertInDirection(state, Directions.RIGHT, action.tileId);
 
 
     case ActionTypes.RESIZE:
@@ -375,7 +367,7 @@ export default function tiles(state = initialState, action) {
         });
 
     case ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER:
-        return handleMouseDownOnDragger(state, action.parentId);
+        return handleMouseDownOnDragger(state, action.parentId, action.content);
 
     case ActionTypes.HANDLE_MOUSE_MOVE_ON_PARENT_CONTAINER:
         return handleMouseMoveOnParentContainer(state, action.xPos, action.yPos);
@@ -385,6 +377,22 @@ export default function tiles(state = initialState, action) {
             dragger: Object.assign({}, state.dragger, {
                 isResizing: false
             })
+        });
+
+    case ActionTypes.SET_CONTEXT_MENU_TILE_ID:
+        return Object.assign({}, state, {
+            contextMenuTileId: action.tileId
+        });
+
+    case ActionTypes.CLOSE_CONTEXT_MENU:
+        return Object.assign({}, state, {
+            contextMenuTileId: null
+        });
+
+    case ActionTypes.CLONE_ALL_TILES_AND_SWAP_IN_NEW_TILE:
+    debugger;
+        return Object.assign({}, state, {
+            tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles, state.hoverMenu.tileId, null, '')
         });
 
     default:

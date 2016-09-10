@@ -3,22 +3,26 @@ import classNames from 'classnames/bind';
 import ReactDOM from 'react-dom';
 // import Tooltip from 'rc-tooltip';
 // import 'rc-tooltip/assets/bootstrap.css';
-import TileObject from '../classes/TileObject';
-// import TileStates from '../utils/TileStates';
-import * as TileTypes from '../utils/TileTypes';
 import Button from 'react-bootstrap/lib/Button';
 import Popover from 'react-bootstrap/lib/Popover';
 // import MyPopover from './MyPopover';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import * as Utils from '../utils/index';
+import TileObject from '../classes/TileObject';
+// import TileStates from '../utils/TileStates';
+import * as TileTypes from '../utils/TileTypes';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import './Tile.css';
 import './Tooltip.css';
 
+
 export default class Tile extends Component {
     handleMouseDownOnDragger(tileId) {
-        const { actions } = this.props;
-        actions.handleMouseDownOnDragger(tileId)
+        const {
+            data,
+            actions
+        } = this.props;
+        actions.handleMouseDownOnDragger(tileId, data.content)
     }
 
     handleMouseMoveOnParentContainer(e){
@@ -102,7 +106,7 @@ export default class Tile extends Component {
   }
 
   handleSplitHorizontal() {
-    this.props.actions.inesertToTheRightOf(this.props.data.id);
+    this.props.actions.insertToTheRightOf(this.props.data.id);
   }
 
   handleDeleteTile() {
@@ -251,7 +255,7 @@ export default class Tile extends Component {
                      title='Popover bottom'
                      arrowOffsetTop='10%'>
                 <div key={`tooltip-height-${tooltipHeight}`}
-                     style={{ width: 220, height: tooltipHeight }}
+                     style={{ width: 274, height: tooltipHeight }}
                      className='Tooltip'>
                     <div className={classes.tooltipHeader}>
                         <div className='Tooltip-header-inner'>
@@ -356,7 +360,8 @@ export default class Tile extends Component {
         return (
           <div className='Tile'
                 style={backgroundStyle}
-                id={`tile-${data.id}`}
+                id={`tile-${data.id}-${data.content}`}
+                data-id={data.id}
                 onClick={this.onClick.bind(this)}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}>
@@ -402,7 +407,8 @@ export default class Tile extends Component {
     }
 
     return (
-        <div id={`tile-${data.id}`}
+        <div id={`tile-${data.id}-${data.content}`}
+             key={`tile-content-${data.content}`}
              className='Tile-container-full'
              onMouseMove={this.handleMouseMoveOnParentContainer.bind(this)}
              onMouseUp={this.handleMouseUpOnParentContainer.bind(this)}>

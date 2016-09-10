@@ -23,7 +23,7 @@ export function insertToTheLeftOf(tileId){
     };
 }
 
-export function inesertToTheRightOf(tileId){
+export function insertToTheRightOf(tileId){
     return {
         type: ActionTypes.INSERT_TO_THE_RIGHT_OF,
         tileId
@@ -121,10 +121,11 @@ export function updateHoverMenu(options){
 
 /***************/
 
-export function handleMouseDownOnDragger(parentId){
+export function handleMouseDownOnDragger(parentId, content){
     return {
         type: ActionTypes.HANDLE_MOUSE_DOWN_ON_DRAGGER,
-        parentId
+        parentId,
+        content
     };
 }
 
@@ -139,5 +140,26 @@ export function handleMouseMoveOnParentContainer(xPos, yPos){
 export function handleMouseUpOnParentContainer(){
     return {
         type: ActionTypes.HANDLE_MOUSE_UP_ON_PARENT_CONTAINER
+    };
+}
+
+/***************/
+
+export function setContextMenuTileId(tileId){
+    return {
+        type: ActionTypes.SET_CONTEXT_MENU_TILE_ID,
+        tileId
+    };
+}
+
+export function closeContextMenu(){
+    return {
+        type: ActionTypes.CLOSE_CONTEXT_MENU
+    };
+}
+
+export function cloneAllTilesAndSwapInNewTile(){
+    return {
+        type: ActionTypes.CLONE_ALL_TILES_AND_SWAP_IN_NEW_TILE
     };
 }

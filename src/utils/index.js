@@ -8,8 +8,9 @@ export const INITIAL_ROOT_TILE_ID = 0;
 export function cloneAllTiles(tiles){
     let result = {};
     
-    for (const key of Object.keys(tiles)) {
-        result[key] = tiles[key].clone();
+    for (const key in Object.keys(tiles)) {
+        const keyAsInt = parseInt(key);
+        result[keyAsInt] = tiles[keyAsInt].clone();
     }
 
     return result;
@@ -91,33 +92,47 @@ export function cleanURL(dirtyURL){
  * @param  {object} tiles         Maps tileIds to tileObjects
  * @param  {number} needleTileId  The id of the tile to edit
  * @param  {number} newPercentage The new percentage of the tile to edit
+ * @param  {number} newContent    The new content of the tile to edit
  * @return {object}               A mapping of tileIds to tileObjects
  */
 export function cloneAllTilesAndSwapInNewTile(tiles,
                                               needleTileId,
-                                              newPercentage){
+                                              newPercentage = null,
+                                              newContent = null){
+    debugger;
     const result = {};
-    for (const key of Object.keys(tiles)) {
-        if(parseInt(key) === needleTileId){
+    for (const key in Object.keys(tiles)) {
+        const keyAsInt = parseInt(key);
+
+        if(keyAsInt === needleTileId){
             const newTile = tiles[needleTileId].clone();
-            newTile.percentage = newPercentage;
-            result[key] = newTile;
+            if(newPercentage){
+                newTile.percentage = newPercentage;                
+            }
+            if(newContent || newContent === ''){
+                newTile.content = newContent;                
+            }
+            result[keyAsInt] = newTile;
         }else{
-            result[key] = tiles[key].clone();
+            result[keyAsInt] = tiles[keyAsInt].clone();
         }
     }
     return result;
 }
 
+/**
+ * Bubble through the DOM, search for a Tile object. Then return the id of the first tile you find. Otherwise return -1
+ * @param  {DOMNode} target The 'target' parameter from the contextmenu event object
+ * @return {number}        A tileId, or -1 if none are found
+ */
+export function findIdOfTileThatClickIsInsideOf(target){
+    let currentTarget = target;
+    do {
+        if(currentTarget.classList.contains('Tile')){
+            return parseInt(currentTarget.dataset.id);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+        currentTarget = currentTarget.parentElement;
+    } while(currentTarget);
+    return null;
+}

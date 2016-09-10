@@ -1,8 +1,27 @@
 import React, { Component, PropTypes } from 'react';
+import MyContextMenu from '../components/MyContextMenu';
 import Tile from '../components/Tile';
+import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
 
-export default class HomeView extends Component {
+class HomeView extends Component {
+    componentDidMount() {
+        let context = document.getElementById('home-view');
+        context.addEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
+    }
+
+    componentWillUnmount() {
+        let context = document.getElementById('home-view');
+        context.removeEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
+    }
+
+    handleOpenContextMenu(e) {
+        const {actions} = this.props;
+
+        const id = Utils.findIdOfTileThatClickIsInsideOf(e.target)
+        actions.setContextMenuTileId(id);
+    }
+
     getChildren(tileId) {
         const {
             tiles,
@@ -57,6 +76,7 @@ export default class HomeView extends Component {
         tiles,
         tooltip,
         hoverMenu,
+        contextMenuTileId,
         actions
     } = this.props;
 
@@ -98,8 +118,10 @@ export default class HomeView extends Component {
     }
 
     return (
-        <div className='full-size'>
+        <div id='home-view' className='full-size'>
           {allTiles}
+          <MyContextMenu activeTileObject={tiles[contextMenuTileId]}
+                         actions={actions} />
         </div>
     );
   }
@@ -110,5 +132,8 @@ HomeView.propTypes = {
   hoverMenu: PropTypes.object,
   rootTileId: PropTypes.number.isRequired,
   tiles: PropTypes.object.isRequired,
+  contextMenuTileId: PropTypes.number,
   actions: PropTypes.object.isRequired
 };
+
+export default HomeView;
