@@ -52,9 +52,8 @@ export function isDescendant(parent, child) {
  *         'https://www.youtube.com/embed/HxXbrnJ6l4A'
  * @return {[type]} [description]
  */
-export function getYoutubeEmbedUrlFromVideoUrl(videoUrl){
-    debugger;
-    const embedUrl = cleanURL(videoUrl).replace('/watch?v=', '/embed/');
+export function getYoutubeEmbedUrlFromVideoURL(videoURL){
+    const embedUrl = cleanURL(videoURL).replace('/watch?v=', '/embed/');
 
     const hasArguments = embedUrl.indexOf('?') >= 0;
 
@@ -72,7 +71,7 @@ export function cleanURL(dirtyURL){
     }
 
     let result = dirtyURL;
-    if(result.indexOf('http://') === -1 && result.indexOf('https://' === -1) && result.indexOf('file://' === -1)){
+    if(result.indexOf('http://') === -1 && result.indexOf('https://') === -1 && result.indexOf('file://') === -1){
         result = `http://${result}`;
     }
 
@@ -106,13 +105,7 @@ export function cloneAllTiles(tiles){
     for (const key of Object.keys(tiles)) {
         const keyAsInt = parseInt(key);
         const oldTile = tiles[keyAsInt];
-        if(!oldTile){
-            debugger;
-        }
         result[keyAsInt] = oldTile.clone();
-
-
-        
     }
 
     return result;

@@ -63,8 +63,6 @@ export default class Tile extends Component {
             actions
         } = this.props;
 
-        debugger;
-
         actions.updateHoverMenu({
             isVisible: true,
             tileId: data.id
@@ -93,12 +91,21 @@ export default class Tile extends Component {
 
   handleShowInsertMenu() {
     const {
+        tooltip,
         data,
         actions
     } = this.props;
 
-    actions.setTooltipIsVisible(true);
     actions.closeContextMenu();
+
+    // If the insert menu is currently visible, it should be hidden
+    if(tooltip && tooltip.isVisible && tooltip.tileId === data.id){
+        actions.setTooltipIsVisible(true);
+        actions.setTooltipTileId(null);
+        return;
+    }
+
+    actions.setTooltipIsVisible(true);
     actions.setTooltipType(data.type || TileTypes.types.YOUTUBE);
     actions.setTooltipTileId(data.id);
     actions.setTooltipContent(data.content);
@@ -363,7 +370,7 @@ export default class Tile extends Component {
             };
         }else if(data.type === TileTypes.types.YOUTUBE){
             innerDOM = (
-                <iframe className='full-size' src={Utils.getYoutubeEmbedUrlFromVideoUrl(data.content)} frameBorder='0' allowFullScreen />
+                <iframe className='full-size' src={Utils.getYoutubeEmbedUrlFromVideoURL(data.content)} frameBorder='0' allowFullScreen />
             )
         }else if(data.type === TileTypes.types.WEBSITE){
             innerDOM = (

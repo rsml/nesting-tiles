@@ -6,12 +6,12 @@ import '../styles/FullSize.css';
 
 class HomeView extends Component {
     componentDidMount() {
-        let context = document.getElementById('home-view');
+        let context = document.getElementById('catch-right-clicks');
         context.addEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
     }
 
     componentWillUnmount() {
-        let context = document.getElementById('home-view');
+        let context = document.getElementById('catch-right-clicks');
         context.removeEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
     }
 
@@ -142,6 +142,7 @@ class HomeView extends Component {
                 isDeleteEnabled={contextMenu.isDeleteEnabled}
                 activeTileObject={tiles[contextMenu.tileId]}
                 actions={actions} />
+          <div id='catch-right-clicks' className='full-size' />
         </div>
     );
   }

@@ -48,7 +48,6 @@ function updateHoverMenuWithSibling(state, options){
     }
 
     const parentTileObject = state.tiles[options.parentId];
-    debugger;
 
     return Object.assign({}, state, {
         hoverMenu: Object.assign({}, state.hoverMenu, {
@@ -219,8 +218,6 @@ function deleteTile(state, activeTileId){
     }
     const parentTileObject = tiles[activeTileObject.parentId];
 
-    debugger;
-
     // get the sibling of the active tile
     let siblingTileId = Utils.getSiblingId(parentTileObject, activeTileId);
 
@@ -313,10 +310,6 @@ function submitTooltip(state, type, content){
 export default function tiles(state = initialState, action) {
     // If the context menu is visible, it
     // should block all other reducer functions
-    if(action.type === ActionTypes.INSERT_ABOVE){
-        debugger;
-    }
-    // 
     if(state.contextMenu.preventEvents && 
         action.type !== ActionTypes.SET_CONTEXT_MENU_PREVENT_EVENTS && 
         action.type !== ActionTypes.UPDATE_HOVER_MENU_WITH_SIBLING &&
@@ -336,22 +329,6 @@ export default function tiles(state = initialState, action) {
 
     case ActionTypes.INSERT_TO_THE_RIGHT_OF:
         return insertInDirection(state, Directions.RIGHT, action.tileId);
-
-
-    case ActionTypes.RESIZE:
-        break;
-
-
-    case ActionTypes.SHOW_INSERT_MENU:
-        break;
-
-    case ActionTypes.HIDE_INSERT_MENU:
-        break;
-
-
-    case ActionTypes.ADD:
-        break;
-
 
     case ActionTypes.DELETE_TILE:
         return deleteTile(state, action.tileId);
