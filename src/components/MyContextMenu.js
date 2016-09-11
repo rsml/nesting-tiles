@@ -1,24 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import Directions from '../utils/Directions';
-// import ContextMenu from 'react-context-menu';
 import ContextMenu from './external/react-context-menu/ContextMenu';
 import * as TileTypes from '../utils/TileTypes';
 
 export default class MyContextMenu extends Component {
-
-    /*handleAddContent() {
-        const {
-            activeTileObject,
-            actions
-        } = this.props;
-
-        actions.setTooltipIsVisible(true);
-        actions.setTooltipType(activeTileObject.type || TileTypes.types.YOUTUBE);
-        actions.setTooltipTileId(activeTileObject.id);
-        actions.setTooltipContent(activeTileObject.content);
-    }*/
-
-    handleRemoveContent () {
+    handleRemoveContent() {
         const {
             activeTileObject,
             actions
@@ -27,7 +13,8 @@ export default class MyContextMenu extends Component {
         actions.setContextMenuPreventEvents(false);
         actions.cloneAllTilesAndSwapInNewTile();
         actions.setTooltipIsVisible(false);
-        actions.setTooltipType(activeTileObject.type || TileTypes.types.YOUTUBE);
+        actions.setTooltipType(activeTileObject.type || 
+                                TileTypes.types.YOUTUBE);
         actions.setTooltipTileId(activeTileObject.id);
         actions.setTooltipContent(null);
     }
@@ -40,31 +27,32 @@ export default class MyContextMenu extends Component {
 
         actions.setContextMenuPreventEvents(false);
 
-        switch(direction){
-            case Directions.ABOVE:
-                actions.insertAbove(activeTileObject.id);
-                return;
+        switch(direction) {
+        case Directions.ABOVE:
+            actions.insertAbove(activeTileObject.id);
+            return;
 
-            case Directions.BELOW:
-                actions.insertBelow(activeTileObject.id);
-                return;
+        case Directions.BELOW:
+            actions.insertBelow(activeTileObject.id);
+            return;
 
-            case Directions.LEFT:
-                actions.insertToTheLeftOf(activeTileObject.id);
-                return;
+        case Directions.LEFT:
+            actions.insertToTheLeftOf(activeTileObject.id);
+            return;
 
-            case Directions.RIGHT:
-                actions.insertToTheRightOf(activeTileObject.id);
-                return;
+        case Directions.RIGHT:
+            actions.insertToTheRightOf(activeTileObject.id);
+            return;
         }
 
-        if(direction === Directions.ABOVE){
+        if(direction === Directions.ABOVE) {
             actions.insertAbove(activeTileObject.id);
-        }else if(direction === Directions.ABOVE){
+        } else if(direction === Directions.ABOVE) {
             actions.insertAbove(activeTileObject.id);
-        }else if(direction === Directions.ABOVE){
+        } else if(direction === Directions.ABOVE) {
             actions.insertAbove(activeTileObject.id);
-        }if(direction === Directions.ABOVE){
+        }
+        if(direction === Directions.ABOVE) {
             actions.insertAbove(activeTileObject.id);
         }
     }
@@ -91,32 +79,29 @@ export default class MyContextMenu extends Component {
             actions
         } = this.props;
 
-        
+        let items = [{
+            'icon': null,
+            'label': 'Insert Above',
+            'function': this.handleClickInsert.bind(this,
+                Directions.ABOVE)
+        }, {
+            'icon': null,
+            'label': 'Insert Below',
+            'function': this.handleClickInsert.bind(this,
+                Directions.BELOW)
+        }, {
+            'icon': null,
+            'label': 'Insert to the Left',
+            'function': this.handleClickInsert.bind(this,
+                Directions.LEFT)
+        }, {
+            'icon': null,
+            'label': 'Insert to the Right',
+            'function': this.handleClickInsert.bind(this,
+                Directions.RIGHT)
+        }];
 
-        let items = [
-            {
-                'icon': null,
-                'label': 'Insert Above',
-                'function': this.handleClickInsert.bind(this, Directions.ABOVE)
-            },
-            {
-                'icon': null,
-                'label': 'Insert Below',
-                'function': this.handleClickInsert.bind(this, Directions.BELOW)
-            },
-            {
-                'icon': null,
-                'label': 'Insert to the Left',
-                'function': this.handleClickInsert.bind(this, Directions.LEFT)
-            },
-            {
-                'icon': null,
-                'label': 'Insert to the Right',
-                'function': this.handleClickInsert.bind(this, Directions.RIGHT)
-            }
-        ];
-
-        if(isRemoveContentEnabled){
+        if(isRemoveContentEnabled) {
             items.push({
                 'icon': null,
                 'label': 'Remove Content',
@@ -124,7 +109,7 @@ export default class MyContextMenu extends Component {
             });
         }
 
-        if(isDeleteEnabled){
+        if(isDeleteEnabled) {
             items.push({
                 'icon': null,
                 'label': 'Delete',
@@ -132,7 +117,7 @@ export default class MyContextMenu extends Component {
             });
         }
 
-        return (
+        return(
             <ContextMenu contextID='home-view'
                          items={items}
                          actions={actions} />

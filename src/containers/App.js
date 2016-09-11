@@ -12,16 +12,15 @@ import '../styles/external/bootstrap.css';
 
 class App extends Component {
     onClick(e) {
-        const {
-            actions
-        } = this.props;
+        const { actions } = this.props;
 
         if(Utils.isDescendant(
-            document.getElementById('popover-trigger-click-root-close'),
-            e.nativeEvent.target
-        )){
+                document.getElementById('popover-trigger-click-root-close'),
+                e.nativeEvent.target
+            )) {
             return;
-        }else if(e.nativeEvent.target.classList.contains('Tile-menu-insert')){
+        } else if(e.nativeEvent.target.classList.contains(
+                'Tile-menu-insert')) {
             return;
         }
 
@@ -37,8 +36,8 @@ class App extends Component {
             actions,
             tiles
         } = this.props;
-        
-        return (
+
+        return(
             <div className='App FullSize'
                  onClick={this.onClick.bind(this)}>
                 <HomeView rootTileId={tiles.rootTileId}
@@ -54,23 +53,24 @@ class App extends Component {
 }
 
 App.propTypes = {
-    actions: PropTypes.object.isRequired,
-    tiles: PropTypes.object.isRequired
+    'actions': PropTypes.object.isRequired,
+    'tiles': PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  return {
-    tiles: state.tiles
-  };
+    return {
+        'tiles': state.tiles
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
+    return {
+        'actions': bindActionCreators(Actions, dispatch)
+    };
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(App);
+

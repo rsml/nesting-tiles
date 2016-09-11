@@ -6,7 +6,8 @@ import Popover from 'react-bootstrap/lib/Popover';
  * always has the arrow towards the top of the popover
  */
 let MyPopover = (props) => {
-  return <Popover {...props} arrowOffsetTop={30} />
+    return <Popover {...props} arrowOffsetTop={30} />
 }
 
 export default MyPopover;
+
