@@ -79,18 +79,8 @@ function handleMouseMoveOnParentContainer(state, xPos, yPos){
         return state;
     }
 
-    // console.log('DEBUG isResizing: ' + state.dragger.isResizing);
-
     if(state.dragger.isVertical){
-        // const offsetRight = state.dragger.containerWidth - action.xPos;
-        // TODO!!!
-        
-        // left.css('right', offsetRight);
-        // right.css('width', offsetRight);
-        // 
-        // 
         const widthPercentage = (xPos - state.dragger.containerOffsetLeft)/state.dragger.containerWidth * 100;
-        // console.log('DEBUG heightPercentage: ' + JSON.stringify(heightPercentage))
         
         return Object.assign({}, state, {
             tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
@@ -102,16 +92,8 @@ function handleMouseMoveOnParentContainer(state, xPos, yPos){
                 yPos: yPos
             })
         });
-    }else{ 
-        // const offsetBottom = state.dragger.containerHeight - state.dragger.containerOffsetTop;
-        // TODO!!!
-        
-        // left.css('bottom', offsetRight);
-        // right.css('height', offsetRight);
-        // 
-        // 
+    }else{
         const heightPercentage =  (yPos - state.dragger.containerOffsetTop)/state.dragger.containerHeight * 100;
-        console.log('DEBUG heightPercentage: ' + JSON.stringify(heightPercentage))
 
         return Object.assign({}, state, {
             tiles: Utils.cloneAllTilesAndSwapInNewTile(state.tiles,

@@ -67,20 +67,14 @@ export default class MyContextMenu extends Component {
         }if(direction === Directions.ABOVE){
             actions.insertAbove(activeTileObject.id);
         }
-
-        // console.log(e);
-        // console.log(data);
-        // actions.deleteTile(activeTileObject.id)
     }
 
-    handleClickDelete(e, data) {
+    handleClickDelete() {
         const {
             activeTileObject,
             actions
         } = this.props;
 
-        console.log(e);
-        console.log(data);
         actions.setContextMenuPreventEvents(false);
         actions.updateHoverMenuWithSibling({
             isVisible: true,

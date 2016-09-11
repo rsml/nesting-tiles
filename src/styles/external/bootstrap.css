@@ -19,6 +19,7 @@
     left: -11px;
     margin-top: -11px;
     border-right-color: #999;
+    border-right-color: rgb(191,191,191);
     border-right-color: rgba(0,0,0,.25);
     border-left-width: 0;
 }
@@ -36,7 +37,7 @@
   border-style: solid;
 }
 .popover > .arrow:after {
-  content: "";
+  content: '';
   border-width: 10px;
 }
 .popover.top > .arrow {
@@ -44,13 +45,14 @@
   left: 50%;
   margin-left: -11px;
   border-top-color: #999;
+  border-top-color: rgb(191,191,191);
   border-top-color: rgba(0, 0, 0, .25);
   border-bottom-width: 0;
 }
 .popover.top > .arrow:after {
   bottom: 1px;
   margin-left: -10px;
-  content: " ";
+  content: ' ';
   border-top-color: #fff;
   border-bottom-width: 0;
 }
@@ -58,14 +60,14 @@
   top: 50%;
   left: -11px;
   margin-top: -11px;
-  border-right-color: #999;
+  border-right-color: rgb(191,191,191);
   border-right-color: rgba(0, 0, 0, .25);
   border-left-width: 0;
 }
 .popover.right > .arrow:after {
   bottom: -10px;
   left: 1px;
-  content: " ";
+  content: ' ';
   border-right-color: #fff;
   border-left-width: 0;
 }
