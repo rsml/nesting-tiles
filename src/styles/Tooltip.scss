@@ -1,6 +1,12 @@
+/* Variables */
+
+$border-radius: 6px;
+
+/* Styles */
+
 .Tooltip {
     position: relative;
-    border-radius: 6px;
+    border-radius: $border-radius;
 }
 
 .Tooltip-header {
@@ -11,17 +17,19 @@
     top: 0;
     background: #ffffff;
     border-bottom: 1px solid #eee;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
 }
 
 .Tooltip-header-inner {
+    $side-margin: 10px;
+
     position: absolute;
-    width: calc(100% - 10px);
+    width: calc(100% - (2 * $side-margin)));
     height: 41px;
-    margin: 10px 5px;
+    margin: 10px $side-margin;
     background: #efefef;
-    border-radius: 6px;
+    border-radius: $border-radius;
 }
 
 .Tooltip-body {

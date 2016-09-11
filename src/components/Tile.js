@@ -7,9 +7,9 @@ import Overlay from 'react-bootstrap/lib/Overlay';
 import * as Utils from '../utils/index';
 import TileObject from '../classes/TileObject';
 import * as TileTypes from '../utils/TileTypes';
-import '../styles/Tile.css';
+import '../styles/Tile.scss';
 import '../styles/Popover.css';
-import '../styles/Tooltip.css';
+import '../styles/Tooltip.scss';
 
 export default class Tile extends Component {
     componentDidMount() {
