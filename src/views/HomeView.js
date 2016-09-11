@@ -148,12 +148,12 @@ class HomeView extends Component {
 }
 
 HomeView.propTypes = {
-  tooltip: PropTypes.object,
-  hoverMenu: PropTypes.object,
-  rootTileId: PropTypes.number.isRequired,
-  tiles: PropTypes.object.isRequired,
-  contextMenu: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  'tooltip': PropTypes.object,
+  'hoverMenu': PropTypes.object,
+  'rootTileId': PropTypes.number.isRequired,
+  'tiles': PropTypes.object.isRequired,
+  'contextMenu': PropTypes.object.isRequired,
+  'actions': PropTypes.object.isRequired
 };
 
 export default HomeView;

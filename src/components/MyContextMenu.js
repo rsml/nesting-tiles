@@ -77,9 +77,9 @@ export default class MyContextMenu extends Component {
 
         actions.setContextMenuPreventEvents(false);
         actions.updateHoverMenuWithSibling({
-            isVisible: true,
-            parentId: activeTileObject.parentId,
-            childId: activeTileObject.id
+            'isVisible': true,
+            'parentId': activeTileObject.parentId,
+            'childId': activeTileObject.id
         });
         actions.deleteTile(activeTileObject.id);
     }
@@ -141,8 +141,8 @@ export default class MyContextMenu extends Component {
 }
 
 MyContextMenu.propTypes = {
-    isRemoveContentEnabled: PropTypes.bool.isRequired,
-    isDeleteEnabled: PropTypes.bool.isRequired,
-    actions: PropTypes.object.isRequired,
-    activeTileObject: PropTypes.object
+    'isRemoveContentEnabled': PropTypes.bool.isRequired,
+    'isDeleteEnabled': PropTypes.bool.isRequired,
+    'actions': PropTypes.object.isRequired,
+    'activeTileObject': PropTypes.object
 }

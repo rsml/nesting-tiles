@@ -154,7 +154,7 @@ function insertInDirection(state, direction, activeTileId){
     newTiles[newSiblingTileId] = newSiblingTileObject;
 
     if(oldParentTileId >= 0){
-        newTiles[oldParentTileId] = Utils.updateTileWithChildren(
+        newTiles[oldParentTileId] = Utils.cloneTileAndReplaceChild(
             newTiles[oldParentTileId],
             activeTileId,
             newParentTileId

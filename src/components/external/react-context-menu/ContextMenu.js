@@ -1,30 +1,29 @@
-import React, {PropTypes, Component} from 'react';
-import './style.css';
+import React, { PropTypes, Component } from 'react';
+import '.../../../styles/ContextMenu.css';
 
 export default class ContextMenu extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            target: ''
+            'target': ''
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         let context = document.getElementById('home-view');
-        context.addEventListener('contextmenu', () => {this.openContextMenu(event)});
-
-        // let menu = document.getElementById('contextMenu');
-        // menu.addEventListener('mouseleave', () => {this.closeContextMenu()});
-
+        context.addEventListener('contextmenu', () => { this.openContextMenu(
+                event) });
     }
 
     openContextMenu(event) {
         event.preventDefault();
-        this.setState({target: event.target});
+        this.setState({ 'target': event.target });
 
-        let xOffset = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
-        let yOffset = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+        let xOffset = Math.max(document.documentElement.scrollLeft,
+            document.body.scrollLeft);
+        let yOffset = Math.max(document.documentElement.scrollTop, document
+            .body.scrollTop);
 
         let menu = document.getElementById('contextMenu');
 
@@ -34,33 +33,24 @@ export default class ContextMenu extends Component {
             'visibility: visible;';
     }
 
-    /*closeContextMenu() {
-        let menu = document.getElementById('contextMenu');
-        menu.style.cssText = 'visibility: hidden;';
-        this.props.actions.closeContextMenu();
-    }*/
-
-    render () {
-        return (
-            <div id='contextMenu'>
-                {this.props.items.map((item) => {
-                    let clickHandler = () => {
-                        // this.closeContextMenu();
-                        item.function(this.state.target);
-                    }
-                    let label = item.label;
-                    return (
-                        <span onClick={clickHandler} key={label}>
-                            {label}
-                        </span>
-                    );
-                })}
-            </div>
-        );
+    render() {
+        return( <div id = 'contextMenu' > {
+            this.props.items.map((item) => {
+                let clickHandler = () => {
+                    item.function(this.state.target);
+                }
+                let label = item.label;
+                return(
+                    <span onClick={clickHandler} key={label}>
+                        {label}
+                    </span>
+                );
+            })
+        } </div>);
     }
 }
 
 ContextMenu.propTypes = {
-    actions: PropTypes.object.isRequired,
-    items: PropTypes.array.isRequired
+    'actions': PropTypes.object.isRequired,
+    'items': PropTypes.array.isRequired
 }

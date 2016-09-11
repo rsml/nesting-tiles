@@ -12,9 +12,9 @@ import TileObject from '../classes/TileObject';
 // import TileStates from '../utils/TileStates';
 import * as TileTypes from '../utils/TileTypes';
 // import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import './Tile.css';
-import './Popover.css';
-import './Tooltip.css';
+import '../styles/Tile.css';
+import '../styles/Popover.css';
+import '../styles/Tooltip.css';
 
 
 export default class Tile extends Component {
