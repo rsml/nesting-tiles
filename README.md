@@ -2,15 +2,28 @@
 
 ##Features:
 
-• A system of frames that can be nested ad infinitum.
+* A system of tiles that can be create and nested ad infinitum
+* Tiles can be removed
+* Right click on a tile to bring the context menu
+    * Insert a new tile in any specific direction
+    * If a tile already has a Youtube video, Website, or Photo in the background, you can delete the content without deleting the tile
+    * If a tile is not the root tile, you can also delete the tile using this menu
+* Click on the insert icon to add a Youtube video, Photo (from the internet or your local filesystem), or a Website
+    * Files from your local filesystem should behin with 'file://'
+* Drag and drop on the edges of the tiles to resize them
 
 
-## Things to add
+## Known Issues
+
+* If you add a Youtube Video or website to a Tile component, then in order to remove the content, you have to hover over that tile and right-click in the icons that appear in the middle of the Tile (aka the HoverMenu). This UX is not ideal. Instead, you should be allowed to right click anywhere in the Tile. This is more effort technically than it is worth at this moment.
+
+
+## Roadmap
 
 * Make this mobile friendly.
     * Instead of showing the HoverMenu on hover, it should be shown onClick for the Tile component
-    * In addition to showing the context menu on right click, you should recognize two finger taps and also show it on that
-
+    * In addition to showing the context menu on right click events, you should show the context menu on two finger tags
+* Add support dragging and dropping panes to 
 
 
 # Development
