@@ -1,3 +1,20 @@
+Built using the React Slingshot skeleton
+(https://github.com/coryhouse/react-slingshot)
+
+# How to use
+
+##Basic Commands
+1. Type `npm start` to start development in your default browser.
+1. Type `npm start-and-test` to start development and also run in parallel any
+    files matching '**/*.spec.js' in your project
+3. Type `npm runb build` to build for production
+
+For more info on this development setup, see the exerpted README
+from https://github.com/coryhouse/react-slingshot below
+
+
+
+
 # React Slingshot!
 
 [![Build status: Linux](https://img.shields.io/travis/coryhouse/react-slingshot.svg?style=flat-square)](https://travis-ci.org/coryhouse/react-slingshot)
@@ -17,15 +34,6 @@ Why Slingshot?
 6. **Automated production build** - Type `npm run build` to do all this:
 
 [![React Slingshot Production Build](https://img.youtube.com/vi/qlfDLsX-J0U/0.jpg)](https://www.youtube.com/watch?v=qlfDLsX-J0U)
-
-## Get Started
-1. **Initial Machine Setup**. First time running the starter kit? Then complete the [Initial Machine Setup](https://github.com/coryhouse/react-slingshot#initial-machine-setup).
-2. **Clone the project**. `git clone https://github.com/coryhouse/react-slingshot.git`.
-3. **Run the setup script**. `npm run setup`
-4. **Run the example app**. `npm start -s`
-This will run the automated build process, start up a webserver, and open the application in your default browser. When doing development with this kit, this command will continue watching all your files. Every time you hit save the code is rebuilt, linting runs, and tests run automatically. Note: The -s flag is optional. It enables silent mode which suppresses unnecessary messages during the build.
-5. **Review the example app.** This starter kit includes a working example app that calculates fuel savings. Note how all source code is placed under /src. Tests are placed alongside the file under test. The final built app is placed under /dist. These are the files you run in production.
-6. **Delete the example app files.** Once you're comfortable with how the example app works, you can [delete those files and begin creating your own app](https://github.com/coryhouse/react-slingshot/blob/master/docs/FAQ.md#i-just-want-an-empty-starter-kit).
 
 ##Initial Machine Setup
 1. **Install [Node 4.0.0 or greater](https://nodejs.org)** - (5.0 or greater is recommended for optimal build performance). Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
@@ -61,7 +69,3 @@ Slingshot offers a rich development experience using the following technologies:
 | [PostCSS](https://github.com/postcss/postcss) | Transform styles with JS plugins. Used to autoprefix CSS |
 | [Editor Config](http://editorconfig.org) | Enforce consistent editor settings (spaces vs tabs, etc). | [IDE Plugins](http://editorconfig.org/#download) |
 | [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. | [Pluralsight course](https://www.pluralsight.com/courses/npm-build-tool-introduction), [Why not Gulp?](https://medium.com/@housecor/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8#.vtaziro8n)  |
-
-The starter kit includes a working example app that puts all of the above to use.
-## Questions?
-Check out the [FAQ](/docs/FAQ.md)

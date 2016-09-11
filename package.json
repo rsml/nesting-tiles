@@ -2,6 +2,11 @@
   "name": "nesting-tiles",
   "version": "0.1.0",
   "description": "A nesting tile layout with controls to create and delete tiles",
+  "author": {
+        "name" : "Ross Miller",
+        "email" : "rossnmiller@gmail.com",
+        "url" : "https://github.com/rsml"
+  },
   "engines": {
     "npm": ">=3"
   },
