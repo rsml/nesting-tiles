@@ -150,7 +150,7 @@ export default class Tile extends Component {
             actions
         } = this.props;
 
-        if(e.key === 'Enter') {
+        if(e.key === 'Enter' && Utils.validateURL(tooltip.content)){
             actions.submitTooltip(tooltip.type, tooltip.content);
         }
     }
