@@ -2,28 +2,29 @@
 
 ##Features:
 
-* A system of tiles that can be create and nested ad infinitum
-* Tiles can be removed
+* A system of tiles that can be created and nested ad infinitum
+* Hover over a tile to quickly bring up controls to 'Insert' content into a tile, to 'Delete' a tile, or to add a new pane via 'Split Vertical' or 'Split Horizontal'
 * Right click on a tile to bring the context menu
     * Insert a new tile in any specific direction
     * If a tile already has a Youtube video, Website, or Photo in the background, you can delete the content without deleting the tile
     * If a tile is not the root tile, you can also delete the tile using this menu
 * Click on the insert icon to add a Youtube video, Photo (from the internet or your local filesystem), or a Website
-    * Files from your local filesystem should behin with 'file://'
-* Drag and drop on the edges of the tiles to resize them
+    * Files from your local filesystem should begin with 'file://'
+* Click and drag on the edges of the tiles to resize them
 
 
 ## Known Issues
 
-* If you add a Youtube Video or website to a Tile component, then in order to remove the content, you have to hover over that tile and right-click in the icons that appear in the middle of the Tile (aka the HoverMenu). This UX is not ideal. Instead, you should be allowed to right click anywhere in the Tile. This is more effort technically than it is worth at this moment.
+* If you add a Youtube Video or website to a Tile component, then in order to remove the content, you have to hover over that tile and right-click on one of the icons that appear in the middle of the Tile (aka the HoverMenu). Ideally, you should be allowed to right click anywhere in the Tile.
+* If you try to insert content into a tile that is near the very bottom of the very right side of the page, in some circumstances this will cause the page width and/or height to grow a little. So, the user may have to scroll in order to see the whole popup. This is not a breaking feature, just a minor nuisance. To fix this, you might have to modify the <Popover /> component (from 'react-bootstrap/lib/Overlay').
 
 
 ## Roadmap
 
-* Make this mobile friendly.
+* Make it mobile friendly
     * Instead of showing the HoverMenu on hover, it should be shown onClick for the Tile component
     * In addition to showing the context menu on right click events, you should show the context menu on two finger tags
-* Add support dragging and dropping panes to 
+* Support dragging and dropping panes to reorganize them easily
 
 
 # Development
@@ -34,9 +35,9 @@
     files matching '**/*.spec.js' in your project
 3. Type `npm runb build` to build for production
 
-For more info on this development setup, see the exerpted README
-from https://github.com/coryhouse/react-slingshot below
+For more info on this development setup, see the exerpted README from https://github.com/coryhouse/react-slingshot below
 
+...
 
 
 Built using the React Slingshot skeleton
