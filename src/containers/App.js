@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as Actions from '../actions/tileActions';
-import HomeView from '../views/HomeView';
-import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
 import '../styles/App.css';
 import '../styles/Fonts.css';
 import '../styles/external/bootstrap.css';
+import * as Actions from '../actions/tileActions';
+import * as Utils from '../utils/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import HomeView from '../views/HomeView';
+import React, { Component, PropTypes } from 'react';
 
 class App extends Component {
     onClick(e) {

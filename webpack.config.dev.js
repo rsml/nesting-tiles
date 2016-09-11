@@ -1,6 +1,6 @@
-import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import webpack from 'webpack';
 
 export default {
   'resolve': {

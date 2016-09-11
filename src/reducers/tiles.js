@@ -1,8 +1,8 @@
-import * as Utils from '../utils/index';
 import * as ActionTypes from '../constants/ActionTypes';
-import TileObject from '../classes/TileObject';
 import * as TileTypes from '../utils/TileTypes';
+import * as Utils from '../utils/index';
 import Directions from '../utils/Directions';
+import TileObject from '../classes/TileObject';
 
 const initialState = {
     'rootTileId': Utils.INITIAL_ROOT_TILE_ID,

@@ -1,5 +1,5 @@
-import React from 'react';
 import Popover from 'react-bootstrap/lib/Popover';
+import React from 'react';
 
 /*
  * MyPopover is the exact same as react-bootstrap/lib/Popover, but MyPopover

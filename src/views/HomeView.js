@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import MyContextMenu from '../components/MyContextMenu';
-import Tile from '../components/Tile';
-import * as Utils from '../utils/index';
 import '../styles/FullSize.css';
+import * as Utils from '../utils/index';
+import MyContextMenu from '../components/MyContextMenu';
+import React, { Component, PropTypes } from 'react';
+import Tile from '../components/Tile';
 
 class HomeView extends Component {
     componentDidMount() {

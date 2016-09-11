@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames/bind';
-import ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/lib/Button';
-import Popover from 'react-bootstrap/lib/Popover';
-import Overlay from 'react-bootstrap/lib/Overlay';
-import * as Utils from '../utils/index';
-import TileObject from '../classes/TileObject';
-import * as TileTypes from '../utils/TileTypes';
 import '../styles/Tile.scss';
 import '../styles/Popover.css';
 import '../styles/Tooltip.scss';
+import * as TileTypes from '../utils/TileTypes';
+import * as Utils from '../utils/index';
+import Button from 'react-bootstrap/lib/Button';
+import Overlay from 'react-bootstrap/lib/Overlay';
+import Popover from 'react-bootstrap/lib/Popover';
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import TileObject from '../classes/TileObject';
+import classNames from 'classnames/bind';
 
 export default class Tile extends Component {
     componentDidMount() {

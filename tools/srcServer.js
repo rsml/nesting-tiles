@@ -3,13 +3,13 @@
 
 // Require Browsersync along with webpack and middleware for it
 import browserSync from 'browser-sync';
+import config from '../webpack.config.dev';
 // Required for react-router browserHistory. see:
 // https://github.com/BrowserSync/browser-sync/issues/204#issuecomment-102623643
 import historyApiFallback from 'connect-history-api-fallback';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.dev';
 
 const bundler = webpack(config);
 

@@ -1,31 +1,18 @@
 {
   "name": "nesting-tiles",
   "version": "0.1.0",
-  "keywords": [
-    "pane",
-    "tile",
-    "layout",
-    "splitview",
-    "resizable",
-    "nesting",
-    "nested"
-  ],
+  "keywords": [],
   "bugs": {
     "url": "rossnmiller@gmail.com"
   },
   "description": "A nesting tile layout with controls to create and delete tiles",
-  "author": {
-        "name" : "Ross Miller",
-        "email" : "rossnmiller@gmail.com",
-        "url" : "https://github.com/rsml"
-  },
+  "author": "Ross Miller",
   "engines": {
     "npm": ">=3"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
     "setup": "node tools/setup/setupMessage.js && npm install && node tools/setup/setup.js",
-    "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist",
     "start": "npm-run-all --parallel test:watch open:src lint:watch",
@@ -43,7 +30,6 @@
     "test:watch": "npm run test -- --watch",
     "open:cover": "npm run test:cover && open coverage/index.html"
   },
-  "author": "Ross Miller",
   "license": "MIT",
   "dependencies": {
     "classnames": "2.2.5",
@@ -86,6 +72,7 @@
     "eslint-plugin-import": "1.14.0",
     "eslint-plugin-jsx-a11y": "2.2.0",
     "eslint-plugin-react": "6.2.0",
+    "eslint-plugin-sort-imports-es6": "0.0.3",
     "eslint-watch": "2.1.14",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
@@ -117,7 +104,6 @@
     "webpack-hot-middleware": "2.12.2",
     "webpack-md5-hash": "0.0.5"
   },
-  "keywords": [],
   "repository": {
     "type": "git",
     "url": ""

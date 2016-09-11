@@ -1,7 +1,7 @@
-import React, { PropTypes, Component } from 'react';
-import Directions from '../utils/Directions';
-import ContextMenu from './external/react-context-menu/ContextMenu';
 import * as TileTypes from '../utils/TileTypes';
+import ContextMenu from './external/react-context-menu/ContextMenu';
+import Directions from '../utils/Directions';
+import React, { Component, PropTypes } from 'react';
 
 export default class MyContextMenu extends Component {
     handleRemoveContent(e) {

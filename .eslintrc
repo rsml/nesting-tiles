@@ -5,7 +5,8 @@
     "plugin:import/warnings"
   ],
   "plugins": [
-    "react" // (must run `npm install eslint-plugin-react` first)
+    "react", // (must run `npm install eslint-plugin-react` first)
+    "sort-imports-es6"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -224,7 +225,16 @@
 
     "no-var": 1,                  // require let or const instead of var (off by default)
     "generator-star-spacing": 1,  // enforce the position of the * in generator functions (off by default)
+
+    ////////// REACT //////////
     "react/jsx-uses-vars": 1,
-    "react/react-in-jsx-scope": 1
+    "react/react-in-jsx-scope": 1,
+
+    ////////// Sort Imports //////////
+    "sort-imports-es6/sort-imports-es6": [2, {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }]
   }
 }

@@ -2,12 +2,12 @@
 // This boilerplate file is likely to be the same for each project that uses Redux.
 // With Redux, the actual stores are in /reducers.
 
-import { createStore, compose, applyMiddleware } from 'redux';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import rootReducer from '../reducers';
+import { applyMiddleware, compose, createStore } from 'redux';
 import DevTools from '../containers/DevTools';
+import createLogger from 'redux-logger';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import rootReducer from '../reducers';
+import thunkMiddleware from 'redux-thunk';
 
 export default function configureStore(initialState) {
     const middewares = [

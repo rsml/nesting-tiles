@@ -2,7 +2,7 @@
 // https://github.com/amurp/react-context-menu
 // modified by Ross Miller to allow improve styling and to work with Redux
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class ContextMenu extends Component {
     constructor(props) {
