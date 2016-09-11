@@ -15,12 +15,12 @@ export const INITIAL_ROOT_TILE_ID = 0;
 
 
 /**
- * Clones the tile object, but updates the children so that the oldChildId is 
+ * Clones the tile object, but updates the children so that the oldChildId is
  *     replaced by the newChildID
  * @param  {TileObject} parentTileObject The parent TileObject instance
  * @param  {number} oldChildId The id of the old child tile
  * @param  {number} newChildId The id of the new child tile
- * @return {TileObject} a new tileObject if successful. Otherwise returns the 
+ * @return {TileObject} a new tileObject if successful. Otherwise returns the
  *                         inputted tileObject and fails silently
  */
 export function cloneTileAndReplaceChild(parentTileObject,
@@ -34,7 +34,7 @@ export function cloneTileAndReplaceChild(parentTileObject,
     result.children = result.children.map(
         (number) => (number === oldChildId) ?
         newChildId : number
-    )
+    );
 
     return result;
 }
@@ -44,7 +44,7 @@ export function cloneTileAndReplaceChild(parentTileObject,
  *     tileId of the sibling of a given childId
  * @param  {TileObject} parentTileObject The parent TileObject instance
  * @param  {number} childId The id of the child tile
- * @return {TileObject} a new tileObject if successful. Otherwise returns the 
+ * @return {TileObject} a new tileObject if successful. Otherwise returns the
  *                         inputted tileObject and fails silently
  */
 export function getSiblingId(parentTileObject, childId) {
@@ -70,29 +70,13 @@ export function getSiblingId(parentTileObject, childId) {
  */
 export function isDescendant(ancestorDOMNode, descendantDOMNode) {
     let node = descendantDOMNode.parentNode;
-    while(node != null) {
-        if(node == ancestorDOMNode) {
+    while(node) {
+        if(node === ancestorDOMNode) {
             return true;
         }
         node = node.parentNode;
     }
     return false;
-}
-
-/**
- * Convert 'https://www.youtube.com/watch?v=HxXbrnJ6l4A' into
- *         'https://www.youtube.com/embed/HxXbrnJ6l4A'
- * @param {string} videoURL The url of the youtube video
- * @return {string} Converts a youtube video into an embeddable youtube URL
- */
-export function getYoutubeEmbedUrlFromVideoURL(videoURL) {
-    const embedUrl = cleanURL(videoURL)
-        .replace('/watch?v=', '/embed/');
-    const hasArguments = embedUrl.indexOf('?') >= 0;
-    const embedUrlWithoutParameters = (hasArguments) ? embedUrl.substring(0,
-            embedUrl.indexOf('?')) :
-        embedUrl;
-    return `${embedUrlWithoutParameters}?autohide=1&autoplay=1&disablekb=0&loop=1&modestbranding=1&playsinline=1&theme=light`;
 }
 
 /*
@@ -114,6 +98,22 @@ export function cleanURL(dirtyURL) {
 }
 
 /**
+ * Convert 'https://www.youtube.com/watch?v=HxXbrnJ6l4A' into
+ *         'https://www.youtube.com/embed/HxXbrnJ6l4A'
+ * @param {string} videoURL The url of the youtube video
+ * @return {string} Converts a youtube video into an embeddable youtube URL
+ */
+export function getYoutubeEmbedUrlFromVideoURL(videoURL) {
+    const embedUrl = cleanURL(videoURL)
+        .replace('/watch?v=', '/embed/');
+    const hasArguments = embedUrl.indexOf('?') >= 0;
+    const embedUrlWithoutParameters = (hasArguments) ? embedUrl.substring(0,
+            embedUrl.indexOf('?')) :
+        embedUrl;
+    return `${embedUrlWithoutParameters}?autohide=1&autoplay=1&disablekb=0&loop=1&modestbranding=1&playsinline=1&theme=light`;
+}
+
+/**
  * Validate URL
  * @param  {string} dirtyURL The URL to be tested
  * @return {bool}   True if it is a correctly formatted url
@@ -130,7 +130,7 @@ export function validateURL(dirtyURL) {
     // https://gist.github.com/dperini/729294
     // see also https://mathiasbynens.be/demo/url-regex
     // modified to allow protocol-relative URLs
-    return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
+    return (/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i)
         .test(cleanedURL);
 
 }
@@ -145,7 +145,7 @@ export function cloneAllTiles(tiles) {
     let result = {};
 
     for(const key of Object.keys(tiles)) {
-        const keyAsInt = parseInt(key);
+        const keyAsInt = parseInt(key, 10);
         const oldTile = tiles[keyAsInt];
         result[keyAsInt] = oldTile.clone();
     }
@@ -169,7 +169,7 @@ export function cloneAllTilesAndSwapInNewTile(tiles,
     newContent = null) {
     const result = {};
     for(const key of Object.keys(tiles)) {
-        const keyAsInt = parseInt(key);
+        const keyAsInt = parseInt(key, 10);
 
         if(keyAsInt === needleTileId) {
             const newTile = tiles[needleTileId].clone();
@@ -198,7 +198,7 @@ export function findIdOfTileThatClickIsInsideOf(target) {
     let currentTarget = target;
     do {
         if(currentTarget.classList.contains('Tile')) {
-            return parseInt(currentTarget.dataset.id);
+            return parseInt(currentTarget.dataset.id, 10);
         }
 
         currentTarget = currentTarget.parentElement;

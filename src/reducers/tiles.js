@@ -94,21 +94,21 @@ function handleMouseMoveOnParentContainer(state, xPos, yPos) {
                 'yPos': yPos
             })
         });
-    } else {
-        const heightPercentage = (yPos - state.dragger.containerOffsetTop) /
-            state.dragger.containerHeight * 100;
-
-        return Object.assign({}, state, {
-            'tiles': Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
-                state.dragger.parentId,
-                heightPercentage,
-                null),
-            'dragger': Object.assign({}, state.dragger, {
-                'xPos': xPos,
-                'yPos': yPos
-            })
-        });
     }
+
+    const heightPercentage = (yPos - state.dragger.containerOffsetTop) /
+        state.dragger.containerHeight * 100;
+
+    return Object.assign({}, state, {
+        'tiles': Utils.cloneAllTilesAndSwapInNewTile(state.tiles,
+            state.dragger.parentId,
+            heightPercentage,
+            null),
+        'dragger': Object.assign({}, state.dragger, {
+            'xPos': xPos,
+            'yPos': yPos
+        })
+    });
 }
 
 function insertInDirection(state, direction, activeTileId) {
@@ -137,7 +137,7 @@ function insertInDirection(state, direction, activeTileId) {
 
     let newChildrenTiles;
     if(direction === Directions.LEFT || direction === Directions.ABOVE) {
-        newChildrenTiles = [newSiblingTileId, activeTileId]
+        newChildrenTiles = [newSiblingTileId, activeTileId];
     } else {
         newChildrenTiles = [activeTileId, newSiblingTileId];
     }
@@ -191,23 +191,23 @@ function insertInDirection(state, direction, activeTileId) {
  *      the sibling tile's id
  */
 function deleteTile(state, activeTileId) {
-    const tiles = state.tiles;
+    const allTiles = state.tiles;
 
     // get the active tile
-    const activeTileObject = tiles[activeTileId];
+    const activeTileObject = allTiles[activeTileId];
 
     // get the parent tile. if it doesn't exist, then return the state unchanged
     if(typeof activeTileObject.parentId === 'undefined') {
         // Unable to delete the root tag
         return state;
     }
-    const parentTileObject = tiles[activeTileObject.parentId];
+    const parentTileObject = allTiles[activeTileObject.parentId];
 
     // get the sibling of the active tile
     let siblingTileId = Utils.getSiblingId(parentTileObject, activeTileId);
 
     // update the parentId of the sibling tile
-    const siblingTileObject = tiles[siblingTileId];
+    const siblingTileObject = allTiles[siblingTileId];
     if(!siblingTileObject) {
         return state;
     }
@@ -216,7 +216,7 @@ function deleteTile(state, activeTileId) {
 
     // update the children of the grandparent tile
     const grandParentTileId = parentTileObject.parentId;
-    const grandParentTileObject = tiles[grandParentTileId];
+    const grandParentTileObject = allTiles[grandParentTileId];
     let newGrandparentTileObject;
     if(grandParentTileObject) {
         newGrandparentTileObject = grandParentTileObject.clone();
@@ -230,9 +230,9 @@ function deleteTile(state, activeTileId) {
     // remove the parent and active tile from the tiles data structure
     // copy of the tiles to a new dictionary and omit the active tile and parent
     const newTiles = {};
-    const tilesKeys = Object.keys(tiles);
+    const tilesKeys = Object.keys(allTiles);
     for(let i = 0; i < tilesKeys.length; i++) {
-        const key = parseInt(tilesKeys[i]);
+        const key = parseInt(tilesKeys[i], 10);
         if(key === activeTileId || key === activeTileObject.parentId) {
             continue;
         }
@@ -247,7 +247,7 @@ function deleteTile(state, activeTileId) {
             continue;
         }
 
-        newTiles[key] = tiles[key];
+        newTiles[key] = allTiles[key];
     }
 
     /* if the old parent tile was the rootTileId, then set the rootTileId to be
@@ -272,11 +272,11 @@ function submitTooltip(state, type, content) {
     // and update it
     let newTiles = {};
     for(let key in state.tiles) {
-        if(parseInt(key) === state.tooltip.tileId) {
+        if(parseInt(key, 10) === state.tooltip.tileId) {
             let newTileObject = state.tiles[key].clone();
             newTileObject.type = type;
             newTileObject.content = content;
-            newTiles[key] = newTileObject
+            newTiles[key] = newTileObject;
         } else {
             newTiles[key] = state.tiles[key];
         }

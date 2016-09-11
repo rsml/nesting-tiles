@@ -45,7 +45,6 @@ class App extends Component {
                               hoverMenu={tiles.hoverMenu}
                               contextMenu={tiles.contextMenu}
                               actions={actions} />
-                    
                 </div>
                 <DevTools />
             </div>

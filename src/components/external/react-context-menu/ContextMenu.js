@@ -15,8 +15,9 @@ export default class ContextMenu extends Component {
 
     componentDidMount() {
         let context = document.getElementById('home-view');
-        context.addEventListener('contextmenu', () => { this.openContextMenu(
-                event) });
+        context.addEventListener('contextmenu', () => {
+            this.openContextMenu(event);
+        });
     }
 
     openContextMenu(event) {
@@ -42,7 +43,7 @@ export default class ContextMenu extends Component {
             {this.props.items.map((item) => {
                     const clickHandler = () => {
                         item.function(this.state.target);
-                    }
+                    };
                     const label = item.label;
                     return(
                         <span onClick={clickHandler} key={label}>
@@ -58,4 +59,4 @@ export default class ContextMenu extends Component {
 ContextMenu.propTypes = {
     'actions': PropTypes.object.isRequired,
     'items': PropTypes.array.isRequired
-}
+};

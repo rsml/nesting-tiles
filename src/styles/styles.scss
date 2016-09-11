@@ -45,3 +45,17 @@ input.small {
 td.fuel-savings-label {
     width: 175px;
 }
+
+.btn {
+    font-weight: 500;
+}
+
+.btn-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 51px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}

@@ -1,7 +1,19 @@
-Built using the React Slingshot skeleton
-(https://github.com/coryhouse/react-slingshot)
+# Nesting Tiles!
 
-# How to use
+##Features:
+
+• A system of frames that can be nested ad infinitum.
+
+
+## Things to add
+
+* Make this mobile friendly.
+    * Instead of showing the HoverMenu on hover, it should be shown onClick for the Tile component
+    * In addition to showing the context menu on right click, you should recognize two finger taps and also show it on that
+
+
+
+# Development
 
 ##Basic Commands
 1. Type `npm start` to start development in your default browser.
@@ -14,6 +26,8 @@ from https://github.com/coryhouse/react-slingshot below
 
 
 
+Built using the React Slingshot skeleton
+(https://github.com/coryhouse/react-slingshot)
 
 # React Slingshot!
 

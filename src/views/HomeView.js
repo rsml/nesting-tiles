@@ -13,7 +13,7 @@ class HomeView extends Component {
 
     componentWillUnmount() {
         let context = document.getElementById('home-view');
-        context.removeEventListener('contextmenu', 
+        context.removeEventListener('contextmenu',
             this.handleOpenContextMenu.bind(this));
     }
 
@@ -28,7 +28,7 @@ class HomeView extends Component {
         const tileObject = tiles[id];
 
         const isContentEnabled = tileObject.content !== null &&
-                                 tileObject.content !== ''
+                                 tileObject.content !== '';
         actions.setContextMenuIsRemoveContentEnabled(isContentEnabled);
         actions.setContextMenuIsDeleteEnabled(tileObject.id !== rootTileId);
 
@@ -114,7 +114,7 @@ class HomeView extends Component {
         let allTiles;
         if(tooltip && tooltip.tileId === tileObject.id) {
             allTiles = (
-                <Tile key={tileObject.id} 
+                <Tile key={tileObject.id}
                   isRootTile={true}
                   data={tileObject}
                   actions={actions}
@@ -140,7 +140,7 @@ class HomeView extends Component {
         return(
             <div id='home-view' className='full-size'>
                 {allTiles}
-                <MyContextMenu 
+                <MyContextMenu
                     isRemoveContentEnabled={contextMenu.isRemoveContentEnabled}
                     isDeleteEnabled={contextMenu.isDeleteEnabled}
                     activeTileObject={tiles[contextMenu.tileId]}

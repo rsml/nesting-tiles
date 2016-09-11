@@ -1,6 +1,8 @@
-import * as ActionTypes from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes';
 
-/******* Inserting *******/
+/*
+ * Inserting
+ */
 
 export function insertAbove(tileId) {
     return {
@@ -30,7 +32,9 @@ export function insertToTheRightOf(tileId) {
     };
 }
 
-/******* Deleting  *******/
+/*
+ * Deleting
+ */
 
 export function deleteTile(tileId) {
     return {
@@ -39,7 +43,9 @@ export function deleteTile(tileId) {
     };
 }
 
-/******* Tooltip *******/
+/*
+ * Tooltip
+ */
 
 export function setTooltipType(tooltipType) {
     return {
@@ -77,7 +83,9 @@ export function submitTooltip(contentType, content) {
     };
 }
 
-/******* Hover Menu *******/
+/*
+ * Hover Menu
+ */
 
 export function updateHoverMenu(options) {
     return {
@@ -94,7 +102,9 @@ export function updateHoverMenuWithSibling(options) {
     };
 }
 
-/******* Mouse Events *******/
+/*
+ * Mouse Events
+ */
 
 export function handleMouseDownOnDragger(parentId, content) {
     return {
@@ -118,7 +128,9 @@ export function handleMouseUpOnParentContainer() {
     };
 }
 
-/******* Context Menu *******/
+/*
+ * Context Menu
+ */
 
 export function setContextMenuTileId(tileId) {
     return {

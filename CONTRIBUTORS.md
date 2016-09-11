@@ -1,3 +1,7 @@
+* Ross Miller ([https://github.com/rsml](https://github.com/rsml))
+
+Based on the skeleton 'React Slingshot'
+
 react-slingshot contributors (sorted alphabetically)
 ====================================================
 * Atif Afzal ([atfzl](https://github.com/atfzl))

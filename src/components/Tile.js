@@ -32,7 +32,7 @@ export default class Tile extends Component {
             data,
             actions
         } = this.props;
-        actions.handleMouseDownOnDragger(tileId, data.content)
+        actions.handleMouseDownOnDragger(tileId, data.content);
     }
 
     handleMouseMoveOnParentContainer(e) {
@@ -44,7 +44,7 @@ export default class Tile extends Component {
 
     handleMouseUpOnParentContainer() {
         const { actions } = this.props;
-        actions.handleMouseUpOnParentContainer()
+        actions.handleMouseUpOnParentContainer();
     }
 
     onHideOverlay() {
@@ -236,12 +236,12 @@ export default class Tile extends Component {
                         tooltipType)
                 });
             }
-        }
+        };
 
         const types = TileTypes.types;
-        const youtubeClass = classes.tileTooltipIconContainer(types.YOUTUBE),
-              imageClass = classes.tileTooltipIconContainer(types.IMAGE),
-              websiteClass = classes.tileTooltipIconContainer(types.WEBSITE);
+        const imageClass = classes.tileTooltipIconContainer(types.IMAGE),
+              websiteClass = classes.tileTooltipIconContainer(types.WEBSITE),
+              youtubeClass = classes.tileTooltipIconContainer(types.YOUTUBE);
 
         const tooltipHeight = 225;
         return(
@@ -289,11 +289,11 @@ export default class Tile extends Component {
             return null;
         }
 
-        let title,
-            placeholder;
+        let placeholder,
+            title;
         if(tooltip.type === TileTypes.types.YOUTUBE) {
             title = 'Youtube URL';
-            placeholder = 'youtube.com/watch?v=geluLZ-S21Q'
+            placeholder = 'youtube.com/watch?v=geluLZ-S21Q';
         } else if(tooltip.type === TileTypes.types.IMAGE) {
             title = 'Image URL';
             placeholder = 'example.com/image.png';
@@ -315,14 +315,14 @@ export default class Tile extends Component {
                 <div className='Tooltip-title'>
                     {title}
                 </div>
-                <input 
+                <input
                     tabIndex='0'
                     ref='contentInput'
                     className='Tooltip-input'
                     type='text'
                     value={tooltip.content || ''}
                     placeholder={placeholder}
-                    onChange={this.handleOnChangeContent.bind(this)} 
+                    onChange={this.handleOnChangeContent.bind(this)}
                     onKeyPress={this.handleOnKeyPress.bind(this)} />
 
                 <Button block={true}
@@ -394,13 +394,13 @@ export default class Tile extends Component {
                         src={Utils.getYoutubeEmbedUrlFromVideoURL(data.content)}
                         frameBorder='0'
                         allowFullScreen />
-                )
+                );
             } else if(data.type === TileTypes.types.WEBSITE) {
                 innerDOM = (
                     <iframe
                         className='full-size'
                         src={Utils.cleanURL(data.content)} />
-                )
+                );
             }
 
             const deleteIcon = require(
@@ -443,7 +443,7 @@ export default class Tile extends Component {
         }
 
         const splitVerticalIsInvalid = data.splitVertical !== true &&
-                                       data.splitVertical !== false
+                                       data.splitVertical !== false;
         if(children.length !== 2 || splitVerticalIsInvalid) {
             return(
                 <div>
@@ -468,22 +468,22 @@ export default class Tile extends Component {
                 'Tile-dragger-vertical': data.splitVertical ===
                     true
             })
-        }
+        };
 
         const styles = {
             'first': function (splitVertical) {
                 const key = splitVertical ? 'width' : 'height';
                 return {
                     [key]: `${data.percentage}%`
-                }
+                };
             },
             'second': function (splitVertical) {
                 const key = splitVertical ? 'width' : 'height';
                 return {
                     [key]: `${100 - data.percentage}%`
-                }
+                };
             }
-        }
+        };
 
         return(
             <div id={`tile-${data.id}-${data.content}`}

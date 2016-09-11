@@ -13,7 +13,7 @@ export default class MyContextMenu extends Component {
         actions.setContextMenuPreventEvents(false);
         actions.cloneAllTilesAndSwapInNewTile();
         actions.setTooltipIsVisible(false);
-        actions.setTooltipType(activeTileObject.type || 
+        actions.setTooltipType(activeTileObject.type ||
                                 TileTypes.types.YOUTUBE);
         actions.setTooltipTileId(activeTileObject.id);
         actions.setTooltipContent(null);
@@ -26,37 +26,28 @@ export default class MyContextMenu extends Component {
             actions
         } = this.props;
 
+        e.preventDefault();
         actions.setContextMenuPreventEvents(false);
 
         switch(direction) {
-        case Directions.ABOVE:
-            actions.insertAbove(activeTileObject.id);
-            return;
+            case Directions.ABOVE:
+                actions.insertAbove(activeTileObject.id);
+                return;
 
-        case Directions.BELOW:
-            actions.insertBelow(activeTileObject.id);
-            return;
+            case Directions.BELOW:
+                actions.insertBelow(activeTileObject.id);
+                return;
 
-        case Directions.LEFT:
-            actions.insertToTheLeftOf(activeTileObject.id);
-            return;
+            case Directions.LEFT:
+                actions.insertToTheLeftOf(activeTileObject.id);
+                return;
 
-        case Directions.RIGHT:
-            actions.insertToTheRightOf(activeTileObject.id);
-            return;
+            case Directions.RIGHT:
+                actions.insertToTheRightOf(activeTileObject.id);
+                return;
+            default:
+                return;
         }
-
-        if(direction === Directions.ABOVE) {
-            actions.insertAbove(activeTileObject.id);
-        } else if(direction === Directions.ABOVE) {
-            actions.insertAbove(activeTileObject.id);
-        } else if(direction === Directions.ABOVE) {
-            actions.insertAbove(activeTileObject.id);
-        }
-        if(direction === Directions.ABOVE) {
-            actions.insertAbove(activeTileObject.id);
-        }
-        e.preventDefault();
     }
 
     handleClickDelete(e) {
@@ -133,4 +124,4 @@ MyContextMenu.propTypes = {
     'isDeleteEnabled': PropTypes.bool.isRequired,
     'actions': PropTypes.object.isRequired,
     'activeTileObject': PropTypes.object
-}
+};

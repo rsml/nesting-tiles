@@ -1,15 +1,21 @@
-/******* Inserting *******/
+/*
+ * Inserting
+ */
 
 export const INSERT_ABOVE = 'INSERT_ABOVE';
 export const INSERT_BELOW = 'INSERT_BELOW';
 export const INSERT_TO_THE_LEFT_OF = 'INSERT_TO_THE_LEFT_OF';
 export const INSERT_TO_THE_RIGHT_OF = 'INSERT_TO_THE_RIGHT_OF';
 
-/******* Deleting  *******/
+/*
+ * Deleting
+ */
 
 export const DELETE_TILE = 'DELETE_TILE';
 
-/******* Tooltip *******/
+/*
+ * Tooltip
+ */
 
 export const SET_TOOLTIP_TYPE = 'SET_TOOLTIP_TYPE';
 export const SET_TOOLTIP_TILE_ID = 'SET_TOOLTIP_TILE_ID';
@@ -17,12 +23,16 @@ export const SET_TOOLTIP_CONTENT = 'SET_TOOLTIP_CONTENT';
 export const SET_TOOLTIP_IS_VISIBLE = 'SET_TOOLTIP_IS_VISIBLE';
 export const SUBMIT_TOOLTIP = 'SUBMIT_TOOLTIP';
 
-/******* Hover Menu *******/
+/*
+ * Hover
+ */
 
 export const UPDATE_HOVER_MENU = 'UPDATE_HOVER_MENU';
 export const UPDATE_HOVER_MENU_WITH_SIBLING = 'UPDATE_HOVER_MENU_WITH_SIBLING';
 
-/******* Mouse Events *******/
+/*
+ * Mouse
+ */
 
 export const HANDLE_MOUSE_DOWN_ON_DRAGGER = 'HANDLE_MOUSE_DOWN_ON_DRAGGER';
 export const HANDLE_MOUSE_MOVE_ON_PARENT_CONTAINER =
@@ -30,7 +40,9 @@ export const HANDLE_MOUSE_MOVE_ON_PARENT_CONTAINER =
 export const HANDLE_MOUSE_UP_ON_PARENT_CONTAINER =
     'HANDLE_MOUSE_UP_ON_PARENT_CONTAINER';
 
-/******* Context Menu *******/
+/*
+ * Context
+ */
 
 export const SET_CONTEXT_MENU_TILE_ID = 'SET_CONTEXT_MENU_TILE_ID';
 export const SET_CONTEXT_MENU_IS_REMOVE_CONTENT_ENABLED =
