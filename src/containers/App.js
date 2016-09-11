@@ -25,8 +25,6 @@ class App extends Component {
         }
 
         // This should come before all over events in this function!
-        actions.setContextMenuPreventEvents(false);
-
         actions.setTooltipIsVisible(false);
         actions.closeContextMenu();
     }
@@ -38,15 +36,18 @@ class App extends Component {
         } = this.props;
 
         return(
-            <div className='App FullSize'
-                 onClick={this.onClick.bind(this)}>
-                <HomeView rootTileId={tiles.rootTileId}
-                          tiles={tiles.tiles}
-                          tooltip={tiles.tooltip}
-                          hoverMenu={tiles.hoverMenu}
-                          contextMenu={tiles.contextMenu}
-                          actions={actions} />
-                {<DevTools />}
+            <div>
+                <div className='App FullSize'
+                     onClick={this.onClick.bind(this)}>
+                    <HomeView rootTileId={tiles.rootTileId}
+                              tiles={tiles.tiles}
+                              tooltip={tiles.tooltip}
+                              hoverMenu={tiles.hoverMenu}
+                              contextMenu={tiles.contextMenu}
+                              actions={actions} />
+                    
+                </div>
+                <DevTools />
             </div>
         );
     }

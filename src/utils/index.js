@@ -69,12 +69,12 @@ export function getSiblingId(parentTileObject, childId) {
  * @return {Boolean} true if the childDOMNode is a descendant, otherwise false
  */
 export function isDescendant(ancestorDOMNode, descendantDOMNode) {
-    let node = descendantDOMNode.ancestorNode;
+    let node = descendantDOMNode.parentNode;
     while(node != null) {
         if(node == ancestorDOMNode) {
             return true;
         }
-        node = node.ancestorNode;
+        node = node.parentNode;
     }
     return false;
 }

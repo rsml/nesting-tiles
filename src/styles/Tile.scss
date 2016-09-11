@@ -30,7 +30,7 @@ $inner-shadow-highlight: #fafafa;
 }
 
 .Tile-container-bottom {
-    background: $background;
+    background: $top-background;
     box-shadow: 0px 0px 0px 0.5px $inner-shadow-base inset, 1px 1px 0px 0.5px $inner-shadow-highlight inset;
     position: absolute;
     bottom: 0;
@@ -40,7 +40,7 @@ $inner-shadow-highlight: #fafafa;
 }
 
 .Tile-container-left {
-    background: $background;
+    background: $top-background;
     box-shadow: 0px 0px 0px 0.5px $inner-shadow-base inset, 1px 1px 0px 0.5px $inner-shadow-highlight inset;
     position: absolute;
     top: 0;
@@ -50,7 +50,7 @@ $inner-shadow-highlight: #fafafa;
 }
 
 .Tile-container-right {
-    background: $background;
+    background: $top-background;
     box-shadow: 0px 0px 0px 0.5px $inner-shadow-base inset, 1px 1px 0px 0.5px $inner-shadow-highlight inset;
     position: absolute;
     top: 0;
@@ -84,6 +84,7 @@ $inner-shadow-highlight: #fafafa;
     line-height: 0;
     padding: 2px;
 }
+
 
 /** Tooltip **/
 

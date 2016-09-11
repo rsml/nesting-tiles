@@ -103,7 +103,7 @@ export default class Tile extends Component {
 
         // If the insert menu is currently visible, it should be hidden
         if(tooltip && tooltip.isVisible && tooltip.tileId === data.id) {
-            actions.setTooltipIsVisible(true);
+            actions.setTooltipIsVisible(false);
             actions.setTooltipTileId(null);
             return;
         }
@@ -169,24 +169,21 @@ export default class Tile extends Component {
     }
 
     onClickTabYoutube(e) {
-        this.onClickTab(TileTypes.types.YOUTUBE);
-        debugger;
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
+        this.onClickTab(TileTypes.types.YOUTUBE);
     }
 
     onClickTabImage(e) {
-        this.onClickTab(TileTypes.types.IMAGE);
-        debugger;
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
+        this.onClickTab(TileTypes.types.IMAGE);
     }
 
     onClickTabWebsite(e) {
-        this.onClickTab(TileTypes.types.WEBSITE);
-        debugger;
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
+        this.onClickTab(TileTypes.types.WEBSITE);
     }
 
     onClickTab(tileType) {

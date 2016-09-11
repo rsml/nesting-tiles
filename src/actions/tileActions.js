@@ -63,9 +63,6 @@ export function setTooltipContent(tooltipContent) {
 }
 
 export function setTooltipIsVisible(isVisible) {
-    if(!isVisible){
-        debugger;
-    }
     return {
         'type': ActionTypes.SET_TOOLTIP_IS_VISIBLE,
         isVisible
