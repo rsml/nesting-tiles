@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import DevTools from './DevTools';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/tileActions';
 import HomeView from '../views/HomeView';
@@ -36,17 +35,14 @@ class App extends Component {
         } = this.props;
 
         return(
-            <div>
-                <div className='App FullSize'
-                     onClick={this.onClick.bind(this)}>
-                    <HomeView rootTileId={tiles.rootTileId}
-                              tiles={tiles.tiles}
-                              tooltip={tiles.tooltip}
-                              hoverMenu={tiles.hoverMenu}
-                              contextMenu={tiles.contextMenu}
-                              actions={actions} />
-                </div>
-                <DevTools />
+            <div className='App FullSize'
+                 onClick={this.onClick.bind(this)}>
+                <HomeView rootTileId={tiles.rootTileId}
+                          tiles={tiles.tiles}
+                          tooltip={tiles.tooltip}
+                          hoverMenu={tiles.hoverMenu}
+                          contextMenu={tiles.contextMenu}
+                          actions={actions} />
             </div>
         );
     }
