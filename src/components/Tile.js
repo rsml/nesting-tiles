@@ -150,7 +150,7 @@ export default class Tile extends Component {
             actions
         } = this.props;
 
-        if(e.key === 'Enter' && Utils.validateURL(tooltip.content)){
+        if(e.key === 'Enter' && Utils.validateURL(tooltip.content)) {
             actions.submitTooltip(tooltip.type, tooltip.content);
         }
     }
@@ -289,15 +289,19 @@ export default class Tile extends Component {
             return null;
         }
 
-        let placeholder,
+        let label,
+            placeholder,
             title;
         if(tooltip.type === TileTypes.types.YOUTUBE) {
+            label = 'Youtube Video URL';
             title = 'Youtube URL';
             placeholder = 'youtube.com/watch?v=geluLZ-S21Q';
         } else if(tooltip.type === TileTypes.types.IMAGE) {
+            label = 'Image URL';
             title = 'Image URL';
             placeholder = 'example.com/image.png';
         } else if(tooltip.type === TileTypes.types.WEBSITE) {
+            label = 'Website URL';
             title = 'Website URL';
             placeholder = 'example.com';
         }
@@ -315,7 +319,9 @@ export default class Tile extends Component {
                 <div className='Tooltip-title'>
                     {title}
                 </div>
+                <label for='tooltip-content'>{label}</label>
                 <input
+                    id='tooltip-content'
                     tabIndex='0'
                     ref='contentInput'
                     className='Tooltip-input'
@@ -324,6 +330,7 @@ export default class Tile extends Component {
                     placeholder={placeholder}
                     onChange={this.handleOnChangeContent.bind(this)}
                     onKeyPress={this.handleOnKeyPress.bind(this)} />
+                }
 
                 <Button block={true}
                     bsSize='large'
@@ -357,7 +364,7 @@ export default class Tile extends Component {
             const tooltipDOM = (
                 <img ref='insert'
                     src={require('../images/insert.svg')}
-                    alt=''
+                    alt='Insert'
                     title='Add Content'
                     className='Tile-menu-item Tile-menu-insert'
                     onClick={this.handleShowInsertMenu.bind(this)} />
@@ -410,17 +417,17 @@ export default class Tile extends Component {
                 <div className='Tile-menu'>
                     {tooltipDOM}
                     <img src={require('../images/split-vertical.svg')}
-                        alt=''
+                        alt='Split Vertical'
                         title='Split Vertical'
                         className='Tile-menu-item Tile-menu-split-vertical'
                         onClick={this.handleSplitVertical.bind(this)} />
                     <img src={deleteIcon}
-                        alt=''
+                        alt='Delete Tile'
                         title='Delete Tile'
                         className='Tile-menu-item Tile-menu-delete'
                         onClick={this.handleDeleteTile.bind(this)} />
                     <img src={require('../images/split-horizontal.svg')}
-                        alt=''
+                        alt='Split Horizontal'
                         title='Split Horizontal'
                         className='Tile-menu-item Tile-menu-split-horizontal'
                         onClick={this.handleSplitHorizontal.bind(this)} />
