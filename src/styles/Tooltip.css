@@ -1,5 +1,3 @@
-
-/** Tooltip container **/
 .Tooltip {
     position: relative;
     border-radius: 6px;
@@ -24,11 +22,6 @@
     margin: 10px 5px;
     background: #efefef;
     border-radius: 6px;
-}
-
-.Tooltip-header-expanded {
-    /*background: rgba(50, 50, 50, 0.75);*/
-    /*background: #e6ecfc;*/
 }
 
 .Tooltip-body {

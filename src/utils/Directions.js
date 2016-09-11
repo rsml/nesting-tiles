@@ -1,8 +1,8 @@
  const DIRECTIONS = {
-    ABOVE: 'ABOVE',
-    BELOW: 'BELOW',
-    LEFT: 'LEFT',
-    RIGHT:  'RIGHT'
-};
+    'ABOVE': 'ABOVE',
+    'BELOW': 'BELOW',
+    'LEFT': 'LEFT',
+    'RIGHT': 'RIGHT'
+ };
 
-export default DIRECTIONS;
+ export default DIRECTIONS;

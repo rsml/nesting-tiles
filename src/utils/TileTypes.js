@@ -9,6 +9,6 @@ export const types = {
 
 const allowedTypes = [undefined, null, ...Utils.objectValues(types)];
 
-export function getAllowedTypes(){
+export function getAllowedTypes() {
     return allowedTypes;
 }

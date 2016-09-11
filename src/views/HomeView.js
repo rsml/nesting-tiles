@@ -7,12 +7,14 @@ import '../styles/FullSize.css';
 class HomeView extends Component {
     componentDidMount() {
         let context = document.getElementById('home-view');
-        context.addEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
+        context.addEventListener('contextmenu',
+            this.handleOpenContextMenu.bind(this));
     }
 
     componentWillUnmount() {
         let context = document.getElementById('home-view');
-        context.removeEventListener('contextmenu', this.handleOpenContextMenu.bind(this));
+        context.removeEventListener('contextmenu', 
+            this.handleOpenContextMenu.bind(this));
     }
 
     handleOpenContextMenu(e) {
@@ -23,12 +25,13 @@ class HomeView extends Component {
         } = this.props;
 
         const id = Utils.findIdOfTileThatClickIsInsideOf(e.target);
-
         const tileObject = tiles[id];
 
-        actions.setContextMenuIsRemoveContentEnabled(tileObject.content !==null && tileObject.content !== '');
+        const isContentEnabled = tileObject.content !== null &&
+                                 tileObject.content !== ''
+        actions.setContextMenuIsRemoveContentEnabled(isContentEnabled);
         actions.setContextMenuIsDeleteEnabled(tileObject.id !== rootTileId);
-        
+
         // these must come at the end of this function!
         actions.setContextMenuTileId(id);
         actions.setContextMenuPreventEvents(true);
@@ -46,15 +49,16 @@ class HomeView extends Component {
         const that = this;
 
         let result = [];
-
         const children = tileObject.children || [];
-        for (let i = 0; i < children.length; i++) {
+        for(let i = 0; i < children.length; i++) {
             const childId = tileObject.children[i];
             const childObject = tiles[childId];
 
             let newTile;
-            const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === childId) ? hoverMenu : null;
-            if(tooltip && tooltip.tileId === childId){
+            const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === childId)
+                                        ? hoverMenu
+                                        : null;
+            if(tooltip && tooltip.tileId === childId) {
                 newTile = (
                     <Tile key={childId}
                           isRootTile={false}
@@ -65,7 +69,7 @@ class HomeView extends Component {
                         {that.getChildren(childId)}
                     </Tile>
                 );
-            }else{
+            } else {
                 newTile = (
                     <Tile key={childId}
                           isRootTile={false}
@@ -83,35 +87,34 @@ class HomeView extends Component {
         return result;
     }
 
+    render() {
+        const {
+            rootTileId,
+            tiles,
+            tooltip,
+            hoverMenu,
+            contextMenu,
+            actions
+        } = this.props;
 
-  render() {
-    const {
-        rootTileId,
-        tiles,
-        tooltip,
-        hoverMenu,
-        contextMenu,
-        actions
-    } = this.props;
+        const tileObject = tiles[rootTileId];
 
-    const tileObject = tiles[rootTileId];
+        if(!tileObject) {
+            return(
+                <div>
+                    No Tile Found
+                </div>
+            );
+        }
 
-    if(!tileObject){
-        return (
-            <div>
-              No Tile Found
-            </div>
-        );
-    }
+        const children = this.getChildren(tileObject.id);
+        const hoverMenuForTile = (hoverMenu && hoverMenu.tileId ===
+            tileObject.id) ? hoverMenu : null;
 
-    const that = this;
-    const children = that.getChildren(tileObject.id);
-    let allTiles;
-    const hoverMenuForTile = (hoverMenu && hoverMenu.tileId === tileObject.id) ? hoverMenu : null;
-
-    if(tooltip && tooltip.tileId === tileObject.id){
-        allTiles = (
-            <Tile key={tileObject.id} 
+        let allTiles;
+        if(tooltip && tooltip.tileId === tileObject.id) {
+            allTiles = (
+                <Tile key={tileObject.id} 
                   isRootTile={true}
                   data={tileObject}
                   actions={actions}
@@ -120,10 +123,10 @@ class HomeView extends Component {
                   hoverMenu={hoverMenuForTile}>
                 {children}
             </Tile>
-        );
-    }else{
-        allTiles = (
-            <Tile key={tileObject.id}
+            );
+        } else {
+            allTiles = (
+                <Tile key={tileObject.id}
                   isRootTile={true}
                   data={tileObject}
                   actions={actions}
@@ -131,29 +134,29 @@ class HomeView extends Component {
                   hoverMenu={hoverMenu}>
                 {children}
             </Tile>
+            );
+        }
+
+        return(
+            <div id='home-view' className='full-size'>
+                {allTiles}
+                <MyContextMenu 
+                    isRemoveContentEnabled={contextMenu.isRemoveContentEnabled}
+                    isDeleteEnabled={contextMenu.isDeleteEnabled}
+                    activeTileObject={tiles[contextMenu.tileId]}
+                    actions={actions} />
+            </div>
         );
     }
-
-    return (
-        <div id='home-view' className='full-size'>
-          {allTiles}
-          <MyContextMenu 
-                isRemoveContentEnabled={contextMenu.isRemoveContentEnabled}
-                isDeleteEnabled={contextMenu.isDeleteEnabled}
-                activeTileObject={tiles[contextMenu.tileId]}
-                actions={actions} />
-        </div>
-    );
-  }
 }
 
 HomeView.propTypes = {
-  'tooltip': PropTypes.object,
-  'hoverMenu': PropTypes.object,
-  'rootTileId': PropTypes.number.isRequired,
-  'tiles': PropTypes.object.isRequired,
-  'contextMenu': PropTypes.object.isRequired,
-  'actions': PropTypes.object.isRequired
+    'tooltip': PropTypes.object,
+    'hoverMenu': PropTypes.object,
+    'rootTileId': PropTypes.number.isRequired,
+    'tiles': PropTypes.object.isRequired,
+    'contextMenu': PropTypes.object.isRequired,
+    'actions': PropTypes.object.isRequired
 };
 
 export default HomeView;

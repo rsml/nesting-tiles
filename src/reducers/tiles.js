@@ -179,7 +179,7 @@ function insertInDirection(state, direction, activeTileId) {
     return Object.assign({}, state, newParameters);
 }
 
-/**
+/*
  * Steps:
  *  - get the active tile
  *  - get the parent tile. if it doesn't exist, then return the state unchanged

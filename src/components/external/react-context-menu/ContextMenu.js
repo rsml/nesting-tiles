@@ -1,5 +1,8 @@
+//  Copyright (c) 2010-2013 Aaron (htts://github.com/amurp)
+// https://github.com/amurp/react-context-menu
+// modified by Ross Miller to allow improve styling and to work with Redux
+
 import React, { PropTypes, Component } from 'react';
-import '.../../../styles/ContextMenu.css';
 
 export default class ContextMenu extends Component {
     constructor(props) {
@@ -7,7 +10,7 @@ export default class ContextMenu extends Component {
 
         this.state = {
             'target': ''
-        }
+        };
     }
 
     componentDidMount() {
@@ -20,9 +23,9 @@ export default class ContextMenu extends Component {
         event.preventDefault();
         this.setState({ 'target': event.target });
 
-        let xOffset = Math.max(document.documentElement.scrollLeft,
+        const xOffset = Math.max(document.documentElement.scrollLeft,
             document.body.scrollLeft);
-        let yOffset = Math.max(document.documentElement.scrollTop, document
+        const yOffset = Math.max(document.documentElement.scrollTop, document
             .body.scrollTop);
 
         let menu = document.getElementById('contextMenu');
@@ -34,19 +37,21 @@ export default class ContextMenu extends Component {
     }
 
     render() {
-        return( <div id = 'contextMenu' > {
-            this.props.items.map((item) => {
-                let clickHandler = () => {
-                    item.function(this.state.target);
-                }
-                let label = item.label;
-                return(
-                    <span onClick={clickHandler} key={label}>
-                        {label}
-                    </span>
-                );
-            })
-        } </div>);
+        return(
+            <div id='contextMenu'>
+            {this.props.items.map((item) => {
+                    const clickHandler = () => {
+                        item.function(this.state.target);
+                    }
+                    const label = item.label;
+                    return(
+                        <span onClick={clickHandler} key={label}>
+                            {label}
+                        </span>
+                    );
+                })}
+            </div>
+        );
     }
 }
 

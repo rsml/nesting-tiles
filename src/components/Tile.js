@@ -67,8 +67,8 @@ export default class Tile extends Component {
         } = this.props;
 
         actions.updateHoverMenu({
-            isVisible: true,
-            tileId: data.id
+            'isVisible': true,
+            'tileId': data.id
         });
     }
 
@@ -86,8 +86,8 @@ export default class Tile extends Component {
             }
 
             actions.updateHoverMenu({
-                isVisible: false,
-                tileId: null
+                'isVisible': false,
+                'tileId': null
             });
         }
     }
@@ -124,9 +124,9 @@ export default class Tile extends Component {
 
     handleDeleteTile() {
         this.props.actions.updateHoverMenuWithSibling({
-            isVisible: true,
-            parentId: this.props.data.parentId,
-            childId: this.props.data.id
+            'isVisible': true,
+            'parentId': this.props.data.parentId,
+            'childId': this.props.data.id
         });
         this.props.actions.deleteTile(this.props.data.id);
     }
@@ -168,16 +168,25 @@ export default class Tile extends Component {
         actions.submitTooltip(tooltip.type, tooltip.content);
     }
 
-    onClickTabYoutube() {
+    onClickTabYoutube(e) {
         this.onClickTab(TileTypes.types.YOUTUBE);
+        debugger;
+        e.preventDefault();
+        e.stopImmediatePropagation();
     }
 
-    onClickTabImage() {
+    onClickTabImage(e) {
         this.onClickTab(TileTypes.types.IMAGE);
+        debugger;
+        e.preventDefault();
+        e.stopImmediatePropagation();
     }
 
-    onClickTabWebsite() {
+    onClickTabWebsite(e) {
         this.onClickTab(TileTypes.types.WEBSITE);
+        debugger;
+        e.preventDefault();
+        e.stopImmediatePropagation();
     }
 
     onClickTab(tileType) {
@@ -199,6 +208,9 @@ export default class Tile extends Component {
     }
 
     getPopover() {
+        const { tooltip } = this.props;
+
+        const tooltipType = (tooltip || {}).type;
         const youtubeIcon = require(
             `../images/youtube${tooltipType !== TileTypes.types.YOUTUBE ?
                                     '-inactive' : ''}.svg`
@@ -218,19 +230,31 @@ export default class Tile extends Component {
             </div>
         );
 
+        const classes = {
+            'tileTooltipIconContainer': function (tileType) {
+                return classNames({
+                    'Tile-tooltip-icon-container': true,
+                    'Tile-tooltip-icon-selected': (
+                        tooltip && tileType ===
+                        tooltipType)
+                });
+            }
+        }
+
         const types = TileTypes.types;
         const youtubeClass = classes.tileTooltipIconContainer(types.YOUTUBE),
               imageClass = classes.tileTooltipIconContainer(types.IMAGE),
               websiteClass = classes.tileTooltipIconContainer(types.WEBSITE);
 
+        const tooltipHeight = 225;
         return(
             <Popover id='popover-trigger-click-root-close'
                  title='Popover bottom'
                  arrowOffsetTop='10%'>
                 <div key={`tooltip-height-${tooltipHeight}`}
-                     style={{ width: 274, height: tooltipHeight }}
+                     style={{ 'width': 274, 'height': tooltipHeight }}
                      className='Tooltip'>
-                    <div className={classes.tooltipHeader}>
+                    <div className='Tooltip-header'>
                         <div className='Tooltip-header-inner'>
                             <div className={youtubeClass}
                                  onClick={this.onClickTabYoutube.bind(this)}>
@@ -289,21 +313,6 @@ export default class Tile extends Component {
             isDisabled = true;
         }
 
-        const classes = {
-            tooltipHeader: classNames({
-                'Tooltip-header': true,
-                'Tooltip-header-expanded': true
-            }),
-            tileTooltipIconContainer: function (tileType) {
-                return classNames({
-                    'Tile-tooltip-icon-container': true,
-                    'Tile-tooltip-icon-selected': (
-                        tooltip && tileType ===
-                        tooltipType)
-                });
-            }
-        }
-
         return(
             <div>
                 <div className='Tooltip-title'>
@@ -342,10 +351,8 @@ export default class Tile extends Component {
         } = this.props;
 
         if(!data.children || data.children.length === 0) {
-            const tooltipHeight = 225;
-            const tooltipType = (tooltip || {}).type;
             const classes = {
-                overlayContainer: classNames({
+                'overlayContainer': classNames({
                     'Overlay-move-up': true
                 })
             };
@@ -369,7 +376,7 @@ export default class Tile extends Component {
                           container={this}
                           animation={true}
                           arrowOffsetTop={10}
-                          target={() => ReactDOM.findDOMNode(this.refs.insert)} >
+                          target={() => ReactDOM.findDOMNode(this.refs.insert)}>
                         {this.getPopover()}
                     </Overlay>
                 </div>
@@ -379,9 +386,9 @@ export default class Tile extends Component {
             let innerDOM;
             if(data.type === TileTypes.types.IMAGE) {
                 backgroundStyle = {
-                    background: `url(${Utils.cleanURL(data.content)}) \
+                    'background': `url(${Utils.cleanURL(data.content)}) \
                                  no-repeat center center`,
-                    backgroundSize: 'contain'
+                    'backgroundSize': 'contain'
                 };
             } else if(data.type === TileTypes.types.YOUTUBE) {
                 innerDOM = (
@@ -457,7 +464,7 @@ export default class Tile extends Component {
                 return splitVertical ? 'Tile-container-right' :
                     'Tile-container-bottom';
             },
-            dragger: classNames({
+            'dragger': classNames({
                 'Tile-dragger': true,
                 'Tile-dragger-horizontal': data.splitVertical ===
                     false,
@@ -468,13 +475,15 @@ export default class Tile extends Component {
 
         const styles = {
             'first': function (splitVertical) {
+                const key = splitVertical ? 'width' : 'height';
                 return {
-                    [splitVertical ? 'width' : 'height']: `${data.percentage}%`
+                    [key]: `${data.percentage}%`
                 }
             },
             'second': function (splitVertical) {
+                const key = splitVertical ? 'width' : 'height';
                 return {
-                    [splitVertical ? 'width' : 'height']: `${100 - data.percentage}%`
+                    [key]: `${100 - data.percentage}%`
                 }
             }
         }
@@ -494,7 +503,8 @@ export default class Tile extends Component {
                      key={`second-${data.percentage}`}
                      style={styles.second(data.splitVertical)}>
                     <div className={classes.dragger}
-                         onMouseDown={this.handleMouseDownOnDragger.bind(this, data.id)} />
+                         onMouseDown={this.handleMouseDownOnDragger
+                                          .bind(this, data.id)} />
                     {children[1]}
                 </div>
             </div>

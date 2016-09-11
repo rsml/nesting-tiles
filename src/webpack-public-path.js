@@ -4,6 +4,8 @@
 // 1. https://github.com/coryhouse/react-slingshot/issues/205
 // 2. https://github.com/coryhouse/react-slingshot/issues/181
 // 3. https://github.com/coryhouse/react-slingshot/pull/125
-// Documentation: http://webpack.github.io/docs/configuration.html#output-publicpath
+// Documentation:
+//      http://webpack.github.io/docs/configuration.html#output-publicpath
 // eslint-disable-next-line no-undef
-__webpack_public_path__ = window.location.protocol + '//' + window.location.host + '/';
+__webpack_public_path__ = window.location.protocol + '//' +
+                            window.location.host + '/';

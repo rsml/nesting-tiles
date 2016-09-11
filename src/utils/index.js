@@ -4,10 +4,10 @@
 export function objectValues(obj) {
     return Object.keys(obj)
         .map(key => obj[key]);
-};
+}
+
+
 /*
-
-
  * The ID of the first Tile
  * This should be greater than or equal to 0
  */
@@ -23,7 +23,7 @@ export const INITIAL_ROOT_TILE_ID = 0;
  * @return {TileObject} a new tileObject if successful. Otherwise returns the 
  *                         inputted tileObject and fails silently
  */
-export function updateTileWithChildren(parentTileObject,
+export function cloneTileAndReplaceChild(parentTileObject,
     oldChildId,
     newChildId) {
     if(!parentTileObject || !parentTileObject.children) {
@@ -62,19 +62,19 @@ export function getSiblingId(parentTileObject, childId) {
 }
 
 /**
- * Checks if a given parent DOM node contains
+ * Checks if a given ancestor DOM node contains
  *     the given child DOM node as a descendant
- * @param  {DOMNode}  parentDOMNode 
- * @param  {DOMNode}  childDOMNode  
+ * @param  {DOMNode}  ancestorDOMNode The DOM Node of the ancestor element
+ * @param  {DOMNode}  descendantDOMNode The DOM Node of the descendant element
  * @return {Boolean} true if the childDOMNode is a descendant, otherwise false
  */
-export function isDescendant(parentDOMNode, childDOMNode) {
-    let node = childDOMNode.parentNode;
+export function isDescendant(ancestorDOMNode, descendantDOMNode) {
+    let node = descendantDOMNode.ancestorNode;
     while(node != null) {
-        if(node == parentDOMNode) {
+        if(node == ancestorDOMNode) {
             return true;
         }
-        node = node.parentNode;
+        node = node.ancestorNode;
     }
     return false;
 }
@@ -95,7 +95,7 @@ export function getYoutubeEmbedUrlFromVideoURL(videoURL) {
     return `${embedUrlWithoutParameters}?autohide=1&autoplay=1&disablekb=0&loop=1&modestbranding=1&playsinline=1&theme=light`;
 }
 
-/**
+/*
  * Prevent XSS Attacks. This is only essential to have if workspaces are shareable. But it's good to have anyway
  */
 export function cleanURL(dirtyURL) {

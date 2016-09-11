@@ -51,6 +51,8 @@
   },
 
   "rules": {
+    "import/no-unresolved": 0,
+
     ////////// Possible Errors //////////
 
     "comma-dangle": 1,             // disallow trailing commas in object literals

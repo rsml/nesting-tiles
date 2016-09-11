@@ -4,7 +4,7 @@ import ContextMenu from './external/react-context-menu/ContextMenu';
 import * as TileTypes from '../utils/TileTypes';
 
 export default class MyContextMenu extends Component {
-    handleRemoveContent() {
+    handleRemoveContent(e) {
         const {
             activeTileObject,
             actions
@@ -17,9 +17,10 @@ export default class MyContextMenu extends Component {
                                 TileTypes.types.YOUTUBE);
         actions.setTooltipTileId(activeTileObject.id);
         actions.setTooltipContent(null);
+        e.preventDefault();
     }
 
-    handleClickInsert(direction) {
+    handleClickInsert(direction, e) {
         const {
             activeTileObject,
             actions
@@ -55,9 +56,10 @@ export default class MyContextMenu extends Component {
         if(direction === Directions.ABOVE) {
             actions.insertAbove(activeTileObject.id);
         }
+        e.preventDefault();
     }
 
-    handleClickDelete() {
+    handleClickDelete(e) {
         const {
             activeTileObject,
             actions
@@ -70,6 +72,7 @@ export default class MyContextMenu extends Component {
             'childId': activeTileObject.id
         });
         actions.deleteTile(activeTileObject.id);
+        e.preventDefault();
     }
 
     render() {
