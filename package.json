@@ -1,6 +1,18 @@
 {
   "name": "nesting-tiles",
   "version": "0.1.0",
+  "keywords": [
+    "pane",
+    "tile",
+    "layout",
+    "splitview",
+    "resizable",
+    "nesting",
+    "nested"
+  ],
+  "bugs": {
+    "url": "rossnmiller@gmail.com"
+  },
   "description": "A nesting tile layout with controls to create and delete tiles",
   "author": {
         "name" : "Ross Miller",
