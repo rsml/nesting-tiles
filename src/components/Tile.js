@@ -18,6 +18,21 @@ import './Tooltip.css';
 
 
 export default class Tile extends Component {
+    componentDidMount(){
+        this.focusOnInput();
+    }
+
+    componentDidUpdate(){
+        this.focusOnInput();
+    }
+
+    focusOnInput(){
+        const input = this.refs.contentInput;
+        if(input){
+            input.focus();
+        }
+    }
+
     handleMouseDownOnDragger(tileId) {
         const {
             data,
@@ -231,7 +246,10 @@ export default class Tile extends Component {
             <div className='Tooltip-title'>
                 {title}
             </div>
-            <input className='Tooltip-input'
+            <input 
+                tabIndex='0'
+                ref='contentInput'
+                className='Tooltip-input'
                 type='text'
                 value={tooltip.content || ''}
                 placeholder={placeholder}
@@ -341,6 +359,7 @@ export default class Tile extends Component {
             <img ref='insert'
                 src={require('../images/insert.svg')}
                 alt=''
+                title='Add Content'
                 className='Tile-menu-item Tile-menu-insert'
                 onClick={this.handleShowInsertMenu.bind(this)} />
         );
@@ -386,14 +405,17 @@ export default class Tile extends Component {
                 {tooltipDOM}
                 <img src={require('../images/split-vertical.svg')}
                     alt=''
+                    title='Split Vertical'
                     className='Tile-menu-item Tile-menu-split-vertical'
                     onClick={this.handleSplitVertical.bind(this)} />
                 <img src={deleteIcon}
                     alt=''
+                    title='Delete Tile'
                     className='Tile-menu-item Tile-menu-delete'
                     onClick={this.handleDeleteTile.bind(this)} />
                 <img src={require('../images/split-horizontal.svg')}
                     alt=''
+                    title='Split Horizontal'
                     className='Tile-menu-item Tile-menu-split-horizontal'
                     onClick={this.handleSplitHorizontal.bind(this)} />
                 {overlayDOM}
