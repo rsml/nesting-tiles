@@ -16,7 +16,7 @@
 ## Known Issues
 
 * If you add a Youtube Video or website to a Tile component, then in order to remove the content, you have to hover over that tile and right-click on one of the icons that appear in the middle of the Tile (aka the HoverMenu). Ideally, you should be allowed to right click anywhere in the Tile.
-* If you try to insert content into a tile that is near the very bottom of the very right side of the page, in some circumstances this will cause the page width and/or height to grow a little. So, the user may have to scroll in order to see the whole popup. This is not a breaking feature, just a minor nuisance. To fix this, you might have to modify the <Popover /> component (from 'react-bootstrap/lib/Overlay').
+* If you try to insert content into a tile that is near the very bottom or the very right side of the page, in some circumstances this will cause the page width and/or height to grow a little. So, the user may have to scroll in order to see the whole popup. This is not a breaking feature, just a minor nuisance. To fix this, you might have to modify the <Popover /> component (from 'react-bootstrap/lib/Overlay').
 
 
 ## Roadmap
