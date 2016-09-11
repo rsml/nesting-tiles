@@ -27,21 +27,33 @@
 * Support dragging and dropping panes to reorganize them easily
 
 
-# Development
+# How to Build
+
+##Install dependences
+ * Install node v4.x or greater
+ * Type `npm install` to install node modules
+
 
 ##Basic Commands
-1. Type `npm start` to start development in your default browser.
-1. Type `npm start-and-test` to start development and also run in parallel any
+ * Type `npm start` to start development in your default browser.
     files matching '**/*.spec.js' in your project
-3. Type `npm runb build` to build for production
+ * Type `npm run build` to build for production
+
+## How to run pre-built files in dist/ directory
+ * Make sure you have python installed
+ * Go to the dist directory inside this project: `cd dist/`
+ * Start a webserver: `python -m SimpleHTTPServer`
+ * On OSX you will see a prompt asking you allow Python.app to accept incoming connections. Click 'Allow'
+ * Navigate to [http://localhost:8000/index.html](http://localhost:8000/index.html) in your favorite browser
+
+
 
 For more info on this development setup, see the exerpted README from https://github.com/coryhouse/react-slingshot below
 
 ...
 
 
-Built using the React Slingshot skeleton
-(https://github.com/coryhouse/react-slingshot)
+Built using the React Slingshot skeleton (https://github.com/coryhouse/react-slingshot). The following is copied from the React Slingshot project's README
 
 # React Slingshot!
 
